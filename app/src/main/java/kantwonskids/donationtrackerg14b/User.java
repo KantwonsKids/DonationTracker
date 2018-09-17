@@ -1,4 +1,8 @@
+package kantwonskids.donationtrackerg14b;
 
+/**
+ * A basic user class that contains a username and password
+ */
 public class User {
 
     // class variables
