@@ -1,4 +1,4 @@
-package kantwonskids.donationtrackerg14b;
+package kantwonskids.donationtrackerg14b.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,6 +31,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kantwonskids.donationtrackerg14b.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

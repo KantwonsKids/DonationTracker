@@ -1,4 +1,4 @@
-package kantwonskids.donationtrackerg14b;
+package kantwonskids.donationtrackerg14b.model;
 
 /**
  * A basic user class that contains a username and password
