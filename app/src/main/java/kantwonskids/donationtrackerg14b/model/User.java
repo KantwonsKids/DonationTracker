@@ -1,4 +1,4 @@
-package kantwonskids.donationtrackerg14b;
+package kantwonskids.donationtrackerg14b.model;
 
 /**
  * @author Ethan Wilson <ewilson72@gatech.edu>
