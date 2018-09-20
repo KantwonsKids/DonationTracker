@@ -4,4 +4,7 @@
     <color name="colorNavy">#1C2841</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#7D7D7D</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FFFFFF</color>
 </resources>
