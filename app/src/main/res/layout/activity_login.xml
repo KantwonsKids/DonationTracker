@@ -90,10 +90,11 @@
 
         </LinearLayout>
     </ScrollView>
-    <TextView
-            android:text="@string/no_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"
-            android:textColor="@color/colorGrey" android:textSize="18sp"
-            android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_account" />
+
 </LinearLayout>
