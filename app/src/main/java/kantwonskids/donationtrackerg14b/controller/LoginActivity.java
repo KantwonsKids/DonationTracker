@@ -92,6 +92,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Go back to the main screen when the "cancel" button is pushed
+        Button loginCancelButton = findViewById(R.id.cancel_login_button);
+        loginCancelButton.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
