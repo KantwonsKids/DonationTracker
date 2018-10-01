@@ -6,7 +6,7 @@ package kantwonskids.donationtrackerg14b.model;
  *
  * A basic user class
  */
-public class User {
+public class User extends Guest {
 
     private String username;
     private String password;
