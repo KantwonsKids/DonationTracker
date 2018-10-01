@@ -3,8 +3,11 @@ package kantwonskids.donationtrackerg14b.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.*;
@@ -17,6 +20,10 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText passwordField;
     private EditText confirmField;
 
+    // valid user types
+    private String [] userTypes = {"User", "LocationEmployee", "Admin"};
+    private Spinner accTypeSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +34,11 @@ public class RegistrationActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.registration_passwordField);
         confirmField = findViewById(R.id.registration_confirmField);
 
-
+        // Create a spinner and populate with valid values
+        accTypeSpinner = findViewById(R.id.registration_accountType_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accTypeSpinner.setAdapter(adapter);
 
         // Attempt to create an account if the account doesn't already exist
         Button createAccountButton = findViewById(R.id.registration_createAccount_button);
@@ -52,9 +63,11 @@ public class RegistrationActivity extends AppCompatActivity {
         passwordField.setError(null);
         confirmField.setError(null);
 
+
         String u = usernameField.getText().toString();
         String p = passwordField.getText().toString();
         String c = confirmField.getText().toString();
+        String accType = (String) accTypeSpinner.getSelectedItem();
 
         // get reference to the model
         Model model = Model.getInstance();
@@ -73,8 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         else
         {
-            model._userList.addUser(new User(u, p));
-            //Model.push(model);
+            model._userList.addUser(new User(u, p, accType));
             Intent intent_welcome = new Intent(this, MainActivity.class);
             startActivity(intent_welcome);
         }

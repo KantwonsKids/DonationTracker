@@ -39,6 +39,11 @@
         android:hint="Confirm password"
         android:inputType="textPassword" />
 
+    <Spinner
+        android:id="@+id/registration_accountType_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/registration_createAccount_button"
         android:layout_width="match_parent"
@@ -52,4 +57,5 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_red_dark"
         android:text="Cancel" />
+
 </LinearLayout>

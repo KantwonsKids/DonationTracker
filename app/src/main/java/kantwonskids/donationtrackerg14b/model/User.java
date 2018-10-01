@@ -10,6 +10,8 @@ public class User {
 
     private String username;
     private String password;
+    private String accountType;
+
 
     /**
      * Creates a new user with a given username and password
@@ -19,9 +21,10 @@ public class User {
      * @param u the username
      * @param p the password
      */
-    public User(String u, String p) {
+    public User(String u, String p, String t) {
         username = u;
         password = p;
+        accountType = t;
     }
 
     /**
@@ -58,5 +61,23 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Sets the account type
+     *
+     * @param x new account type
+     */
+    public void setAccountType(String x) {
+        accountType = x;
+    }
+
+    /**
+     * Gets the account type
+     *
+     * @return account type
+     */
+    public String getAccountType() {
+        return accountType;
     }
 }

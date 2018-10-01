@@ -11,7 +11,6 @@ public class Model {
     // instance of the class
     private static Model _instance = new Model();
     public static Model getInstance() { return _instance; }
-    public static void push(Model m) { _instance = m; }
 
     // so that we can skip remaking methods in this class
     // security is retarded

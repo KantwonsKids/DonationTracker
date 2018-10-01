@@ -71,7 +71,7 @@ public class UserList {
      * @return if user is valid
      */
     public boolean isValidUser(String username, String password) {
-        return isValidUser(new User(username, password));
+        return isValidUser(new User(username, password, ""));
     }
 
 }
