@@ -10,36 +10,33 @@ public class User {
 
     private String username;
     private String password;
-    private String accountType;
-
 
     /**
      * Creates a new user with a given username and password
      *
      * Has to be public in order to create users outside of package
      *
-     * @param u the username
-     * @param p the password
+     * @param username the username
+     * @param password the password
      */
-    public User(String u, String p, String t) {
-        username = u;
-        password = p;
-        accountType = t;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     /**
      * Sets the username
      *
-     * @param x new username
+     * @param newUsername The new username to set
      */
-    public void setUsername(String x) {
-        username = x;
+    public void setUsername(String newUsername) {
+        username = newUsername;
     }
 
     /**
      * Gets the username
      *
-     * @return username
+     * @return the user's username
      */
     public String getUsername() {
         return username;
@@ -48,36 +45,18 @@ public class User {
     /**
      * Sets the password
      *
-     * @param x new password
+     * @param newPassword The new password to set
      */
-    public void setPassword(String x) {
-        password = x;
+    public void setPassword(String newPassword) {
+        password = newPassword;
     }
 
     /**
-     * Gets the password
+     * Gets the password.
      *
-     * @return password
+     * @return The user's password
      */
     public String getPassword() {
         return password;
-    }
-
-    /**
-     * Sets the account type
-     *
-     * @param x new account type
-     */
-    public void setAccountType(String x) {
-        accountType = x;
-    }
-
-    /**
-     * Gets the account type
-     *
-     * @return account type
-     */
-    public String getAccountType() {
-        return accountType;
     }
 }
