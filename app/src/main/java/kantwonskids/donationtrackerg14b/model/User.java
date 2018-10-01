@@ -14,10 +14,12 @@ public class User {
     /**
      * Creates a new user with a given username and password
      *
+     * Has to be public in order to create users outside of package
+     *
      * @param u the username
      * @param p the password
      */
-    User(String u, String p) {
+    public User(String u, String p) {
         username = u;
         password = p;
     }

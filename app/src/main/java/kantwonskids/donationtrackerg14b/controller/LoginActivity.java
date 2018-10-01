@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
+import kantwonskids.donationtrackerg14b.model.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -70,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.login_username);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.login_password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -84,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.login_login_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,10 +94,17 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Go back to the main screen when the "cancel" button is pushed
-        Button loginCancelButton = findViewById(R.id.cancel_login_button);
+        Button loginCancelButton = findViewById(R.id.login_cancel_button);
         loginCancelButton.setOnClickListener((view) -> {
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
+        });
+
+        // Send to registration screen when button is pressed
+        Button regiButton = findViewById(R.id.login_noAccount_button);
+        regiButton.setOnClickListener((view) -> {
+            Intent intent_regi = new Intent(this, RegistrationActivity.class);
+            startActivity(intent_regi);
         });
 
         mLoginFormView = findViewById(R.id.login_form);
@@ -119,7 +127,12 @@ public class LoginActivity extends AppCompatActivity {
 
         View focusView = mPasswordView;
 
-        if (email.equals(DUMMY_CREDENTIALS[0]) && password.equals(DUMMY_CREDENTIALS[1])) {
+        // Get instance of model to compare the username / password with the list of valid users
+        Model model = Model.getInstance();
+        UserList userList = model._userList;
+        User potentialUser = new User(email, password);
+
+        if (userList.isValidUser(potentialUser)) {
             login();
         } else {
             focusView.requestFocus();
