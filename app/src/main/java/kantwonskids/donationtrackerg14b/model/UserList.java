@@ -1,5 +1,4 @@
 package kantwonskids.donationtrackerg14b.model;
-
 import java.util.ArrayList;
 
 /**
@@ -42,7 +41,27 @@ public class UserList {
      * @return if the user is valid or not
      */
     public boolean isValidUser(User user) {
-        return backingArray.contains(user);
+        for (User u : backingArray) {
+            if (u.getUsername().equals(user.getUsername()) &&
+                    u.getPassword().equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method to check if the username is taken
+     * @param username username to be checked
+     * @return if the username exists or not
+     */
+    public boolean usernameTaken(String username) {
+        for (User u : backingArray) {
+            if (username.equals(u.getUsername())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -52,7 +71,7 @@ public class UserList {
      * @return if user is valid
      */
     public boolean isValidUser(String username, String password) {
-        return isValidUser(new User(username, password));
+        return isValidUser(new User(username, password, ""));
     }
 
 }
