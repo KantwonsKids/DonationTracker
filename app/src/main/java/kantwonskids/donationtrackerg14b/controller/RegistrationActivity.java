@@ -59,7 +59,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (adapter.getItem(i).equals("Location Employee")) {
                     locationTextField.setHint("Name of location");
                     // TODO: autocompletion with list of available locations
-                    registrationLayout.addView(locationTextField, registrationLayout.getChildCount() - 2);
+
+                    // Put the location text box below the spinner
+                    int newIndex = registrationLayout.indexOfChild(accTypeSpinner);
+                    registrationLayout.addView(locationTextField, newIndex + 1);
                 } else {
                     if (locationTextField.getParent() != null) {
                         // if location text field has been added, delete it
