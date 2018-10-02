@@ -130,10 +130,10 @@ public class LoginActivity extends AppCompatActivity {
         // Get instance of model to compare the username / password with the list of valid users
         Model model = Model.getInstance();
         UserList userList = model._userList;
-        User potentialUser = new User(email, password);
+        User potentialUser = userList.getUser(email);
 
         if (userList.isValidUser(potentialUser)) {
-            login();
+            login(potentialUser);
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -143,9 +143,11 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Logs in to the app, once the username and password have passed verification.
      * Shows the main screen with a "success" page.
+     * @param potentialUser The user to log in as.
      */
-    private void login() {
+    private void login(User potentialUser) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("CURRENT_USER", potentialUser);
         startActivity(intent);
     }
 

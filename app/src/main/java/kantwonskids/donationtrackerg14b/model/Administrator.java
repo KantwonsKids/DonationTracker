@@ -1,12 +1,14 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import android.os.Parcelable;
+
 /**
  * Represents an administrator, who has the following permissions:
  *     - All permissions of managers
  *     - Add/remove users
  *     - Lock/unlock accounts
  */
-public class Administrator extends User {
+public class Administrator extends User implements Parcelable {
 
     /**
      * Creates a new administrator.
@@ -15,5 +17,10 @@ public class Administrator extends User {
      */
     public Administrator(String name, String password) {
         super(name, password);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nAdministrator";
     }
 }

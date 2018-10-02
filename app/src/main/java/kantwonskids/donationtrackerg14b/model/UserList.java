@@ -55,7 +55,7 @@ public class UserList {
      * @param username username to be checked
      * @return if the username exists or not
      */
-    public boolean usernameTaken(String username) {
+    public boolean isUsernameTaken(String username) {
         for (User u : backingArray) {
             if (username.equals(u.getUsername())) {
                 return true;
@@ -72,6 +72,20 @@ public class UserList {
      */
     public boolean isValidUser(String username, String password) {
         return isValidUser(new User(username, password));
+    }
+
+    /**
+     * Gets a user by username.
+     * @param username the username to search for.
+     * @return the User with that username, or null if it does not exist.
+     */
+    public User getUser(String username) {
+        for (User u : backingArray) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        }
+        return null;
     }
 
 }

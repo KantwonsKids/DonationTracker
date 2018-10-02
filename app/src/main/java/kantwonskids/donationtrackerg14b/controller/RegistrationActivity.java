@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText locationTextField;
 
     // valid user types
-    private String [] userTypes = {"User", "Location Employee", "Admin", "Manager"};
+    private String [] userTypes = {"User", "Location Employee", "Administrator", "Manager"};
     private Spinner accTypeSpinner;
 
     @Override
@@ -55,12 +55,10 @@ public class RegistrationActivity extends AppCompatActivity {
         accTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                // DEBUG
-//                Log.d("accountTypeSpinner", adapterView + " clicked with pos " + i + " and id " + l);
                 // If the user selects location employee, open a new text field to enter the location
                 if (adapter.getItem(i).equals("Location Employee")) {
                     locationTextField.setHint("Name of location");
+                    // TODO: autocompletion with list of available locations
                     registrationLayout.addView(locationTextField, registrationLayout.getChildCount() - 2);
                 } else {
                     if (locationTextField.getParent() != null) {
@@ -104,38 +102,45 @@ public class RegistrationActivity extends AppCompatActivity {
         String p = passwordField.getText().toString();
         String c = confirmField.getText().toString();
         String accType = (String) accTypeSpinner.getSelectedItem();
+        String location = locationTextField.getText().toString();
 
         // get reference to the model
         Model model = Model.getInstance();
         // check to see if the username exists in the list
-        if (model._userList.usernameTaken(u)) {
+        if (model._userList.isUsernameTaken(u)) {
             usernameField.setError("Username is taken");
-        }
-        else if (!validUsername(u).equals("VALID")) {
-            usernameField.setError(validUsername(u));
-        }
-        else if (!p.equals(c)) {
+        } else if (!validateUsername(u).equals("VALID")) {
+            usernameField.setError(validateUsername(u));
+        } else if (!p.equals(c)) {
             passwordField.setError("Passwords do not match!");
-        }
-        else if (!validPassword(p).equals("VALID")) {
-            passwordField.setError(validPassword(p));
+        } else if (!validatePassword(p).equals("VALID")) {
+            passwordField.setError(validatePassword(p));
+        } else if (accType.equals("Location Employee") && !isValidLocation(location)) {
+            locationTextField.setError("Invalid location!");
         }
         else
         {
+            // Determine the selected account type and create object accordingly
+            User newUser = null;
             switch (accType) {
                 case "Administrator":
-                    model._userList.addUser(new Administrator(u, p));
+                    newUser = new Administrator(u, p);
                     break;
                 case "Manager":
-                    model._userList.addUser(new Manager(u, p));
+                    newUser = new Manager(u, p);
                     break;
                 case "Location Employee":
-                    model._userList.addUser(new LocationEmployee(u, p, ""));
+                    newUser = new LocationEmployee(u, p, location);
+                    break;
+                case "User":
+                    newUser = new User(u, p);
                     break;
             }
-            model._userList.addUser(new User(u, p));
-            Intent intent_welcome = new Intent(this, MainActivity.class);
-            startActivity(intent_welcome);
+            model._userList.addUser(newUser);
+            Intent welcomeIntent = new Intent(this, MainActivity.class);
+            // Pass the user just created to the main activity to set as the logged in user
+            welcomeIntent.putExtra("CURRENT_USER", newUser);
+            startActivity(welcomeIntent);
         }
 
 
@@ -147,7 +152,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param u username
      * @return message
      */
-    private String validUsername(String u) {
+    private String validateUsername(String u) {
         String msg = "VALID";
 
         if (u.length() < 4) {
@@ -173,7 +178,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param p password
      * @return message
      */
-    private String validPassword(String p) {
+    private String validatePassword(String p) {
         String msg = "VALID";
 
         if (p.length() < 8) {
@@ -187,5 +192,15 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
         return msg;
+    }
+
+    /**
+     * Checks to see if the location string is non-empty, non-null, and exists in the locations list.
+     * @param l the location to check
+     * @return true if the location is valid, false otherwise
+     */
+    private boolean isValidLocation(String l) {
+        // TODO: check list of locations for validity
+        return l != null && !l.isEmpty();
     }
 }
