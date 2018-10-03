@@ -7,18 +7,14 @@ import java.util.HashMap;
  */
 public class UserList {
 
-    // List keeping track of all registered users.
-    private ArrayList<User> backingArray;
-
     // Mapping of usernames to user objects, for quick lookup of users by name.
     private HashMap<String, User> usernameObjectMap;
 
     /**
      * Creates an empty user list.
      */
-    public UserList() {
-        backingArray = new ArrayList<>();
-        usernameObjectMap = new HashMap<String, User>;
+    UserList() {
+        usernameObjectMap = new HashMap<>();
     }
 
     /**
@@ -26,7 +22,6 @@ public class UserList {
      * @param user the user to be added
      */
     public void addUser(User user) {
-        backingArray.add(user);
         usernameObjectMap.put(user.getUsername(), user);
     }
 
@@ -35,7 +30,6 @@ public class UserList {
      * @param user the user to be removed
      */
     public void removeUser(User user) {
-        backingArray.remove(user);
         usernameObjectMap.remove(user);
     }
 
@@ -45,7 +39,7 @@ public class UserList {
      * @return if the user is valid or not
      */
     public boolean isValidUser(User user) {
-        return this.backingArray.contains(user);
+        return this.usernameObjectMap.containsValue(user);
     }
 
     /**
