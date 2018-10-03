@@ -131,16 +131,16 @@ public class RegistrationActivity extends AppCompatActivity {
             User newUser = null;
             switch (accType) {
                 case "Administrator":
-                    newUser = new Administrator(u, p);
+                    newUser = new User(u, p, UserRole.ADMINISTRATOR);
                     break;
                 case "Manager":
-                    newUser = new Manager(u, p);
+                    newUser = new User(u, p, UserRole.MANAGER);
                     break;
                 case "Location Employee":
-                    newUser = new LocationEmployee(u, p, location);
+                    newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, location);
                     break;
                 case "User":
-                    newUser = new User(u, p);
+                    newUser = new User(u, p, UserRole.USER);
                     break;
             }
             model._userList.addUser(newUser);

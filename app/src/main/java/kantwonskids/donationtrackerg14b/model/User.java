@@ -9,7 +9,7 @@ import android.os.Parcelable;
  *
  * A basic user class
  */
-public class User extends Guest implements Parcelable {
+public class User implements Parcelable {
 
     private String username;
     private String password;
