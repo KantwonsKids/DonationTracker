@@ -27,8 +27,6 @@ public class RegistrationActivity extends AppCompatActivity {
     // Dynamically created edit field for location employees to enter their location
     private EditText locationTextField;
 
-    // valid user types
-    private String [] userTypes = {"User", "Location Employee", "Administrator", "Manager"};
     private Spinner accTypeSpinner;
 
     @Override
@@ -47,7 +45,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Create a spinner and populate with valid values
         accTypeSpinner = findViewById(R.id.registration_accountType_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userTypes);
+
+        // Get values for each of the roles
+        String[] types = new String[UserRole.values().length];
+        for (int i = 0; i < UserRole.values().length; i++) {
+            types[i] = UserRole.values()[i].toString();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accTypeSpinner.setAdapter(adapter);
         // Callback for item clicked, which shows a new text box for location employees to pick

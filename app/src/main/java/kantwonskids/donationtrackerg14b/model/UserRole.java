@@ -1,11 +1,11 @@
 package kantwonskids.donationtrackerg14b.model;
 
 public enum UserRole {
-    ADMINISTRATOR(true, true, true, true, true),
-    GUEST(false, false, false, false, false),
-    LOCATION_EMPLOYEE(true, true, false, false, false),
-    MANAGER(true, true, false, false, false),
-    USER(true, false, false, false, false);
+    ADMINISTRATOR("Administrator", true, true, true, true, true),
+    GUEST("Guest", false, false, false, false, false),
+    LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false),
+    MANAGER("Manager", true, true, false, false, false),
+    USER("User", true, false, false, false, false);
 
     /*
      * Enumerates the permissions for each user type.
@@ -33,6 +33,9 @@ public enum UserRole {
     private boolean canLockOrUnlockUsers;
     private boolean canAddOrRemoveLocations;
 
+    // String representation for nice displaying
+    private String name;
+
     /**
      * Constructor. Initializes all the permissions for a user type.
      * @param canLogIn Whether the user type can log in
@@ -41,8 +44,9 @@ public enum UserRole {
      * @param canLockOrUnlockUsers Whether the user type can lock or unlock users
      * @param canAddOrRemoveLocations Whether the user type can add or remove locations
      */
-    UserRole(boolean canLogIn, boolean canUpdateInfo, boolean canAddOrRemoveUsers,
+    UserRole(String name, boolean canLogIn, boolean canUpdateInfo, boolean canAddOrRemoveUsers,
              boolean canLockOrUnlockUsers, boolean canAddOrRemoveLocations) {
+        this.name = name;
         this.canLogIn = canLogIn;
         this.canUpdateInfo = canUpdateInfo;
         this.canAddOrRemoveUsers = canAddOrRemoveUsers;
@@ -88,6 +92,11 @@ public enum UserRole {
      */
     public boolean canAddOrRemoveLocations() {
         return this.canAddOrRemoveLocations;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
 }
