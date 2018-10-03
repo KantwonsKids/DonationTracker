@@ -150,4 +150,14 @@ public class User implements Parcelable {
 
         return str;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || !(other instanceof User)) {
+            return false;
+        }
+
+        User u = (User) other;
+        return this.username.equals(u.getUsername());
+    }
 }
