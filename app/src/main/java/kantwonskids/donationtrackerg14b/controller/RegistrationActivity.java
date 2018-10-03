@@ -97,7 +97,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
      /**
-     * Attempts to register.  Either succeeds or presents a relevent error message
+     * Attempts to register.  Either succeeds or presents a relevant error message
      */
     private void attemptRegistration() {
         usernameField.setError(null);
@@ -115,7 +115,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Model model = Model.getInstance();
         // check to see if the username exists in the list
         if (model._userList.isUsernameTaken(u)) {
-            usernameField.setError("Username is taken");
+            usernameField.setError("This username is taken!");
         } else if (!validateUsername(u).equals("VALID")) {
             usernameField.setError(validateUsername(u));
         } else if (!p.equals(c)) {
