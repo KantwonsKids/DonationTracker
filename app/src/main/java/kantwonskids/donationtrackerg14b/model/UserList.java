@@ -1,29 +1,28 @@
 package kantwonskids.donationtrackerg14b.model;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class for the list of valid users
  */
 public class UserList {
 
-    private ArrayList<User> backingArray;
-    private int size;
+    // Mapping of usernames to user objects, for quick lookup of users by name.
+    private HashMap<String, User> usernameObjectMap;
 
     /**
-     * Constructor for UserList
+     * Creates an empty user list.
      */
     UserList() {
-        backingArray = new ArrayList<>();
+        usernameObjectMap = new HashMap<>();
     }
-
 
     /**
      * Method to add a new User to the list
      * @param user the user to be added
      */
     public void addUser(User user) {
-        size++;
-        backingArray.add(user);
+        usernameObjectMap.put(user.getUsername(), user);
     }
 
     /**
@@ -31,8 +30,7 @@ public class UserList {
      * @param user the user to be removed
      */
     public void removeUser(User user) {
-        size--;
-        backingArray.remove(user);
+        usernameObjectMap.remove(user);
     }
 
     /**
@@ -41,13 +39,7 @@ public class UserList {
      * @return if the user is valid or not
      */
     public boolean isValidUser(User user) {
-        for (User u : backingArray) {
-            if (u.getUsername().equals(user.getUsername()) &&
-                    u.getPassword().equals(user.getPassword())) {
-                return true;
-            }
-        }
-        return false;
+        return this.usernameObjectMap.containsValue(user);
     }
 
     /**
@@ -55,13 +47,8 @@ public class UserList {
      * @param username username to be checked
      * @return if the username exists or not
      */
-    public boolean usernameTaken(String username) {
-        for (User u : backingArray) {
-            if (username.equals(u.getUsername())) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isUsernameTaken(String username) {
+        return this.usernameObjectMap.containsKey(username);
     }
 
     /**
@@ -71,7 +58,17 @@ public class UserList {
      * @return if user is valid
      */
     public boolean isValidUser(String username, String password) {
-        return isValidUser(new User(username, password, ""));
+        return this.usernameObjectMap.containsKey(username)
+                && usernameObjectMap.get(username).getPassword().equals(password);
+    }
+
+    /**
+     * Gets a user by username.
+     * @param username the username to search for.
+     * @return the User with that username, or null if it does not exist.
+     */
+    public User getUser(String username) {
+        return usernameObjectMap.get(username);
     }
 
 }
