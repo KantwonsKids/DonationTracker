@@ -3,6 +3,7 @@ package kantwonskids.donationtrackerg14b.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import java.io.BufferedReader;
@@ -49,7 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         try {
             // open a stream on the file
-            InputStream is = getResources().openRawResource(R.raw.SampleData);
+            InputStream is = getResources().openRawResource(R.raw.sampledata);
             // wrap it in a buffered reader so that we can see lines
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
@@ -90,7 +91,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 model.donationDataList.add(d);
             }
             // print the success
-            System.out.print("Successfully populated the donationDataList");
+            Log.d("DATA", "Successfully populated the donationDataList");
             br.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());
