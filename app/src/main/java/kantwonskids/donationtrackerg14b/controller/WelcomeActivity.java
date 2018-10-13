@@ -49,7 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         try {
             // open a stream on the file
-            InputStream is = getResources().openRawResource(R.raw.SampleData);
+            InputStream is = getResources().openRawResource(R.raw.sampledata);
             // wrap it in a buffered reader so that we can see lines
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
