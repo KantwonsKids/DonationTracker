@@ -1,5 +1,7 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import java.util.List;
+
 /**
  * @author Ethan Wilson
  *
@@ -17,9 +19,16 @@ public class Model {
     public UserList _userList;
 
     /**
+     * A list of donationData objects
+     */
+    public List<DonationData> donationDataList;
+
+    /**
      * The user that is currently logged in.
      */
     private User loggedInUser;
+
+
 
     /**
      * Gets the instance of the model class.
