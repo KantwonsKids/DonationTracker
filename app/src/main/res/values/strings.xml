@@ -17,4 +17,6 @@
     <string name="login">Login</string>
     <string name="cancel">Cancel</string>
     <string name="create_account">Create an account</string>
+    <string name="title_location_list">Locations</string>
+    <string name="title_location_detail">Location Detail</string>
 </resources>

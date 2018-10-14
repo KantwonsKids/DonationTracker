@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().setCurrentUser(currentUser);
         userInfoTextView = findViewById(R.id.main_userInfoTextView);
         displayUserInformation(Model.getInstance().getCurrentUser(), userInfoTextView);
+
+        // Debugging purposes
+        startActivity(new Intent(this, LocationListActivity.class));
     }
 
     /**
