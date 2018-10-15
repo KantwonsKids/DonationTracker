@@ -2,7 +2,7 @@ package kantwonskids.donationtrackerg14b.model;
 
 /**
  * @author Ethan Wilson <ewilson72@gatech.edu>
- * @version 1.1
+ * @version 1.2
  *
  * A wrapper that stores all data of a specific donation
  */
@@ -144,5 +144,10 @@ public class DonationData {
 
     public void setWebsite(String s) {
         website = s;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
