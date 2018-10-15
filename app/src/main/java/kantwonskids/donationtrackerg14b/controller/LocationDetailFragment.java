@@ -62,9 +62,15 @@ public class LocationDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
         if (mLocation != null) {
-            ((TextView) rootView.findViewById(R.id.location_detail)).setText(mLocation.getAddress());
+            ((TextView) rootView.findViewById(R.id.location_detail)).setText(
+                    String.format("Location: "+ "\n" +
+                            mLocation.getAddress() + "\n" +
+                            mLocation.getCity() + ", " +
+                            mLocation.getState() + " " +
+                            mLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
+                            mLocation.getPhoneNumber() + "\n" +
+                            mLocation.getWebsite()));
         }
 
         return rootView;
