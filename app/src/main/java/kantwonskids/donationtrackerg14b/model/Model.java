@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * @author Ethan Wilson
+ * @author Juliana Petrillo
+ * @version 2.0
  *
  *
  * A singleton instance of the model that controllers
@@ -21,12 +23,17 @@ public class Model {
     /**
      * A list of donationData objects
      */
-    public List<DonationData> donationDataList;
+    public static List<DonationData> donationDataList;
 
     /**
      * The user that is currently logged in.
      */
     private User loggedInUser;
+
+    /**
+     * The currently selected location;
+     */
+    private DonationData _currentLocation;
 
 
 
@@ -59,6 +66,49 @@ public class Model {
      */
     public User getCurrentUser() {
         return loggedInUser;
+    }
+
+    /**
+     * @return the currently selected location.
+     */
+    public DonationData getCurrentLocation() {
+        return _currentLocation;
+    }
+
+    /**
+     * Sets the currently selected location.
+     * @param location the currently selected location.
+     */
+    public void setCurrentLocation(DonationData location) {
+        _currentLocation = location;
+    }
+
+    /**
+     * Return the location with a given key.
+     * @param key the key of the location to look for
+     * @return the correct location or null if no such location exists
+     */
+    public DonationData getLocationByKey(int key) {
+        for (DonationData d : donationDataList) {
+            if (d.getKey() == key) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Return the location with a given name.
+     * @param name the name of the location to look for
+     * @return the correct location or null if no such location exists
+     */
+    public DonationData getLocationByName(String name) {
+        for (DonationData d : donationDataList) {
+            if (d.getName().equals(name)) {
+                return d;
+            }
+        }
+        return null;
     }
 
 }
