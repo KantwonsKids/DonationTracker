@@ -11,24 +11,29 @@ import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.controller.dummy.DummyContent;
+import kantwonskids.donationtrackerg14b.model.DonationData;
+import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
+ * @author Juliana Petrillo
+ * @version 2.0
+ *
  * A fragment representing a single Location detail screen.
- * This fragment is either contained in a {@link LocationListActivity}
- * in two-pane mode (on tablets) or a {@link LocationDetailActivity}
- * on handsets.
  */
 public class LocationDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_NAME = "name";
+    public static final String ARG_ADDRESS = "address";
+    public static final String ARG_CITY = "city";
+    public static final String ARG_STATE = "state";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private DonationData mLocation;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -41,16 +46,13 @@ public class LocationDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
+        if (getArguments().containsKey(ARG_NAME)) {
+            Model model = Model.getInstance();
+            mLocation = model.getCurrentLocation();
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mLocation.getName());
             }
         }
     }
@@ -61,8 +63,8 @@ public class LocationDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.location_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.location_detail)).setText(mItem.details);
+        if (mLocation != null) {
+            ((TextView) rootView.findViewById(R.id.location_detail)).setText(mLocation.getAddress());
         }
 
         return rootView;
