@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
@@ -37,6 +38,11 @@ public class LocationListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.location_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+        ImageButton  sidebarButton = (ImageButton) findViewById(R.id.sidebarButton);
+        sidebarButton.setOnClickListener((view) -> {
+            logout();
+        });
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -106,5 +112,15 @@ public class LocationListActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    /**
+     * Logs the user out when the logout button is pressed and goes back to the login screen.
+     */
+    private void logout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        // Log out the current user
+        Model.getInstance().setCurrentUser(null);
+        startActivity(intent);
     }
 }
