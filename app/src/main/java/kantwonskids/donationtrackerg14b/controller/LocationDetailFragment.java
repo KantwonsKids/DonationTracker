@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.controller.dummy.DummyContent;
-import kantwonskids.donationtrackerg14b.model.DonationData;
+import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -33,7 +32,7 @@ public class LocationDetailFragment extends Fragment {
     /**
      * The content this fragment is presenting.
      */
-    private DonationData mLocation;
+    private Location mLocation;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

@@ -56,13 +56,13 @@ public class LocationListActivity extends AppCompatActivity {
         /**
          * The items to be shown in the list
          */
-        private final List<DonationData> mLocations;
+        private final List<Location> mLocations;
 
         /**
          * Sets the items to be used by the adapter.
          * @param locations
          */
-        SimpleItemRecyclerViewAdapter(List<DonationData> locations) {
+        SimpleItemRecyclerViewAdapter(List<Location> locations) {
             mLocations = locations;
         }
 
@@ -102,7 +102,7 @@ public class LocationListActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mContentView;
-            public DonationData mLocation;
+            public Location mLocation;
 
 
             public ViewHolder(View view) {

@@ -23,7 +23,7 @@ public class Model {
     /**
      * A list of donationData objects
      */
-    public static List<DonationData> donationDataList;
+    public static List<Location> donationDataList;
 
     /**
      * The user that is currently logged in.
@@ -33,7 +33,7 @@ public class Model {
     /**
      * The currently selected location;
      */
-    private DonationData _currentLocation;
+    private Location _currentLocation;
 
 
 
@@ -71,7 +71,7 @@ public class Model {
     /**
      * @return the currently selected location.
      */
-    public DonationData getCurrentLocation() {
+    public Location getCurrentLocation() {
         return _currentLocation;
     }
 
@@ -79,7 +79,7 @@ public class Model {
      * Sets the currently selected location.
      * @param location the currently selected location.
      */
-    public void setCurrentLocation(DonationData location) {
+    public void setCurrentLocation(Location location) {
         _currentLocation = location;
     }
 
@@ -88,8 +88,8 @@ public class Model {
      * @param key the key of the location to look for
      * @return the correct location or null if no such location exists
      */
-    public DonationData getLocationByKey(int key) {
-        for (DonationData d : donationDataList) {
+    public Location getLocationByKey(int key) {
+        for (Location d : donationDataList) {
             if (d.getKey() == key) {
                 return d;
             }
@@ -102,8 +102,8 @@ public class Model {
      * @param name the name of the location to look for
      * @return the correct location or null if no such location exists
      */
-    public DonationData getLocationByName(String name) {
-        for (DonationData d : donationDataList) {
+    public Location getLocationByName(String name) {
+        for (Location d : donationDataList) {
             if (d.getName().equals(name)) {
                 return d;
             }

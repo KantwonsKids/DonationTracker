@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.Button;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -42,7 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Reads in sample data from raw, formats into DonationData objects, and stores them in a list
+     * Reads in sample data from raw, formats into Location objects, and stores them in a list
      * within the model instance
      */
     private void readSampleData() {
@@ -75,7 +74,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 String website = tokens[10];
 
                 // create a donationData from these parameters and add it to model
-                DonationData d = new DonationData(
+                Location d = new Location(
                         key,
                         name,
                         latitude,
