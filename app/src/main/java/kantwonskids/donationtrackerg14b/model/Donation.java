@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Donation {
 
     private LocalDateTime time;
-    private String item;
+    private String name;
     private String description;
     private float value;
     private DonationCategory category;
@@ -21,7 +21,7 @@ public class Donation {
     Donation(LocalDateTime time, String item, String description, float value,
              DonationCategory category, String comments) {
         this.time = time;
-        this.item = item;
+        this.name = item;
         this.description = description;
         this.value = value;
         this.category = category;
@@ -48,8 +48,8 @@ public class Donation {
      * Gets the name of the item that was donated.
      * @return the name
      */
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -96,8 +96,8 @@ public class Donation {
      * Sets the name of the item that was donated.
      * @param item the item name
      */
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String item) {
+        this.name = item;
     }
 
     /**
