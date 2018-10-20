@@ -45,6 +45,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Spinner
+        android:id="@+id/registration_location_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/registration_createAccount_button"
         android:layout_width="match_parent"
