@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import java.util.List;
+
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.*;
 
@@ -28,6 +30,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText locationTextField;
 
     private Spinner accTypeSpinner;
+    private Spinner locationSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Create a spinner and populate with valid values
         accTypeSpinner = findViewById(R.id.registration_accountType_spinner);
+        locationSpinner = findViewById(R.id.registration_location_spinner);
+
+        // Get location names
+        List<Location> locs = Model.donationDataList;
+        String[] locNames = new String[locs.size()];
+        for (int i = 0; i < locs.size(); i++) {
+            locNames[i] = locs.get(i).getName();
+        }
+
+        // populate the invisible spinner for locationdata
+        ArrayAdapter<String> adapter_loc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locNames);
+        adapter_loc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(adapter_loc);
 
         // Get values for each of the roles
         String[] types = new String[UserRole.values().length];
@@ -62,16 +78,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 // If the user selects location employee, open a new text field to enter the location
                 if (adapter.getItem(i).equals("Location Employee")) {
                     locationTextField.setHint("Name of location");
-                    // TODO: autocompletion with list of available locations
+                    locationSpinner.setVisibility(View.VISIBLE);
 
-                    // Put the location text box below the spinner
-                    int newIndex = registrationLayout.indexOfChild(accTypeSpinner);
-                    registrationLayout.addView(locationTextField, newIndex + 1);
+//                    // Put the location text box below the spinner
+//                    int newIndex = registrationLayout.indexOfChild(accTypeSpinner);
+//                    registrationLayout.addView(locationTextField, newIndex + 1);
                 } else {
-                    if (locationTextField.getParent() != null) {
-                        // if location text field has been added, delete it
-                        registrationLayout.removeView(locationTextField);
-                    }
+//                    if (locationTextField.getParent() != null) {
+//                        // if location text field has been added, delete it
+//                        registrationLayout.removeView(locationTextField);
+//                    }
+                    locationSpinner.setVisibility(View.GONE);
                 }
             }
 
@@ -109,7 +126,17 @@ public class RegistrationActivity extends AppCompatActivity {
         String p = passwordField.getText().toString();
         String c = confirmField.getText().toString();
         String accType = (String) accTypeSpinner.getSelectedItem();
-        String location = locationTextField.getText().toString();
+        String locationStr = (String) locationSpinner.getSelectedItem();
+        Location loc = null;
+        // find the real location
+        if (accType.equals("Location Employee")) {
+            for (int i = 0; i < Model.donationDataList.size(); i++) {
+                if (Model.donationDataList.get(i).getName().equals(locationStr)) {
+                    loc = Model.donationDataList.get(i);
+                }
+            }
+        }
+
 
         // get reference to the model
         Model model = Model.getInstance();
@@ -122,7 +149,7 @@ public class RegistrationActivity extends AppCompatActivity {
             passwordField.setError("Passwords do not match!");
         } else if (!validatePassword(p).equals("VALID")) {
             passwordField.setError(validatePassword(p));
-        } else if (accType.equals("Location Employee") && !isValidLocation(location)) {
+        } else if (accType.equals("Location Employee") && !isValidLocation(loc)) {
             locationTextField.setError("Invalid location!");
         }
         else
@@ -137,7 +164,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     newUser = new User(u, p, UserRole.MANAGER);
                     break;
                 case "Location Employee":
-                    newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, location);
+                    newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, loc);
                     break;
                 case "User":
                     newUser = new User(u, p, UserRole.USER);
@@ -206,8 +233,8 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param l the location to check
      * @return true if the location is valid, false otherwise
      */
-    private boolean isValidLocation(String l) {
-        // TODO: check list of locations for validity
-        return l != null && !l.isEmpty();
+    private boolean isValidLocation(Location l) {
+
+        return Model.donationDataList.contains(l);
     }
 }

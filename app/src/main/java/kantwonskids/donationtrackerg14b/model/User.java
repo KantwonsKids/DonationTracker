@@ -14,7 +14,7 @@ public class User implements Parcelable {
     private String username;
     private String password;
     private UserRole role;
-    private String location;
+    private Location location;
 
     /**
      * Creates a new user with a given username, password, role, and assigned location.
@@ -26,7 +26,7 @@ public class User implements Parcelable {
      * @param location the user's location
      * @throws IllegalArgumentException If the role is not location employee and "location" is anything other than null
      */
-    public User(String username, String password, UserRole role, String location) {
+    public User(String username, String password, UserRole role, Location location) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -61,7 +61,8 @@ public class User implements Parcelable {
     public User(Parcel in) {
         this.username = in.readString();
         this.password = in.readString();
-        this.location = in.readString();
+        // this.location = in.readString(); idk what this parcel thing is but it is bad
+        this.location = null;
         this.role = (UserRole)in.readSerializable();
     }
 
@@ -125,7 +126,7 @@ public class User implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.username);
         dest.writeString(this.password);
-        dest.writeString(this.location);
+        // dest.writeString(this.location);
         dest.writeSerializable(this.role);
     }
 
