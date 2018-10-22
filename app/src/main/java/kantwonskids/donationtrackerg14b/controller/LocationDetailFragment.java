@@ -80,6 +80,7 @@ public class LocationDetailFragment extends Fragment {
                             mLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
                             mLocation.getPhoneNumber() + "\n" +
                             mLocation.getWebsite()));
+            //
 
             // store each donation's info
             Collection<Donation> donations = mLocation.getDonations();
