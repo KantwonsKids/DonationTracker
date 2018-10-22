@@ -16,6 +16,16 @@
         android:textIsSelectable="true"
         tools:context=".controller.LocationDetailFragment" />
 
+    <TextView
+        android:id="@+id/location_detail_inventory_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Inventory"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="24sp"
+        tools:text="Inventory:" />
+
     <ListView
         android:id="@+id/donations_at_location"
         android:layout_width="match_parent"

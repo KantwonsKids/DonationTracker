@@ -90,13 +90,13 @@ public class LocationDetailFragment extends Fragment {
             while (iter.hasNext()) {
                 Donation d = iter.next();
                 donationStrings[i] =
-                                d.getName() + ":\t\t" +
-                                d.getCategory().toString() +
-                                "\n" + d.getDescription() + "\n";
+                                Integer.toString(i) + ".\t\t\t" + d.getCategory().toString() +
+                                 ":\t\t\t\t\t\t" + d.getName() +
+                                "\n\t\t\t\t\t\t" + d.getDescription() + "\n";
                 i++;
             }
             // TODO: REMOVE THIS WHEN THERE ARE REAL DONATIONS
-            donationStrings[i] = "Spaghetti:\t\t FOOD\nWhat a tasty treat!\n";
+            donationStrings[i] = "1.\t\t\tFOOD:\t\t\t\t\t\t Spaghetti\n\t\t\t\t\t\tWhat a tasty treat!\n";
             // create an adapter for the donations
             ArrayAdapter<String> adap = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, donationStrings);
 
