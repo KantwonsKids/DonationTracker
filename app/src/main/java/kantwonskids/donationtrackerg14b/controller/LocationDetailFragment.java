@@ -81,6 +81,8 @@ public class LocationDetailFragment extends Fragment {
                             mLocation.getPhoneNumber() + "\n" +
                             mLocation.getWebsite()));
 
+//commit
+
             // store each donation's info
             Collection<Donation> donations = mLocation.getDonations();
             Iterator<Donation> iter = donations.iterator();
