@@ -9,7 +9,7 @@ import android.os.Parcelable;
  *
  * A basic user class
  */
-public class User implements Parcelable {
+public class User implements Parcelable, NamedObject {
 
     private String username;
     private String password;
@@ -160,5 +160,10 @@ public class User implements Parcelable {
 
         User u = (User) other;
         return this.username.equals(u.getUsername());
+    }
+
+    @Override
+    public String getName() {
+        return this.getUsername();
     }
 }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * @author Juliana Petrillo
  * @version 1.0
  */
-public class Donation {
+public class Donation implements NamedObject {
 
     private LocalDateTime time;
     private String name;
