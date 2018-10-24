@@ -2,6 +2,7 @@ package kantwonskids.donationtrackerg14b.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -72,7 +74,7 @@ public class LocationDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.location_detail, container, false);
 
         if (mLocation != null) {
-            ((TextView) rootView.findViewById(R.id.location_detail)).setText(
+            ((TextView) rootView.findViewById(R.id.location_detail_container)).setText(
                     String.format("Location: "+ "\n" +
                             mLocation.getAddress() + "\n" +
                             mLocation.getCity() + ", " +
@@ -80,28 +82,27 @@ public class LocationDetailFragment extends Fragment {
                             mLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
                             mLocation.getPhoneNumber() + "\n" +
                             mLocation.getWebsite()));
-            //
 
             // store each donation's info
-            Collection<Donation> donations = mLocation.getDonations();
-            Iterator<Donation> iter = donations.iterator();
-            // TODO: REMOVE THAT + 1 CAUSE ITS A PLACEHOLDER FOR NO REAL DONATIONS IN THE LIST
-            String [] donationStrings = new String[donations.size() + 1];
-            int i = 0;
-            while (iter.hasNext()) {
-                Donation d = iter.next();
-                donationStrings[i] =
-                                Integer.toString(i) + ".\t\t\t" + d.getCategory().toString() +
-                                 ":\t\t\t\t\t\t" + d.getName() +
-                                "\n\t\t\t\t\t\t" + d.getDescription() + "\n";
-                i++;
-            }
-            // TODO: REMOVE THIS WHEN THERE ARE REAL DONATIONS
-            donationStrings[i] = "1.\t\t\tFOOD:\t\t\t\t\t\t Spaghetti\n\t\t\t\t\t\tWhat a tasty treat!\n";
-            // create an adapter for the donations
-            ArrayAdapter<String> adap = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, donationStrings);
-
-            ((ListView) rootView.findViewById(R.id.donations_at_location)).setAdapter(adap);
+//            Collection<Donation> donations = mLocation.getDonations();
+//            Iterator<Donation> iter = donations.iterator();
+//            // TODO: REMOVE THAT + 1 CAUSE ITS A PLACEHOLDER FOR NO REAL DONATIONS IN THE LIST
+//            String [] donationStrings = new String[donations.size() + 1];
+//            int i = 0;
+//            while (iter.hasNext()) {
+//                Donation d = iter.next();
+//                donationStrings[i] =
+//                                Integer.toString(i) + ".\t\t\t" + d.getCategory().toString() +
+//                                 ":\t\t\t\t\t\t" + d.getName() +
+//                                "\n\t\t\t\t\t\t" + d.getDescription() + "\n";
+//                i++;
+//            }
+//            // TODO: REMOVE THIS WHEN THERE ARE REAL DONATIONS
+//            donationStrings[i] = "1.\t\t\tFOOD:\t\t\t\t\t\t Spaghetti\n\t\t\t\t\t\tWhat a tasty treat!\n";
+//            // create an adapter for the donations
+//            ArrayAdapter<String> adap = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, donationStrings);
+//
+//            ((ListView) rootView.findViewById(R.id.donations_at_location)).setAdapter(adap);
         }
 
         return rootView;

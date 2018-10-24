@@ -1,7 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ public class Location {
     private String type;  // could be an enum
     private String phoneNumber; // String because it has the () and -
     private String website;
-    private Collection<Donation> donations;
+    private List<Donation> donations;
 
     /**
      * Constructor that takes in type-appropriate data
@@ -265,7 +264,7 @@ public class Location {
      * Gets a collection of all donations made at this location
      * @return the collection of donations
      */
-    public Collection<Donation> getDonations() {
+    public List<Donation> getDonations() {
         return donations;
     }
 
@@ -273,7 +272,7 @@ public class Location {
      * Sets the collection of all donations made at this loction
      * @param donations a list of Donations
      */
-    public void setDonations(Collection<Donation> donations) {
+    public void setDonations(List<Donation> donations) {
         this.donations = donations;
     }
 
