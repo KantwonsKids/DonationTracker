@@ -23,7 +23,7 @@ public class Model {
     /**
      * A list of donationData objects
      */
-    public static List<Location> donationDataList;
+    public static NameSearchableList<Location> donationDataList;
 
     /**
      * The user that is currently logged in.

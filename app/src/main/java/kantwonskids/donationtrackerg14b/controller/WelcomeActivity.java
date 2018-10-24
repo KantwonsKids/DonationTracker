@@ -54,7 +54,7 @@ public class WelcomeActivity extends AppCompatActivity {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
             // initialize the donationDataList in the model
-            model.donationDataList = new ArrayList<>();
+            model.donationDataList = new NameSearchableList<>();
 
             String line;
             br.readLine(); // drop the header line

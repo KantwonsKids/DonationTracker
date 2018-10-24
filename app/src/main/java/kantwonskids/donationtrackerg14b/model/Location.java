@@ -10,7 +10,7 @@ import java.util.List;
  *
  * A wrapper that stores all data of a specific donation
  */
-public class Location {
+public class Location implements NamedObject {
 
     private int key;
     private String name;

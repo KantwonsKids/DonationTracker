@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class UserList {
 
     // Mapping of usernames to user objects, for quick lookup of users by name.
+    // TODO: make this work with NameSearchableLists
     private HashMap<String, User> usernameObjectMap;
 
     /**
