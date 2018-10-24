@@ -18,7 +18,7 @@ public class Donation implements NamedObject {
     private String comments;
     // TODO: add an instance variable for image
 
-    Donation(LocalDateTime time, String item, String description, float value,
+    public Donation(LocalDateTime time, String item, String description, float value,
              DonationCategory category, String comments) {
         this.time = time;
         this.name = item;
@@ -124,4 +124,7 @@ public class Donation implements NamedObject {
         this.comments = comments;
     }
 
+    public String toString() {
+        return category.toString() + ": " + name;
+    }
 }

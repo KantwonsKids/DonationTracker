@@ -85,8 +85,8 @@ public class LocationListActivity extends AppCompatActivity {
                     Context context = v.getContext();
                     Intent intent = new Intent(context,
                             LocationDetailActivity.class);
-                    intent.putExtra(LocationDetailFragment.ARG_NAME,
-                            holder.mLocation.getName());
+                    //intent.putExtra(LocationDetailFragment.ARG_NAME,
+                      //      holder.mLocation.getName());
                     model.setCurrentLocation(holder.mLocation);
                     context.startActivity(intent);
                 }
@@ -96,7 +96,11 @@ public class LocationListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mLocations.size();
+            if (mLocations != null) {
+                return mLocations.size();
+            } else {
+                return 0;
+            }
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
