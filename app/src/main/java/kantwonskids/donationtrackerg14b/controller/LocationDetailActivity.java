@@ -11,8 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
+import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
  * @author Juliana Petrillo
@@ -34,6 +38,30 @@ public class LocationDetailActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        Model model = Model.getInstance();
+        Location mLocation = model.getCurrentLocation();
+        TextView locationTitle = findViewById(R.id.locationTitle);
+        locationTitle.setText(mLocation.getName());
+        TextView locationDetail = findViewById(R.id.location_detail_text);
+        locationDetail.setText(
+                String.format("Location: " + "\n" +
+                        mLocation.getAddress() + "\n" +
+                        mLocation.getCity() + ", " +
+                        mLocation.getState() + " " +
+                        mLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
+                        mLocation.getPhoneNumber() + "\n" +
+                        mLocation.getWebsite()));
+
+        Button inventoryButton = (Button) findViewById(R.id.viewInventory);
+        inventoryButton.setOnClickListener((view) -> {
+            Intent intent_inventory = new Intent(this, InventoryActivity.class);
+            startActivity(intent_inventory);
+        });
+        Button addButton = (Button) findViewById(R.id.addToInventory);
+        addButton.setOnClickListener((view) -> {
+            Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
+            startActivity(intent_addToInventory);
+        });
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -44,18 +72,18 @@ public class LocationDetailActivity extends AppCompatActivity {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(LocationDetailFragment.ARG_NAME,
-                    getIntent().getStringExtra(LocationDetailFragment.ARG_NAME));
-            LocationDetailFragment fragment = new LocationDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.location_detail_container, fragment)
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            // Create the detail fragment and add it to the activity
+//            // using a fragment transaction.
+//            Bundle arguments = new Bundle();
+//            arguments.putString(LocationDetailFragment.ARG_NAME,
+//                    getIntent().getStringExtra(LocationDetailFragment.ARG_NAME));
+//            LocationDetailFragment fragment = new LocationDetailFragment();
+//            fragment.setArguments(arguments);
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.location_detail_container, fragment)
+//                    .commit();
+//        }
     }
 
     @Override
