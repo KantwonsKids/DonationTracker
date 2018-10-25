@@ -36,7 +36,7 @@ public class Model {
     private Location _currentLocation;
 
 
-
+    private Donation _currentDonation;
     /**
      * Gets the instance of the model class.
      * @return the instance of the Model, which stores all relevant application data
@@ -82,6 +82,10 @@ public class Model {
     public void setCurrentLocation(Location location) {
         _currentLocation = location;
     }
+
+    public Donation getCurrentDonation() {return _currentDonation;}
+
+    public void setCurrentDonation(Donation donation) {_currentDonation = donation;}
 
     /**
      * Return the location with a given key.
