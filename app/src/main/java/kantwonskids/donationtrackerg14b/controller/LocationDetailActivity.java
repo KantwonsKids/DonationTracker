@@ -58,6 +58,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             startActivity(intent_inventory);
         });
 
+
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).
