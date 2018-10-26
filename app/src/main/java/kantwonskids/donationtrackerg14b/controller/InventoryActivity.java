@@ -79,16 +79,11 @@ public class InventoryActivity extends AppCompatActivity {
             holder.mDonation = mInventory.get(position);
             holder.mContentView.setText(mInventory.get(position).toString());
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context,
-                            ItemDetailActivity.class);
-                    model.setCurrentDonation(holder.mDonation);
-                    context.startActivity(intent);
-
-                }
+            holder.mView.setOnClickListener( (View v) -> {
+                Context context = v.getContext();
+                Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
+                model.setCurrentDonation(holder.mDonation);
+                context.startActivity(item_detail_intent);
             });
 
         }
