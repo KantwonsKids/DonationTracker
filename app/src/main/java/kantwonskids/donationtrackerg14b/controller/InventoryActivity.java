@@ -75,18 +75,15 @@ public class InventoryActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
+            final Model model = Model.getInstance();
             holder.mDonation = mInventory.get(position);
             holder.mContentView.setText(mInventory.get(position).toString());
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Context context = v.getContext();
-                    //Intent intent = new Intent(context,
-                            //LocationDetailActivity.class);
-                    //context.startActivity(intent);
-                    //TODO: fix this so that clicking here actually goes to item details page
-                }
+            holder.mView.setOnClickListener( (View v) -> {
+                Context context = v.getContext();
+                Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
+                model.setCurrentDonation(holder.mDonation);
+                context.startActivity(item_detail_intent);
             });
 
         }

@@ -57,6 +57,8 @@
         </activity>
         <activity android:name=".controller.InventoryActivity"></activity>
         <activity android:name=".controller.NewItemActivity"></activity>
+        <activity android:name=".controller.ItemDetailActivity"></activity>
+
     </application>
 
 </manifest>

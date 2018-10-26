@@ -53,21 +53,21 @@ public class NewItemActivity extends AppCompatActivity{
     }
 
     private void attemptCreateDonation() {
-
-//        if (itemName.getText() == null) {
-//            String error = "Please enter a valid item name.";
-//            errorMessage.setText(error);
-//        } else if (itemDescription.getText() == null) {
-//            String error = "Please enter a valid item description.";
-//            errorMessage.setText(error);
-//        } else if (itemPrice.getText() == null) {
-//            String error = "Please enter a valid item price.";
-//            errorMessage.setText(error);
-//        } else {
-//            createDonation();
-//        }
-        //TODO: gonna need some validation that actually works here
-        createDonation();
+        String name = itemName.getText().toString();
+        String description = itemDescription.getText().toString();
+        float price = Float.parseFloat(itemPrice.getText().toString());
+        if (name.length() < 1) {
+            String error = "Please enter a valid item name.";
+            errorMessage.setText(error);
+        } else if (description.length() < 1) {
+            String error = "Please enter a valid item description.";
+            errorMessage.setText(error);
+        } else if (price <= 0) {
+            String error = "Please enter a valid item price.";
+            errorMessage.setText(error);
+        } else {
+            createDonation();
+        }
     }
 
     private void createDonation() {

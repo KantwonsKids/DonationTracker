@@ -3,14 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".controller.LocationDetailFragment" >
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/viewInventory"
+    <TextView
+        android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Inventory" />
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/item_detail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>
