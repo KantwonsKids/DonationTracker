@@ -31,7 +31,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
     Model model = Model.getInstance();
     Donation mDonation = model.getCurrentDonation();
-    TextView donationTitle = findViewById(R.id.itemTitle);
+    TextView donationTitle = findViewById(R.id.item_title);
         donationTitle.setText(mDonation.getName());
     TextView donationDetail = findViewById(R.id.item_detail_text);
         donationDetail.setText(

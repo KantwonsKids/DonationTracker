@@ -57,11 +57,6 @@ public class LocationDetailActivity extends AppCompatActivity {
             Intent intent_inventory = new Intent(this, InventoryActivity.class);
             startActivity(intent_inventory);
         });
-        Button addButton = (Button) findViewById(R.id.addToInventory);
-        addButton.setOnClickListener((view) -> {
-            Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
-            startActivity(intent_addToInventory);
-        });
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
