@@ -83,8 +83,16 @@ public class Model {
         _currentLocation = location;
     }
 
+    /**
+     *
+     * @return currently selected donation item
+     */
     public Donation getCurrentDonation() {return _currentDonation;}
 
+    /**
+     *
+     * @param donation sets currently selected donation item
+     */
     public void setCurrentDonation(Donation donation) {_currentDonation = donation;}
 
     /**

@@ -18,7 +18,15 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
 import kantwonskids.donationtrackerg14b.model.Model;
 
+/**
+ * @author Aidan Mulaokar
+ * @version 1.0
+ *
+ * An activity representing a single Donation detail screen
+ */
+
 public class ItemDetailActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
