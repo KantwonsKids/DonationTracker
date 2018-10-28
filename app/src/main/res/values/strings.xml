@@ -19,4 +19,6 @@
     <string name="create_account">Create an account</string>
     <string name="title_location_list">Locations</string>
     <string name="title_location_detail">Location Detail</string>
+    <string name="app_label">BuzzTracker</string>
+    <string name="search_hint_locations">Search locations</string>
 </resources>
