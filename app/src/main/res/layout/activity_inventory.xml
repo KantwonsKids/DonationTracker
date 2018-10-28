@@ -7,16 +7,28 @@
     android:fitsSystemWindows="true"
     tools:context=".controller.InventoryActivity">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_weight="1"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="0dp"
+        app:fabSize="normal"
+        app:rippleColor="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/addItem"
+        <SearchView
+            android:id="@+id/searchFromInventory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Donation" />
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -27,6 +39,7 @@
             <include
                 layout="@layout/inventory"
                 android:layout_width="314dp" />
+
         </FrameLayout>
     </LinearLayout>
 
