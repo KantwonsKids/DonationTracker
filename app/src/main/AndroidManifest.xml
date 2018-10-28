@@ -56,8 +56,7 @@
                 android:value="kantwonskids.donationtrackerg14b.controller.LocationListActivity" />
         </activity>
         <activity
-                android:name=".controller.InventoryActivity"
-                android:parentActivityName="controller.LocationDetailActivity" >
+                android:name=".controller.InventoryActivity" >
         </activity>
         <activity android:name=".controller.NewItemActivity"></activity>
         <activity android:name=".controller.ItemDetailActivity"></activity>
