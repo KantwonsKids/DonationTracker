@@ -48,7 +48,8 @@ public class LocationListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle("Locations");
+//        ab.setDisplayHomeAsUpEnabled(true);
 
 //        ImageButton  sidebarButton = (ImageButton) findViewById(R.id.sidebarButton);
 //        sidebarButton.setOnClickListener((view) -> {

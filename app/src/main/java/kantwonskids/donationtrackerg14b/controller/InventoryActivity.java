@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +35,18 @@ public class InventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        Button addItemButton = (Button) findViewById(R.id.addItem);
+        FloatingActionButton addItemButton = findViewById(R.id.addItem);
         addItemButton.setOnClickListener((view) -> {
             Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
             startActivity(intent_addToInventory);
         });
+
+        // set up the app bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
