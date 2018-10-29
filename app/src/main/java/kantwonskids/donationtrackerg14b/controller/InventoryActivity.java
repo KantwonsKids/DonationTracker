@@ -88,6 +88,7 @@ public class InventoryActivity extends AppCompatActivity {
 
         }
 
+
         @Override
         public int getItemCount() {
             return mInventory.size();
@@ -106,5 +107,13 @@ public class InventoryActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(InventoryActivity.this,
+                LocationDetailActivity.class));
+        finish();
     }
 }
