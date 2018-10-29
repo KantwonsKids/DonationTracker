@@ -1,5 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * A wrapper that stores all data of a specific donation
  */
-public class Location implements NamedObject {
+public class Location implements NamedObject, Serializable {
 
     private int key;
     private String name;

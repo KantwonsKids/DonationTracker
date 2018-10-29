@@ -1,5 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Juliana Petrillo
  * @version 1.0
  */
-public class Donation implements NamedObject {
+public class Donation implements NamedObject, Serializable {
 
     private LocalDateTime time;
     private String name;

@@ -49,7 +49,7 @@ public class LocationListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
-                Model.donationDataList));
+                Model.getInstance().donationDataList));
     }
 
     public static class SimpleItemRecyclerViewAdapter
