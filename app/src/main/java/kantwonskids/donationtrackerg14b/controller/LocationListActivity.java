@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,9 @@ public class LocationListActivity extends AppCompatActivity {
 //        sidebarButton.setOnClickListener((view) -> {
 //            logout();
 //        });
+
+        // set up tabs
+        TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
     }
 
     @Override
