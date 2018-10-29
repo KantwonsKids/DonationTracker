@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class InventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        Button addItemButton = (Button) findViewById(R.id.addItem);
+        FloatingActionButton addItemButton = findViewById(R.id.addItem);
         addItemButton.setOnClickListener((view) -> {
             Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
             startActivity(intent_addToInventory);
