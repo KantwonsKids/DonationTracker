@@ -93,16 +93,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Go back to the main screen when the "cancel" button is pushed
-        Button loginCancelButton = findViewById(R.id.login_cancel_button);
-        loginCancelButton.setOnClickListener((view) -> {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-        });
-
         // Send to registration screen when button is pressed
-        Button regiButton = findViewById(R.id.login_noAccount_button);
-        regiButton.setOnClickListener((view) -> {
+        View regView = findViewById(R.id.login_noAccount_textview);
+        regView.setOnClickListener((view) -> {
             Intent intent_regi = new Intent(this, RegistrationActivity.class);
             startActivity(intent_regi);
         });
