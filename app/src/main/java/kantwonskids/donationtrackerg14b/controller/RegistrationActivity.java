@@ -52,7 +52,7 @@ public class RegistrationActivity extends AppCompatActivity {
         locationSpinner = findViewById(R.id.registration_location_spinner);
 
         // Get location names
-        List<Location> locs = Model.donationDataList;
+        List<Location> locs = Model.getInstance().donationDataList;
         String[] locNames = new String[locs.size()];
         for (int i = 0; i < locs.size(); i++) {
             locNames[i] = locs.get(i).getName();
@@ -131,9 +131,9 @@ public class RegistrationActivity extends AppCompatActivity {
         Location loc = null;
         // find the real location
         if (accType.equals("Location Employee")) {
-            for (int i = 0; i < Model.donationDataList.size(); i++) {
-                if (Model.donationDataList.get(i).getName().equals(locationStr)) {
-                    loc = Model.donationDataList.get(i);
+            for (int i = 0; i < Model.getInstance().donationDataList.size(); i++) {
+                if (Model.getInstance().donationDataList.get(i).getName().equals(locationStr)) {
+                    loc = Model.getInstance().donationDataList.get(i);
                 }
             }
         }
@@ -240,6 +240,6 @@ public class RegistrationActivity extends AppCompatActivity {
      */
     private boolean isValidLocation(Location l) {
 
-        return Model.donationDataList.contains(l);
+        return Model.getInstance().donationDataList.contains(l);
     }
 }

@@ -36,7 +36,7 @@ public class Model implements Serializable {
     /**
      * A list of donationData objects
      */
-    public static NameSearchableList<Location> donationDataList;
+    public NameSearchableList<Location> donationDataList;
 
     /**
      * The user that is currently logged in.
@@ -92,6 +92,11 @@ public class Model implements Serializable {
     public Location getCurrentLocation() {
         return _currentLocation;
     }
+
+    /**
+     * @return the list of locations
+     */
+    public NameSearchableList<Location> getDonationDataList() { return donationDataList; }
 
     /**
      * Sets the currently selected location.

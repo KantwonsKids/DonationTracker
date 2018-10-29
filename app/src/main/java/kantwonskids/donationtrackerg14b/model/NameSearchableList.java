@@ -1,5 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,7 +10,7 @@ import java.util.List;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 
-public class NameSearchableList<T extends NamedObject> extends ArrayList<T> implements Searchable<T, String> {
+public class NameSearchableList<T extends NamedObject> extends ArrayList<T> implements Searchable<T, String>, Serializable {
 
     @Override
     public List<T> search(String key) {
