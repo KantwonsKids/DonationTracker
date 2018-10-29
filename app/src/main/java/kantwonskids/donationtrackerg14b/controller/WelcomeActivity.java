@@ -38,6 +38,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Read data on start up
         readSampleData();
+
+        // Load the serialized model
+        Model.loadSavedData();
     }
 
     /**

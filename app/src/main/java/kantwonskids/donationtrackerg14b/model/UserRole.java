@@ -1,6 +1,8 @@
 package kantwonskids.donationtrackerg14b.model;
 
-public enum UserRole {
+import java.io.Serializable;
+
+public enum UserRole implements Serializable {
     ADMINISTRATOR("Administrator", true, true, true, true, true),
     GUEST("Guest", false, false, false, false, false),
     LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false),

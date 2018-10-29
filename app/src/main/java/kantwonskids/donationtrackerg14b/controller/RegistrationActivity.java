@@ -1,6 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -171,9 +172,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     break;
             }
             model._userList.addUser(newUser);
+
+            // save to file
+            Model.saveToPhone();
+
             Intent welcomeIntent = new Intent(this, MainActivity.class);
             // Pass the user just created to the main activity to set as the logged in user
-            welcomeIntent.putExtra("CURRENT_USER", newUser);
+            welcomeIntent.putExtra("CURRENT_USER", (Parcelable)newUser);
             startActivity(welcomeIntent);
         }
 

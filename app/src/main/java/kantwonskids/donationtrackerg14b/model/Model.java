@@ -1,5 +1,18 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +24,7 @@ import java.util.List;
  * A singleton instance of the model that controllers
  * can access
  */
-public class Model {
+public class Model implements Serializable {
     // instance of the class
     private static Model _instance = new Model();
 
@@ -27,16 +40,21 @@ public class Model {
 
     /**
      * The user that is currently logged in.
+     * Transient so that it does not persist when saving
      */
-    private User loggedInUser;
+    private transient User loggedInUser;
 
     /**
-     * The currently selected location;
+     * The currently selected location
+     * Transient so that it does not persist when saving
      */
-    private Location _currentLocation;
+    private transient Location _currentLocation;
 
-
-    private Donation _currentDonation;
+    /**
+     * The currently selected donation
+     * Transient so that it does not persist when saving
+     */
+    private transient Donation _currentDonation;
     /**
      * Gets the instance of the model class.
      * @return the instance of the Model, which stores all relevant application data
@@ -121,6 +139,57 @@ public class Model {
             }
         }
         return null;
+    }
+
+    /**
+     * Saves the entire model to the phone
+     */
+    public static void saveToPhone(){
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS);
+        File filename = new File(path, "/" + "donationTracker.ser");
+        FileOutputStream fOS;
+        ObjectOutputStream out;
+
+        try {
+            path.mkdirs();
+            filename.createNewFile();
+            fOS = new FileOutputStream(filename);
+            out = new ObjectOutputStream(fOS);
+            out.writeObject(_instance);
+            out.close();
+            fOS.close();
+            Log.v("Serializing", "Wrote model to file successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * loads all saved data and places it in instance
+     */
+    public static void loadSavedData()
+    {
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS);
+        File filename = new File(path, "/" + "donationTracker.ser");
+        FileInputStream fIS;
+        ObjectInputStream in;
+
+
+        try
+        {
+            fIS = new FileInputStream(filename);
+            in = new ObjectInputStream(fIS);
+            Object o = in.readObject();
+            _instance = (Model)o;
+            Log.v("Serialization", "Successfully loaded the model");
+        }
+        catch(Exception ex)
+        {
+            Log.v("Serialization Read Error : ",ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 
 }
