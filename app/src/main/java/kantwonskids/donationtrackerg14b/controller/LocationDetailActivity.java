@@ -97,4 +97,12 @@ public class LocationDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LocationDetailActivity.this,
+                LocationListActivity.class));
+        finish();
+    }
 }

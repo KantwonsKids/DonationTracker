@@ -1,10 +1,12 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -165,5 +167,29 @@ public class LocationListActivity extends AppCompatActivity {
         // Log out the current user
         Model.getInstance().setCurrentUser(null);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(LocationListActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Logout?");
+        builder.setMessage("Press OK to be logged out of the app. Press Cancel"
+                + " or tap outside of this dialogue to return to the app.");
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        });
+        builder.show();
     }
 }
