@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BuzzTracker</string>
+    <string name="app_name">Don8ion</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
@@ -21,4 +21,5 @@
     <string name="title_location_detail">Location Detail</string>
     <string name="app_label">BuzzTracker</string>
     <string name="search_hint_locations">Search locations</string>
+    <string name="action_settings">Settings</string>
 </resources>
