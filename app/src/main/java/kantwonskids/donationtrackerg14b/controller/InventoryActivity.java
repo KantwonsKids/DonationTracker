@@ -5,22 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
-import java.time.LocalDateTime;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
-import kantwonskids.donationtrackerg14b.model.DonationCategory;
 
 /**
  * an Activity to represent the inventory (list of donation items)
@@ -38,6 +36,13 @@ public class InventoryActivity extends AppCompatActivity {
             Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
             startActivity(intent_addToInventory);
         });
+
+        // set up the app bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;

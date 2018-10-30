@@ -25,7 +25,7 @@ import kantwonskids.donationtrackerg14b.model.Model;
  * An activity representing a single Location detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link LocationListActivity}.
+ * in a {@link MainActivity}.
  */
 public class LocationDetailActivity extends AppCompatActivity {
 
@@ -34,14 +34,17 @@ public class LocationDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_detail);
         // Show the Up button in the action bar.
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.location_detail_title);
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         Model model = Model.getInstance();
         Location mLocation = model.getCurrentLocation();
-        TextView locationTitle = findViewById(R.id.locationTitle);
-        locationTitle.setText(mLocation.getName());
+//        TextView locationTitle = findViewById(R.id.locationTitle);
+//        locationTitle.setText(mLocation.getName());
         TextView locationDetail = findViewById(R.id.location_detail_text);
         locationDetail.setText(
                 String.format("Location: " + "\n" +
@@ -92,7 +95,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, LocationListActivity.class));
+            navigateUpTo(new Intent(this, MainActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -102,7 +105,7 @@ public class LocationDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(LocationDetailActivity.this,
-                LocationListActivity.class));
+                MainActivity.class));
         finish();
     }
 }

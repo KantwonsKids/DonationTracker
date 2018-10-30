@@ -60,11 +60,11 @@ public class LocationDetailFragment extends Fragment {
         if (getArguments().containsKey(ARG_NAME)) {
             Model model = Model.getInstance();
             mLocation = model.getCurrentLocation();
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mLocation.getName());
-            }
+//            Activity activity = this.getActivity();
+//            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
+//            if (appBarLayout != null) {
+//                appBarLayout.setTitle(mLocation.getName());
+//            }
         }
     }
 

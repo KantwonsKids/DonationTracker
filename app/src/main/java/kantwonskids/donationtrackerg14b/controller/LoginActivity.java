@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param potentialUser The user to log in as.
      */
     private void login(User potentialUser) {
+//        Intent intent = new Intent(this, MainActivity.class);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CURRENT_USER", (Parcelable)potentialUser);
         startActivity(intent);

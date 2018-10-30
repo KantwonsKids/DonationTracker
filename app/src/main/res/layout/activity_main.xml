@@ -1,30 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+
+
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorNavy"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login success!"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="30sp" />
+    <include layout="@layout/toolbar">
+    </include>
 
-    <TextView
-        android:id="@+id/main_userInfoTextView"
+    <android.support.design.widget.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/location_list_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_below="@+id/toolbar"
+        tools:context=".controller.MainActivity">
 
-    <Button
-        android:id="@+id/logout_button"
+        <!--<android.support.design.widget.TabItem-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/title_location_list">-->
+
+
+        <!--</android.support.design.widget.TabItem>-->
+        <!--<android.support.design.widget.TabItem-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="test2" />-->
+    </android.support.design.widget.TabLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Logout"
-        android:textAlignment="center" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@id/location_list_tab_layout">
+
+        <!--<android.support.v4.view.PagerTabStrip-->
+            <!--android:id="@+id/pager_header"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_gravity="top"></android.support.v4.view.PagerTabStrip>-->
+    </android.support.v4.view.ViewPager>
+
+    <!--<include-->
+    <!--layout="@layout/location_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<fragment android:name="kantwonskids.donationtrackerg14b.controller.LocationListFragment"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="match_parent">-->
+    <!--</fragment>-->
+
 </LinearLayout>
