@@ -12,17 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
-import java.time.LocalDateTime;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
-import kantwonskids.donationtrackerg14b.model.DonationCategory;
 
 /**
  * an Activity to represent the inventory (list of donation items)
@@ -42,7 +38,7 @@ public class InventoryActivity extends AppCompatActivity {
         });
 
         // set up the app bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();

@@ -52,7 +52,7 @@ public class NewItemActivity extends AppCompatActivity{
             attemptCreateDonation();
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

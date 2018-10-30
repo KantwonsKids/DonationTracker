@@ -34,14 +34,17 @@ public class LocationDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_detail);
         // Show the Up button in the action bar.
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.location_detail_title);
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         Model model = Model.getInstance();
         Location mLocation = model.getCurrentLocation();
-        TextView locationTitle = findViewById(R.id.locationTitle);
-        locationTitle.setText(mLocation.getName());
+//        TextView locationTitle = findViewById(R.id.locationTitle);
+//        locationTitle.setText(mLocation.getName());
         TextView locationDetail = findViewById(R.id.location_detail_text);
         locationDetail.setText(
                 String.format("Location: " + "\n" +
