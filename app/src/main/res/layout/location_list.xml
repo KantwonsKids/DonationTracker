@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        tools:context=".controller.LocationListActivity"
+        tools:context=".controller.MainActivity"
         tools:listitem="@layout/location_list_content" >
 
     </android.support.v7.widget.RecyclerView>

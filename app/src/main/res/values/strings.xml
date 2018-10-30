@@ -22,4 +22,7 @@
     <string name="app_label">BuzzTracker</string>
     <string name="search_hint_locations">Search locations</string>
     <string name="action_settings">Settings</string>
+    <string name="home_page_title">Dashboard</string>
+    <string name="location_tab_title">Locations</string>
+    <string name="map_tab_title">Map</string>
 </resources>

@@ -20,27 +20,26 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
-public class LocationListFragment extends ListFragment {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-//        View recyclerView = view.findViewById(R.id.location_list);
-////        assert recyclerView != null;
-//        setupRecyclerView((RecyclerView) recyclerView);
-    }
-
+/**
+ * Fragment for the location list.
+ * Contains a recycler view to show all locations currently loaded.
+ * Used as the fragment for one of the tabs on the main screen.
+ */
+public class LocationListFragment extends Fragment {
+    /**
+     * Sets up the recycler view.
+     * @param recyclerView the recycler view to set up
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
                 Model.getInstance().donationDataList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    public static class SimpleItemRecyclerViewAdapter
+    /**
+     * View adapter for the recycler view. Populates the recycler view with the elements of the global location list.
+     */
+    private static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         /**
@@ -111,17 +110,14 @@ public class LocationListFragment extends ListFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        // Inflate the root view into the fragment
         View rootView = inflater.inflate(R.layout.location_list, container, false);
+
+        // Get the recycler view
         View recyclerView = rootView.findViewById(R.id.location_list);
-//        assert recyclerView != null;
+
+        // set up the recycler view
         setupRecyclerView((RecyclerView) recyclerView);
         return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 }

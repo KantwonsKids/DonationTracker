@@ -25,7 +25,7 @@ import kantwonskids.donationtrackerg14b.model.Model;
  * An activity representing a single Location detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link LocationListActivity}.
+ * in a {@link MainActivity}.
  */
 public class LocationDetailActivity extends AppCompatActivity {
 
@@ -92,7 +92,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, LocationListActivity.class));
+            navigateUpTo(new Intent(this, MainActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -102,7 +102,7 @@ public class LocationDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(LocationDetailActivity.this,
-                LocationListActivity.class));
+                MainActivity.class));
         finish();
     }
 }
