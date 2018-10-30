@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // set up tabs
-        TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
+//        TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
     }
 
 }

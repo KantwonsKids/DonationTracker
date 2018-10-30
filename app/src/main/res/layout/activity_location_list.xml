@@ -3,11 +3,12 @@
 
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/toolbar" />
-
+    <include layout="@layout/toolbar">
+    </include>
 
     <android.support.design.widget.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,29 +17,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+        android:layout_below="@+id/my_toolbar"
         tools:context=".controller.LocationListActivity">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/title_location_list">
+        <!--<android.support.design.widget.TabItem-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/title_location_list">-->
 
 
-        </android.support.design.widget.TabItem>
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="test2" />
+        <!--</android.support.design.widget.TabItem>-->
+        <!--<android.support.design.widget.TabItem-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="test2" />-->
     </android.support.design.widget.TabLayout>
 
-    <!--<include-->
-        <!--layout="@layout/location_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
 
-    <fragment android:name="kantwonskids.donationtrackerg14b.controller.LocationListFragment"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
-    </fragment>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@id/location_list_tab_layout">
+
+        <!--<android.support.v4.view.PagerTabStrip-->
+            <!--android:id="@+id/pager_header"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_gravity="top"></android.support.v4.view.PagerTabStrip>-->
+    </android.support.v4.view.ViewPager>
+
+    <!--<include-->
+    <!--layout="@layout/location_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<fragment android:name="kantwonskids.donationtrackerg14b.controller.LocationListFragment"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_width="match_parent">-->
+    <!--</fragment>-->
 
 </LinearLayout>

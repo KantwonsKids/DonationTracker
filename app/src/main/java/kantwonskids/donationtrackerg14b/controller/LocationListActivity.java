@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,16 +47,16 @@ public class LocationListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
 
-        View recyclerView = findViewById(R.id.location_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+//        View recyclerView = findViewById(R.id.location_list);
+//        assert recyclerView != null;
+//        setupRecyclerView((RecyclerView) recyclerView);
 
         // set up the app bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setTitle("Locations");
+        ab.setTitle("jasdkfjs");
 //        ab.setDisplayHomeAsUpEnabled(true);
 
 //        ImageButton  sidebarButton = (ImageButton) findViewById(R.id.sidebarButton);
@@ -60,7 +65,50 @@ public class LocationListActivity extends AppCompatActivity {
 //        });
 
         // set up tabs
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        setupViewPager(viewPager);
+
         TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.addTab(tabLayout.newTab().setText("sajdfkj"));
+    }
+
+    private void setupViewPager(ViewPager vp) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new LocationListFragment(), "Locations");
+        adapter.addFragment(new Fragment(), "Test");
+        vp.setAdapter(adapter);
+    }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> fragmentList;
+        private final List<String> fragmentTitleList;
+
+        private ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+            fragmentList = new ArrayList<>();
+            fragmentTitleList = new ArrayList<>();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitleList.get(position);
+        }
     }
 
     @Override
