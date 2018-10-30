@@ -1,11 +1,12 @@
 package kantwonskids.donationtrackerg14b.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * A class for the list of valid users
  */
-public class UserList {
+public class UserList implements Serializable {
 
     // Mapping of usernames to user objects, for quick lookup of users by name.
     // TODO: make this work with NameSearchableLists

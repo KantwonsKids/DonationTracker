@@ -3,13 +3,15 @@ package kantwonskids.donationtrackerg14b.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * @author Ethan Wilson <ewilson72@gatech.edu>
  * @version 1.1
  *
  * A basic user class
  */
-public class User implements Parcelable, NamedObject {
+public class User implements Parcelable, NamedObject, Serializable {
 
     private String username;
     private String password;

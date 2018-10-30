@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -93,16 +94,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Go back to the main screen when the "cancel" button is pushed
-        Button loginCancelButton = findViewById(R.id.login_cancel_button);
-        loginCancelButton.setOnClickListener((view) -> {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-        });
-
         // Send to registration screen when button is pressed
-        Button regiButton = findViewById(R.id.login_noAccount_button);
-        regiButton.setOnClickListener((view) -> {
+        View regView = findViewById(R.id.login_noAccount_textview);
+        regView.setOnClickListener((view) -> {
             Intent intent_regi = new Intent(this, RegistrationActivity.class);
             startActivity(intent_regi);
         });
@@ -147,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void login(User potentialUser) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("CURRENT_USER", potentialUser);
+        intent.putExtra("CURRENT_USER", (Parcelable)potentialUser);
         startActivity(intent);
     }
 

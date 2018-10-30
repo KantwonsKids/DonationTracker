@@ -97,6 +97,9 @@ public class NewItemActivity extends AppCompatActivity{
         loc.addDonation(new Donation(time, item, description, price, category, comments));
         model.setCurrentLocation(loc);
 
+        // save model
+        Model.saveToPhone();
+
         //go back to inventory
         Intent intent_backToInventory = new Intent(this, InventoryActivity.class);
         startActivity(intent_backToInventory);

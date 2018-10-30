@@ -1,6 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class RegistrationActivity extends AppCompatActivity {
         locationSpinner = findViewById(R.id.registration_location_spinner);
 
         // Get location names
-        List<Location> locs = Model.donationDataList;
+        List<Location> locs = Model.getInstance().donationDataList;
         String[] locNames = new String[locs.size()];
         for (int i = 0; i < locs.size(); i++) {
             locNames[i] = locs.get(i).getName();
@@ -130,9 +131,9 @@ public class RegistrationActivity extends AppCompatActivity {
         Location loc = null;
         // find the real location
         if (accType.equals("Location Employee")) {
-            for (int i = 0; i < Model.donationDataList.size(); i++) {
-                if (Model.donationDataList.get(i).getName().equals(locationStr)) {
-                    loc = Model.donationDataList.get(i);
+            for (int i = 0; i < Model.getInstance().donationDataList.size(); i++) {
+                if (Model.getInstance().donationDataList.get(i).getName().equals(locationStr)) {
+                    loc = Model.getInstance().donationDataList.get(i);
                 }
             }
         }
@@ -171,9 +172,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     break;
             }
             model._userList.addUser(newUser);
+
+            // save to file
+            Model.saveToPhone();
+
             Intent welcomeIntent = new Intent(this, MainActivity.class);
             // Pass the user just created to the main activity to set as the logged in user
-            welcomeIntent.putExtra("CURRENT_USER", newUser);
+            welcomeIntent.putExtra("CURRENT_USER", (Parcelable)newUser);
             startActivity(welcomeIntent);
         }
 
@@ -235,6 +240,6 @@ public class RegistrationActivity extends AppCompatActivity {
      */
     private boolean isValidLocation(Location l) {
 
-        return Model.donationDataList.contains(l);
+        return Model.getInstance().donationDataList.contains(l);
     }
 }

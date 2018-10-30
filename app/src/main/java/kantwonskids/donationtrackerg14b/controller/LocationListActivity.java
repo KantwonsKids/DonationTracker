@@ -92,7 +92,7 @@ public class LocationListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
-                Model.donationDataList));
+                Model.getInstance().donationDataList));
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -180,7 +180,7 @@ public class LocationListActivity extends AppCompatActivity {
                 new AlertDialog.Builder(LocationListActivity.this);
         builder.setCancelable(true);
         builder.setTitle("Logout?");
-        builder.setMessage("Press OK to be logged out of the app. Press Cancel"
+        builder.setMessage("Press OK to be logged out of the app. Press CANCEL"
                 + " or tap outside of this dialogue to return to the app.");
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

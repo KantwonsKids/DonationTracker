@@ -95,18 +95,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/login_noAccount_button"
+    <TextView
+        android:id="@+id/login_noAccount_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_account" />
-
-    <Button
-        android:id="@+id/login_cancel_button"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorRed"
-        android:text="@string/cancel" />
+        android:text="@string/no_account"
+        android:textSize="16sp" />
 
 </LinearLayout>
