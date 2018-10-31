@@ -39,7 +39,13 @@
         <activity
             android:name=".controller.MainActivity"
             android:label="@string/title_location_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
         <activity
             android:name=".controller.LocationDetailActivity"
             android:label="@string/title_location_detail"
@@ -49,12 +55,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kantwonskids.donationtrackerg14b.controller.MainActivity" />
         </activity>
-        <activity
-                android:name=".controller.InventoryActivity" >
+        <activity android:name=".controller.InventoryActivity"></activity>
+        <activity android:name=".controller.NewItemActivity" />
+        <activity android:name=".controller.ItemDetailActivity" />
+        <activity android:name=".controller.LocationSearchActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.app.searchable"-->
+                <!--android:resource="@xml/searchable"/>-->
         </activity>
-        <activity android:name=".controller.NewItemActivity"></activity>
-        <activity android:name=".controller.ItemDetailActivity"></activity>
-
     </application>
 
 </manifest>

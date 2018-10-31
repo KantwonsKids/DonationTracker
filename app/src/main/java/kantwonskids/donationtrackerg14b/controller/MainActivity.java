@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 //        tabLayout.addTab(tabLayout.newTab().setText("sajdfkj"));
+
+        // Search
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+        }
     }
 
     /**
@@ -113,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         // Set up the search bar
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         return true;
     }
