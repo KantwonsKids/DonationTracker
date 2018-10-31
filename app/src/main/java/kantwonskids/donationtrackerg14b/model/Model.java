@@ -1,10 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import java.io.File;
@@ -13,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author Ethan Wilson
@@ -36,7 +31,7 @@ public class Model implements Serializable {
     /**
      * A list of donationData objects
      */
-    public NameSearchableList<Location> donationDataList;
+    public SearchableList<Location> locationList;
 
     /**
      * The user that is currently logged in.
@@ -96,7 +91,7 @@ public class Model implements Serializable {
     /**
      * @return the list of locations
      */
-    public NameSearchableList<Location> getDonationDataList() { return donationDataList; }
+    public SearchableList<Location> getLocationList() { return locationList; }
 
     /**
      * Sets the currently selected location.
@@ -124,7 +119,7 @@ public class Model implements Serializable {
      * @return the correct location or null if no such location exists
      */
     public Location getLocationByKey(int key) {
-        for (Location d : donationDataList) {
+        for (Location d : locationList) {
             if (d.getKey() == key) {
                 return d;
             }
@@ -138,7 +133,7 @@ public class Model implements Serializable {
      * @return the correct location or null if no such location exists
      */
     public Location getLocationByName(String name) {
-        for (Location d : donationDataList) {
+        for (Location d : locationList) {
             if (d.getName().equals(name)) {
                 return d;
             }

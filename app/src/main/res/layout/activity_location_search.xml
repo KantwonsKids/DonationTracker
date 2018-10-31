@@ -10,7 +10,6 @@
     <include layout="@layout/toolbar">
     </include>
 
-
     <!--<intent-filter>-->
         <!--<action android:name="android.intent.action.SEARCH" />-->
     <!--</intent-filter>-->

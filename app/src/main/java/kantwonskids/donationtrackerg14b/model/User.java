@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * A basic user class
  */
-public class User implements Parcelable, NamedObject, Serializable {
+public class User implements Parcelable, LabeledObject, Serializable {
 
     private String username;
     private String password;
@@ -165,7 +165,7 @@ public class User implements Parcelable, NamedObject, Serializable {
     }
 
     @Override
-    public String getName() {
+    public String getLabel() {
         return this.getUsername();
     }
 }

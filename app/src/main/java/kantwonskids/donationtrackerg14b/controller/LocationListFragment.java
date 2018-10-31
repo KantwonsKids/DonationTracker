@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,13 +25,14 @@ import kantwonskids.donationtrackerg14b.model.Model;
  * Used as the fragment for one of the tabs on the main screen.
  */
 public class LocationListFragment extends Fragment {
+    RecyclerView recyclerView;
     /**
      * Sets up the recycler view.
      * @param recyclerView the recycler view to set up
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
-                Model.getInstance().donationDataList));
+                Model.getInstance().locationList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -114,10 +114,10 @@ public class LocationListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.location_list, container, false);
 
         // Get the recycler view
-        View recyclerView = rootView.findViewById(R.id.location_list);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.location_list);
 
         // set up the recycler view
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView(recyclerView);
         return rootView;
     }
 }

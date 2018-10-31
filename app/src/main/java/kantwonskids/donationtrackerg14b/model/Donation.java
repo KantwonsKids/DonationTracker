@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Juliana Petrillo
  * @version 1.0
  */
-public class Donation implements NamedObject, Serializable {
+public class Donation implements LabeledObject, Serializable {
 
     private LocalDateTime time;
     private String name;
@@ -125,7 +125,13 @@ public class Donation implements NamedObject, Serializable {
         this.comments = comments;
     }
 
+    @Override
     public String toString() {
         return category.toString() + ": " + name;
+    }
+
+    @Override
+    public String getLabel() {
+        return this.name;
     }
 }

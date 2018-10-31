@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -51,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
         ab.setTitle(R.string.home_page_title);
 //        ab.setDisplayHomeAsUpEnabled(true);
 
+        // Search
+        Intent intent = getIntent();
+        List<Location> searchResults = Model.getInstance().locationList;
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            SearchableList locationList = Model.getInstance().locationList;
+            searchResults = locationList.search(query);
+
+            // TODO: launch the results activity
+        }
+
         // set up tabs
         ViewPager viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -59,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 //        tabLayout.addTab(tabLayout.newTab().setText("sajdfkj"));
 
-        // Search
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-        }
     }
 
     /**
@@ -73,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setupViewPager(ViewPager vp) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LocationListFragment(), getResources().getString(R.string.location_tab_title));
+        LocationListFragment listFragment = new LocationListFragment();
+        adapter.addFragment(listFragment, getResources().getString(R.string.location_tab_title));
 
         // TODO: Instead of new Fragment(), do new MapFragment() to add the map
         adapter.addFragment(new Fragment(), getResources().getString(R.string.map_tab_title));
