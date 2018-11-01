@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".controller.InventoryActivity">
+    <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEARCH" />-->
+    <!--</intent-filter>-->
+    <!--<meta-data android:name="android.app.searchable"-->
+        <!--android:resource="@xml/searchable"/>-->
+
 
     <include layout="@layout/toolbar"/>
 

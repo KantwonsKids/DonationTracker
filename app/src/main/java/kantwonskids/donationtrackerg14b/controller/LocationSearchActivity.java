@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class LocationSearchActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView, List<Donation> list) {
-        final Model model = Model.getInstance();
         recyclerView.setAdapter(new LocationSearchActivity.SimpleItemRecyclerViewAdapter(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -71,7 +71,7 @@ public class LocationSearchActivity extends AppCompatActivity {
         @Override
         public LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.location_list_content, parent, false);
+                    .inflate(R.layout.inventory_content, parent, false);
             return new LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
@@ -80,6 +80,8 @@ public class LocationSearchActivity extends AppCompatActivity {
             final Model model = Model.getInstance();
             holder.mDonation = mInventory.get(position);
             holder.mContentView.setText(mInventory.get(position).toString());
+            holder.locationNameView.setText(mInventory.get(position).getLocationString());
+            holder.itemIcon.setImageResource(R.drawable.ic_tshirt);
 
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
@@ -99,13 +101,17 @@ public class LocationSearchActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mContentView;
+            public final TextView locationNameView;
+            public final ImageView itemIcon;
             public Donation mDonation;
 
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mContentView = (TextView) view.findViewById(R.id.item_name);
+                locationNameView = (TextView)view.findViewById(R.id.location_name);
+                itemIcon = view.findViewById(R.id.item_icon);
             }
 
         }

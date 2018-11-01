@@ -9,8 +9,13 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 
 /**
  * @author Ethan Wilson
@@ -33,7 +38,7 @@ public class Model implements Serializable {
     /**
      * A list of donationData objects
      */
-    public SearchableList<Location> locationList;
+    public List<Location> locationList;
 
     /**
      * The user that is currently logged in.
@@ -212,13 +217,42 @@ public class Model implements Serializable {
      * Gets all donations in every location. Used to search through all locations.
      * @return SearchableList of all donations currently stored.
      */
-    public SearchableList<Donation> getAllDonations() {
-        SearchableList<Donation> list = new SearchableList<>();
+    public List<Donation> getAllDonations() {
+        List<Donation> list = new ArrayList<>();
         for (Location l : locationList) {
             list.addAll(l.getDonations());
         }
 
         return list;
+
+    }
+
+    /**
+     * Searches a list of labeled objects for the label query. Uses a fuzzy search and returns a
+     * list sorted by similarity.
+     * @param list the list to search
+     * @param query the query to search for
+     * @param <T> the type of the labeled object to search
+     * @return list of objects sorted by search similarity
+     */
+    public static <T extends LabeledObject> List<T> search(List<T> list, String query) {
+        final int CUTOFF = 10;
+        // Fuzzily search a list of the names of all the locations
+        List<String> names = new ArrayList<>();
+        list.forEach((item) -> names.add(item.getLabel()));
+        List<ExtractedResult> results = FuzzySearch.extractSorted(query,
+                names, CUTOFF);
+//        List<String> stringResults = new ArrayList<>();
+//        results.forEach((item) -> stringResults.add(item.getString()));
+
+        // Create a reordering of the original list of locations
+        List<T> sortedList = new ArrayList<>();
+        for (ExtractedResult er : results) {
+            int index = er.getIndex();
+            sortedList.add(list.get(index));
+        }
+
+        return sortedList;
 
     }
 

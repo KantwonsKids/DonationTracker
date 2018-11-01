@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.*;
@@ -62,7 +63,7 @@ public class WelcomeActivity extends AppCompatActivity {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
             // initialize the locationList in the model
-            model.locationList = new SearchableList<>();
+            model.locationList = new ArrayList<>();
 
             String line;
             br.readLine(); // drop the header line
