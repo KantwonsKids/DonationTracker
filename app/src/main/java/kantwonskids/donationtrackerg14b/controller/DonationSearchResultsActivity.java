@@ -1,6 +1,5 @@
 package kantwonskids.donationtrackerg14b.controller;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +21,9 @@ import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
-public class LocationSearchActivity extends AppCompatActivity {
+public class DonationSearchResultsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +59,13 @@ public class LocationSearchActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView, List<Donation> list) {
-        recyclerView.setAdapter(new LocationSearchActivity.SimpleItemRecyclerViewAdapter(list));
+        recyclerView.setAdapter(new DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setLayoutManager(new LinearLayoutManager(context));
     }
 
     private static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
+            extends RecyclerView.Adapter<DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         /**
          * The items to be shown in the list
@@ -85,14 +82,14 @@ public class LocationSearchActivity extends AppCompatActivity {
         }
 
         @Override
-        public LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.inventory_content, parent, false);
-            return new LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
+            return new DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(final DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
             final Model model = Model.getInstance();
             holder.mDonation = mInventory.get(position);
             holder.mContentView.setText(mInventory.get(position).toString());

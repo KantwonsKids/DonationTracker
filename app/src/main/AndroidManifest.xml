@@ -69,7 +69,7 @@
         <activity android:name=".controller.NewItemActivity" />
         <activity android:name=".controller.ItemDetailActivity" />
         <activity
-            android:name=".controller.LocationSearchActivity"
+            android:name=".controller.DonationSearchResultsActivity"
             android:parentActivityName=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

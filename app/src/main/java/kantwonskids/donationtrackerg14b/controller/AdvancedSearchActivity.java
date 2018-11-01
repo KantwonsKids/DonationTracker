@@ -1,15 +1,12 @@
 package kantwonskids.donationtrackerg14b.controller;
 
-import android.app.SearchManager;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +43,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 //        String searchQuery = queryView.getText().toString();
         Button goButton = findViewById(R.id.adv_search_go_button);
         goButton.setOnClickListener((view -> {
-            Intent intent = new Intent(this, LocationSearchActivity.class);
+            Intent intent = new Intent(this, DonationSearchResultsActivity.class);
 //            intent.setAction(Intent.ACTION_SEARCH);
             // get search results
             String query = queryView.getText().toString();

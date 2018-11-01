@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             List<Donation> donationList = Model.getInstance().getAllDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
-            Intent resultsIntent = new Intent(this, LocationSearchActivity.class);
+            Intent resultsIntent = new Intent(this, DonationSearchResultsActivity.class);
             resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>) searchResults);
             startActivity(resultsIntent);
         }
