@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
@@ -33,8 +34,23 @@ public class LocationSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_search);
         Intent intent = getIntent();
         ArrayList<Donation> searchResults = intent.getParcelableArrayListExtra("SEARCH_RESULTS");
+        ArrayList<String> selectedCategories = intent.getStringArrayListExtra("SELECTED_CATEGORIES");
         // convert list of strings into list of locations
         RecyclerView recyclerView = findViewById(R.id.search_results);
+
+        // filter search results based on selected categories
+        Collection<Donation> toRemove = new ArrayList<>();
+        if (selectedCategories != null) {
+            for (Donation d : searchResults) {
+                if (!selectedCategories.contains(d.getCategory().toString())) {
+//                    searchResults.remove(d);
+                    toRemove.add(d);
+                }
+            }
+
+            searchResults.removeAll(toRemove);
+        }
+
         setupRecyclerView(recyclerView, searchResults);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

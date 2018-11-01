@@ -23,6 +23,7 @@ import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
+import kantwonskids.donationtrackerg14b.model.DonationCategory;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -80,6 +81,21 @@ public class InventoryActivity extends AppCompatActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.advanced_search:
+                // Show the advanced search activity
+                Intent intent = new Intent(this, AdvancedSearchActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

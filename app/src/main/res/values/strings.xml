@@ -27,4 +27,5 @@
     <string name="map_tab_title">Map</string>
     <string name="location_detail_title">Location Details</string>
     <string name="search_results">Search results</string>
+    <string name="advanced_search">Advanced search</string>
 </resources>
