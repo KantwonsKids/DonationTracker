@@ -52,13 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Search
         Intent intent = getIntent();
-        List<Location> searchResults = Model.getInstance().locationList;
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             SearchableList locationList = Model.getInstance().locationList;
-            searchResults = locationList.search(query);
+            List<Location> searchResults = locationList.search(query);
 
             // TODO: launch the results activity
+            Intent resultsIntent = new Intent(this, LocationSearchActivity.class);
+            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Location>) searchResults);
+            startActivity(resultsIntent);
         }
 
         // set up tabs

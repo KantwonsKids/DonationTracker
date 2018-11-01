@@ -26,6 +26,7 @@ import kantwonskids.donationtrackerg14b.model.Model;
  */
 public class LocationListFragment extends Fragment {
     RecyclerView recyclerView;
+
     /**
      * Sets up the recycler view.
      * @param recyclerView the recycler view to set up

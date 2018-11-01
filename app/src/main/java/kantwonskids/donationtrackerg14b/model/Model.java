@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ethan Wilson
@@ -88,10 +90,10 @@ public class Model implements Serializable {
         return _currentLocation;
     }
 
-    /**
-     * @return the list of locations
-     */
-    public SearchableList<Location> getLocationList() { return locationList; }
+//    /**
+//     * @return the list of locations
+//     */
+//    public SearchableList<Location> getLocationList() { return locationList; }
 
     /**
      * Sets the currently selected location.
@@ -139,6 +141,20 @@ public class Model implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * Gets a mapping of the location list's name to the object itself.
+     * Used when searching.
+     * @return a map of each location's name to its object reference
+     */
+    public Map<String, Location> getLabelLocationMap() {
+        Map<String, Location> map = new HashMap<>();
+        for (Location l : locationList) {
+            map.put(l.getLabel(), l);
+        }
+
+        return map;
     }
 
     /**
