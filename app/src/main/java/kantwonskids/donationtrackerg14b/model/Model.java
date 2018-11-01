@@ -234,9 +234,18 @@ public class Model implements Serializable {
      * @param query the query to search for
      * @param <T> the type of the labeled object to search
      * @return list of objects sorted by search similarity
+     * @throws IllegalArgumentException if query or list is null
      */
     public static <T extends LabeledObject> List<T> search(List<T> list, String query) {
         final int CUTOFF = 10;
+        if (query == null || list == null) {
+            throw new IllegalArgumentException("The query and the list must be non-null.");
+        }
+
+        // Return the same list if no query
+        if (query.isEmpty()) {
+            return list;
+        }
         // Fuzzily search a list of the names of all the locations
         List<String> names = new ArrayList<>();
         list.forEach((item) -> names.add(item.getLabel()));
