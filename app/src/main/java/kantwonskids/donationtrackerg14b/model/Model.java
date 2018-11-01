@@ -208,4 +208,18 @@ public class Model implements Serializable {
         }
     }
 
+    /**
+     * Gets all donations in every location. Used to search through all locations.
+     * @return SearchableList of all donations currently stored.
+     */
+    public SearchableList<Donation> getAllDonations() {
+        SearchableList<Donation> list = new SearchableList<>();
+        for (Location l : locationList) {
+            list.addAll(l.getDonations());
+        }
+
+        return list;
+
+    }
+
 }

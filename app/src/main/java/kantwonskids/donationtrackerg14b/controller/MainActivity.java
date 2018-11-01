@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            SearchableList locationList = Model.getInstance().locationList;
-            List<Location> searchResults = locationList.search(query);
+//            SearchableList locationList = Model.getInstance().locationList;
+            SearchableList donationList = Model.getInstance().getAllDonations();
+            List<Location> searchResults = donationList.search(query);
 
             // TODO: launch the results activity
             Intent resultsIntent = new Intent(this, LocationSearchActivity.class);

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
+import kantwonskids.donationtrackerg14b.model.Donation;
 import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
@@ -30,7 +31,7 @@ public class LocationSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_search);
         Intent intent = getIntent();
-        ArrayList<Location> searchResults = intent.getParcelableArrayListExtra("SEARCH_RESULTS");
+        ArrayList<Donation> searchResults = intent.getParcelableArrayListExtra("SEARCH_RESULTS");
         // convert list of strings into list of locations
         RecyclerView recyclerView = findViewById(R.id.search_results);
         setupRecyclerView(recyclerView, searchResults);
@@ -43,7 +44,7 @@ public class LocationSearchActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView, List<Location> list) {
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView, List<Donation> list) {
         final Model model = Model.getInstance();
         recyclerView.setAdapter(new LocationSearchActivity.SimpleItemRecyclerViewAdapter(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,14 +57,14 @@ public class LocationSearchActivity extends AppCompatActivity {
         /**
          * The items to be shown in the list
          */
-        private final List<Location> mInventory;
+        private final List<Donation> mInventory;
 
         /**
          * Sets the items to be used by the adapter.
          *
          * @param inventory
          */
-        SimpleItemRecyclerViewAdapter(List<Location> inventory) {
+        SimpleItemRecyclerViewAdapter(List<Donation> inventory) {
             mInventory = inventory;
         }
 
@@ -77,13 +78,13 @@ public class LocationSearchActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final LocationSearchActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
             final Model model = Model.getInstance();
-            holder.mLocation = mInventory.get(position);
+            holder.mDonation = mInventory.get(position);
             holder.mContentView.setText(mInventory.get(position).toString());
 
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
-                Intent item_detail_intent = new Intent(context, LocationDetailActivity.class);
-                model.setCurrentLocation(holder.mLocation);
+                Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
+                model.setCurrentDonation(holder.mDonation);
                 context.startActivity(item_detail_intent);
             });
 
@@ -98,7 +99,7 @@ public class LocationSearchActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mContentView;
-            public Location mLocation;
+            public Donation mDonation;
 
 
             public ViewHolder(View view) {

@@ -1,5 +1,8 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -9,7 +12,7 @@ import java.time.LocalDateTime;
  * @author Juliana Petrillo
  * @version 1.0
  */
-public class Donation implements LabeledObject, Serializable {
+public class Donation implements LabeledObject, Serializable, Parcelable {
 
     private LocalDateTime time;
     private String name;
@@ -27,6 +30,14 @@ public class Donation implements LabeledObject, Serializable {
         this.value = value;
         this.category = category;
         this.comments = comments;
+    }
+
+    public Donation(Parcel in) {
+        this.name = in.readString();
+        this.description = in.readString();
+        this.comments = in.readString();
+        this.value = in.readFloat();
+        this.category = (DonationCategory)in.readSerializable();
     }
 
     /**
@@ -133,5 +144,33 @@ public class Donation implements LabeledObject, Serializable {
     @Override
     public String getLabel() {
         return this.name;
+    }
+    /**
+     * Parcelable creator.
+     */
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<Donation>() {
+        @Override
+        public Donation createFromParcel(Parcel in) {
+            return new Donation(in);
+        }
+
+        @Override
+        public Donation[] newArray(int size) {
+            return new Donation[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeString(this.comments);
+        dest.writeFloat(this.value);
+        dest.writeSerializable(this.category);
     }
 }
