@@ -47,8 +47,15 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 //            intent.setAction(Intent.ACTION_SEARCH);
             // get search results
             String query = queryView.getText().toString();
-            List<Donation> searchResults = Model.search(
-                    Model.getInstance().getCurrentLocation().getDonations(), query);
+            List<Donation> toSearch;
+            String scope = getIntent().getStringExtra("SCOPE");
+            if (scope != null && scope.equals("ALL")) {
+                toSearch = Model.getInstance().getAllDonations();
+            } else {
+                toSearch = Model.getInstance().getCurrentLocation().getDonations();
+            }
+
+            List<Donation> searchResults = Model.search(toSearch, query);
 //            intent.putExtra(SearchManager.QUERY, query);
             intent.putStringArrayListExtra("SELECTED_CATEGORIES", selectedCategories);
             intent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>)searchResults);

@@ -88,6 +88,7 @@ public class InventoryActivity extends AppCompatActivity {
             case R.id.advanced_search:
                 // Show the advanced search activity
                 Intent intent = new Intent(this, AdvancedSearchActivity.class);
+                intent.putExtra("SCOPE", "LOCATION");
                 startActivity(intent);
                 return true;
             default:
