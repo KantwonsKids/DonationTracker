@@ -59,6 +59,11 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView, List<Donation> list) {
+        if (list.isEmpty()) {
+            TextView message = findViewById(R.id.search_results_message);
+            message.setVisibility(View.VISIBLE);
+            message.setText("Your search returned no results.");
+        }
         recyclerView.setAdapter(new DonationSearchResultsActivity.SimpleItemRecyclerViewAdapter(list));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setLayoutManager(new LinearLayoutManager(context));
