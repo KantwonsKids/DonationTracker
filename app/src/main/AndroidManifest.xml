@@ -58,7 +58,8 @@
         <activity android:name=".controller.InventoryActivity"></activity>
         <activity android:name=".controller.NewItemActivity" />
         <activity android:name=".controller.ItemDetailActivity" />
-        <activity android:name=".controller.LocationSearchActivity">
+        <activity android:name=".controller.LocationSearchActivity"
+            android:parentActivityName=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
