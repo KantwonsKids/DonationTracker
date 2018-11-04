@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"/>
-
     <LinearLayout
         android:id="@+id/newItemEntry"
         android:layout_width="match_parent"
@@ -25,6 +23,10 @@
             <!--android:textAlignment="center"-->
             <!--android:textColor="@color/colorWhite"-->
             <!--android:textSize="30sp" />-->
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent" />
 
         <TextView
             android:id="@+id/category"

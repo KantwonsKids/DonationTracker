@@ -1,5 +1,6 @@
 package kantwonskids.donationtrackerg14b.controller;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +9,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
@@ -43,10 +48,54 @@ public class InventoryActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(Model.getInstance().getCurrentLocation().getName());
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+        // Search
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+//            SearchableList locationList = Model.getInstance().locationList;
+            List<Donation> donationList = Model.getInstance().getCurrentLocation().getDonations();
+            List<Donation> searchResults = Model.search(donationList, query);
+
+            Intent resultsIntent = new Intent(this, DonationSearchResultsActivity.class);
+            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>) searchResults);
+            startActivity(resultsIntent);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // Set up the search bar
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.advanced_search:
+                // Show the advanced search activity
+                Intent intent = new Intent(this, AdvancedSearchActivity.class);
+                intent.putExtra("SCOPE", "LOCATION");
+                startActivity(intent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -109,7 +158,8 @@ public class InventoryActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mContentView = (TextView) view.findViewById(R.id.item_name);
+//                locationNameView = view.findViewById(R.id.location_name);
             }
 
         }

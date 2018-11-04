@@ -1,5 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
         ab.setTitle(R.string.home_page_title);
 //        ab.setDisplayHomeAsUpEnabled(true);
 
+        // Search
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+//            SearchableList locationList = Model.getInstance().locationList;
+            List<Donation> donationList = Model.getInstance().getAllDonations();
+            List<Donation> searchResults = Model.search(donationList, query);
+
+            Intent resultsIntent = new Intent(this, DonationSearchResultsActivity.class);
+            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>) searchResults);
+            startActivity(resultsIntent);
+        }
+
         // set up tabs
         ViewPager viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -54,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 //        tabLayout.addTab(tabLayout.newTab().setText("sajdfkj"));
+
     }
 
     /**
@@ -63,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setupViewPager(ViewPager vp) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LocationListFragment(), getResources().getString(R.string.location_tab_title));
+        LocationListFragment listFragment = new LocationListFragment();
+        adapter.addFragment(listFragment, getResources().getString(R.string.location_tab_title));
 
         // TODO: Instead of new Fragment(), do new MapFragment() to add the map
         adapter.addFragment(new Fragment(), getResources().getString(R.string.map_tab_title));
@@ -105,19 +123,24 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // Set up the search bar
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
-                return true;
-
-            case R.id.action_favorite:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+            case R.id.advanced_search:
+                // Show the advanced search activity
+                Intent intent = new Intent(this, AdvancedSearchActivity.class);
+                intent.putExtra("SCOPE", "ALL");
+                startActivity(intent);
                 return true;
 
             default:

@@ -1,14 +1,12 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -42,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // Load the serialized model
         Model.loadSavedData();
         Model instance = Model.getInstance();
-        if (instance.getDonationDataList() == null)
+        if (instance.getInstance().locationList == null)
         {
             readSampleData();
         }
@@ -64,8 +62,8 @@ public class WelcomeActivity extends AppCompatActivity {
             // wrap it in a buffered reader so that we can see lines
             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
-            // initialize the donationDataList in the model
-            model.donationDataList = new NameSearchableList<>();
+            // initialize the locationList in the model
+            model.locationList = new ArrayList<>();
 
             String line;
             br.readLine(); // drop the header line
@@ -98,10 +96,10 @@ public class WelcomeActivity extends AppCompatActivity {
                         phoneNumber,
                         website
                 );
-                model.donationDataList.add(d);
+                model.locationList.add(d);
             }
             // print the success
-            Log.d("DATA", "Successfully populated the donationDataList");
+            Log.d("DATA", "Successfully populated the locationList");
             br.close();
         } catch (Exception e) {
             System.out.print(e.getMessage());

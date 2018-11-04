@@ -91,10 +91,10 @@ public class NewItemActivity extends AppCompatActivity{
         String strPrice = itemPrice.getText().toString();
         float price = Float.parseFloat(strPrice);
         String strCategory = categorySpinner.getSelectedItem().toString();
-        DonationCategory category = DonationCategory.valueOf(strCategory);
+        DonationCategory category = DonationCategory.valueOf(strCategory.toUpperCase());
         String comments = itemComments.getText().toString();
 
-        loc.addDonation(new Donation(time, item, description, price, category, comments));
+        loc.addDonation(new Donation(time, item, description, price, category, comments, loc));
         model.setCurrentLocation(loc);
 
         // save model

@@ -1,5 +1,8 @@
 package kantwonskids.donationtrackerg14b.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
  *
  * A wrapper that stores all data of a specific donation
  */
-public class Location implements NamedObject, Serializable {
+public class Location implements LabeledObject, Serializable, Parcelable {
 
     private int key;
     private String name;
@@ -74,6 +77,16 @@ public class Location implements NamedObject, Serializable {
                     String website) {
         this(key, name, latitude, longitude, address, city, state, zipcode,
                 type, phoneNumber, website, new ArrayList<>());
+    }
+
+    /**
+     * Constructs a Location object using a parcel.
+     * @param in a parcel
+     */
+    public Location(Parcel in) {
+        this.name = in.readString();
+        this.city = in.readString();
+        this.state = in.readString();
     }
 
     /**
@@ -291,5 +304,37 @@ public class Location implements NamedObject, Serializable {
      */
     public void addDonation(List<Donation> donations) {
         this.donations.addAll(donations);
+    }
+
+    @Override
+    public String getLabel() {
+        return this.name;
+    }
+
+    /**
+     * Parcelable creator.
+     */
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<Location>() {
+        @Override
+        public Location createFromParcel(Parcel in) {
+            return new Location(in);
+        }
+
+        @Override
+        public Location[] newArray(int size) {
+            return new Location[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.city);
+        dest.writeString(this.state);
     }
 }

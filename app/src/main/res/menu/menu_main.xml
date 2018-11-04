@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/action_search"
         android:icon="@drawable/ic_baseline_search_24px"
         android:title="Search"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+
+    <item android:id="@+id/advanced_search"
+        android:title="@string/advanced_search"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_adv_search"/>
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
