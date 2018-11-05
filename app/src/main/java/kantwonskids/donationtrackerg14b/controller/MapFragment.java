@@ -40,7 +40,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getActivity().getApplicationContext());
         mMapView.getMapAsync(this);
 
-
         return rootView;
 
     }
