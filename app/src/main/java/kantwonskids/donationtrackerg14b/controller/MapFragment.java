@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -24,8 +23,9 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
-public class MapFragmentActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    MapView mMapView;
     private GoogleMap map;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,8 +33,13 @@ public class MapFragmentActivity extends FragmentActivity implements OnMapReadyC
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
         //set up maps
-        SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFrag.getMapAsync(this);
+        mMapView = (MapView) rootView.findViewById(R.id.map_view);
+        //mMapView.onCreate(savedInstanceState);
+        //mMapView.onResume();
+
+        MapsInitializer.initialize(getActivity().getApplicationContext());
+        mMapView.getMapAsync(this);
+
 
         return rootView;
 
@@ -43,16 +48,17 @@ public class MapFragmentActivity extends FragmentActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        Model model = Model.getInstance();
-        List<Location> locations = model.locationList;
 
-        //put a marker at every location in locationList
-        for (Location loc : locations) {
+        Model model = Model.getInstance();
+        List<Location> locs = model.locationList;
+
+        //put a marker at every location in the location list
+        for (Location loc : locs) {
             LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            map.addMarker(new MarkerOptions().position(ltlng).title(loc.getName()));
+            MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName());
+            map.addMarker(marker);
             map.moveCamera(CameraUpdateFactory.newLatLng(ltlng));
         }
-
     }
 
 

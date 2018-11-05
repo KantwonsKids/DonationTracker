@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
         LocationListFragment listFragment = new LocationListFragment();
         adapter.addFragment(listFragment, getResources().getString(R.string.location_tab_title));
 
-        // TODO: Instead of new Fragment(), do new MapFragment() to add the map
-        adapter.addFragment(new Fragment(), getResources().getString(R.string.map_tab_title));
+        MapFragment mapFragment = new MapFragment();
+        adapter.addFragment(mapFragment, getResources().getString(R.string.map_tab_title));
         vp.setAdapter(adapter);
     }
 

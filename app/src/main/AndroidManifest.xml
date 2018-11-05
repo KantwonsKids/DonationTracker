@@ -80,6 +80,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".controller.AdvancedSearchActivity"></activity>
+        <activity android:name=".controller.MapFragmentActivity"></activity>
     </application>
 
 </manifest>
