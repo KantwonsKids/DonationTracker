@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- To save data onto external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -80,6 +79,9 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".controller.AdvancedSearchActivity"></activity>
+
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDOvJ3tqK627Tkd5leeMK_LBvu2sw65VAc"/>
     </application>
 
 </manifest>
