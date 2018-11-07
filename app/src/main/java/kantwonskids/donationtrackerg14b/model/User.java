@@ -105,6 +105,42 @@ public class User implements Parcelable, LabeledObject, Serializable {
     }
 
     /**
+     * Gets the role of the current user.
+     *
+     * @param role the type of account that the user should have
+     */
+    public void setUserRole(UserRole role) {
+        this.role = role;
+    }
+
+    /**
+     * Gets the role of the current user.
+     *
+     * @return the type of account that the current user has
+     */
+    public UserRole getUserRole() {
+        return this.role;
+    }
+
+    /**
+     * Sets the location where this user works (Location employees only).
+     *
+     * @param location where this user works
+     */
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    /**
+     * Gets the location where this user works (Location employees only).
+     *
+     * @return the location described above.
+     */
+    public Location getLocation() {
+        return this.location;
+    }
+
+    /**
      * Parcelable creator.
      */
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator<User>() {
