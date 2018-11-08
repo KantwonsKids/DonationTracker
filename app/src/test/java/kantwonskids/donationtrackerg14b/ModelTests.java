@@ -38,18 +38,21 @@ public class ModelTests {
 
     @Before
     /**
-     * Initializes a sample list of labeled objects to search through, with names "ab...", "bc...", ...
-     * where each name is length nameLength.
+     * Initializes a sample list of labeled objects to search through, with
+     * names "ab...", "bc...", ..., "...z" where each name is length nameLength.
+     *
+     * Each name overlaps nameLength - 1 chars with the next name, nameLength - 2
+     * with the name after, etc.
      */
     public void initialize() {
         testList = new ArrayList<>();
         // Length of the name of the mock objects.
         final int nameLength = 4;
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 26 - nameLength; i++) {
             StringBuilder sb = new StringBuilder();
 
             // builds the name
-            for (int j = 0; j < nameLength; j++) {
+            for (int j = i; j < nameLength + i; j++) {
                 sb.append((char) (((int) 'a') + j));
             }
 
@@ -106,6 +109,33 @@ public class ModelTests {
             List<MockLabeledObject> results = search(testList, obj.getLabel());
             assertTrue(results.size() > 0);
             assertEquals(obj, results.get(0));
+        }
+    }
+
+    /**
+     * Searching a list with no match (not even with fuzzy) should return an empty list.
+     */
+    @Test
+    public void searchNoMatchTest() {
+        List<MockLabeledObject> results = search(testList, "$&#*$&#$*");
+        assertTrue(results.isEmpty());
+    }
+
+    /**
+     * Tests the fuzzy search in a naive way.
+     * With the construction of the names in testList, testList[0] and testList[1]
+     * share nameLength - 1 chars. So searching the list for the common chars should
+     * return the first object, then the second, based on the fuzzy algorithm.
+     */
+    @Test
+    public void searchFuzzyTest() {
+        for (int i = 0; i < testList.size() - 1; i++) {
+            MockLabeledObject obj1 = testList.get(i);
+            MockLabeledObject obj2 = testList.get(i + 1);
+            List<MockLabeledObject> results = search(testList, obj1.getLabel().substring(1, obj1.getLabel().length()));
+            assertTrue(results.size() > 0);
+            assertEquals(obj1, results.get(0));
+            assertEquals(obj2, results.get(1));
         }
     }
 }
