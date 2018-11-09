@@ -105,7 +105,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
     }
 
     /**
-     * Gets the role of the current user.
+     * Sets the role of the current user.
      *
      * @param role the type of account that the user should have
      */
@@ -128,6 +128,11 @@ public class User implements Parcelable, LabeledObject, Serializable {
      * @param location where this user works
      */
     public void setLocation(Location location) {
+        if (this.role != UserRole.LOCATION_EMPLOYEE) {
+            throw new IllegalArgumentException("User type "
+                    + this.role.toString()
+                    + " cannot be assigned to a location.");
+        }
         this.location = location;
     }
 
