@@ -13,9 +13,11 @@ import kantwonskids.donationtrackerg14b.model.Model;
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * JUNIT Test that thoroughly tests Model.GetLocationByKey method
  *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * @author Ethan Wilson
+ * @version 1.0
+ *
  */
 public class GetLocationByKeyUnitTest {
 
