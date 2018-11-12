@@ -32,8 +32,6 @@ import kantwonskids.donationtrackerg14b.model.*;
 public class InventoryActivity extends AppCompatActivity {
 
     private User user = Model.getInstance().getCurrentUser();
-    private UserRole role = user.getUserRole();
-    private Location location = user.getLocation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +39,10 @@ public class InventoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inventory);
 
         FloatingActionButton addItemButton = findViewById(R.id.addItem);
-        if ((role == UserRole.LOCATION_EMPLOYEE
-                && location == Model.getInstance().getCurrentLocation())
-                || role == UserRole.MANAGER) {
+//        if ((role == UserRole.LOCATION_EMPLOYEE
+//                && location == Model.getInstance().getCurrentLocation())
+//                || role == UserRole.MANAGER) {
+        if (user.canUpdateDonationsAt(Model.getInstance().getCurrentLocation())) {
             addItemButton.setOnClickListener((view) -> {
                 Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
                 startActivity(intent_addToInventory);
