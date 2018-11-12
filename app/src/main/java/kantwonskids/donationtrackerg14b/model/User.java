@@ -151,6 +151,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
      * Sets the location where this user works (Location employees only).
      *
      * @param location where this user works
+     * @throws IllegalArgumentException if the user is not a location employee
      */
     public void setLocation(Location location) {
         if (this.role != UserRole.LOCATION_EMPLOYEE) {
