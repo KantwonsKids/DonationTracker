@@ -71,8 +71,16 @@ public enum UserRole implements Serializable {
      * Determines whether the user type can update info.
      * @return whether or not the user type can update info
      */
-    public boolean canUpdateInfo() {
+    public boolean canAddOrRemoveDonationsSpecificLocation() {
         return this.canUpdateInfo;
+    }
+
+    /**
+     * Determines whether the user type can update info at all locations.
+     * @return whether or not the user type can update info at all locations.
+     */
+    public boolean canAddOrRemoveDonationstAllLocations() {
+        return this.canUpdateInfoAtAllLocations;
     }
 
     /**

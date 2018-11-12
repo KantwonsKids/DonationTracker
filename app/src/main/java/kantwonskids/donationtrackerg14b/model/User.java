@@ -79,18 +79,18 @@ public class User implements Parcelable, LabeledObject, Serializable {
             throw new IllegalArgumentException("Location cannot be null.");
         }
 
-        int roleStatus = this.role.compareTo(UserRole.LOCATION_EMPLOYEE);
-
-        if (roleStatus < 0) {
-            // User is less than a donation employee, so it can update donations at no location.
-            return false;
-        } else if (roleStatus == 0) {
-            // User is a location employee, so can only update donations at assigned location.
-            return loc.equals(this.location);
-        } else {
-            // User is a manager or above, so can update donations at any location.
+        // Managers/admins can add/remove donations at all locations
+        if (role.canAddOrRemoveDonationstAllLocations()) {
             return true;
         }
+
+        // Location employees can add/remove if the location matches
+        if (role.canAddOrRemoveDonationsSpecificLocation()) {
+            return loc.equals(location);
+        }
+
+        // Everybody else can do nothing
+        return false;
     }
 
     /**
