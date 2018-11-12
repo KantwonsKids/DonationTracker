@@ -3,11 +3,11 @@ package kantwonskids.donationtrackerg14b.model;
 import java.io.Serializable;
 
 public enum UserRole implements Serializable {
-    ADMINISTRATOR("Administrator", true, true, true, true, true),
     GUEST("Guest", false, false, false, false, false),
+    USER("User", true, false, false, false, false),
     LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false),
     MANAGER("Manager", true, true, false, false, false),
-    USER("User", true, false, false, false, false);
+    ADMINISTRATOR("Administrator", true, true, true, true, true);
 
     /*
      * Enumerates the permissions for each user type.
@@ -100,5 +100,6 @@ public enum UserRole implements Serializable {
     public String toString() {
         return this.name;
     }
+
 
 }

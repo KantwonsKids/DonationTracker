@@ -69,6 +69,31 @@ public class User implements Parcelable, LabeledObject, Serializable {
     }
 
     /**
+     * Returns a boolean value determining whether this user can update info at a certain location.
+     * @param loc the location to update info at
+     * @return true if the user can, false if it cannot
+     * @throws IllegalArgumentException if the location is null
+     */
+    public boolean canUpdateDonationsAt(Location loc) {
+        if (loc == null) {
+            throw new IllegalArgumentException("Location cannot be null.");
+        }
+
+        int roleStatus = this.role.compareTo(UserRole.LOCATION_EMPLOYEE);
+
+        if (roleStatus < 0) {
+            // User is less than a donation employee, so it can update donations at no location.
+            return false;
+        } else if (roleStatus == 0) {
+            // User is a location employee, so can only update donations at assigned location.
+            return loc.equals(this.location);
+        } else {
+            // User is a manager or above, so can update donations at any location.
+            return true;
+        }
+    }
+
+    /**
      * Sets the username
      *
      * @param newUsername The new username to set
@@ -194,6 +219,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
 
         return str;
     }
+
 
     @Override
     public boolean equals(Object other) {
