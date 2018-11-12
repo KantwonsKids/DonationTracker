@@ -6,8 +6,8 @@ public enum UserRole implements Serializable {
     GUEST("Guest", false, false, false, false, false, false),
     USER("User", true, false, false, false, false, false),
     LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false, false),
-    MANAGER("Manager", true, true, true, false, false, false),
-    ADMINISTRATOR("Administrator", true, true, true, true, true, true);
+    MANAGER("Manager", true, false, true, false, false, false),
+    ADMINISTRATOR("Administrator", true, false, true, true, true, true);
 
     /*
      * Enumerates the permissions for each user type.
@@ -79,7 +79,7 @@ public enum UserRole implements Serializable {
      * Determines whether the user type can update info at all locations.
      * @return whether or not the user type can update info at all locations.
      */
-    public boolean canAddOrRemoveDonationstAllLocations() {
+    public boolean canAddOrRemoveDonationsAllLocations() {
         return this.canUpdateInfoAtAllLocations;
     }
 

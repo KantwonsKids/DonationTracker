@@ -80,7 +80,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
         }
 
         // Managers/admins can add/remove donations at all locations
-        if (role.canAddOrRemoveDonationstAllLocations()) {
+        if (role.canAddOrRemoveDonationsAllLocations()) {
             return true;
         }
 
