@@ -32,29 +32,29 @@ public final class Model implements Serializable {
     /**
      * The list of registered users.
      */
-    public static final UserList _userList = new UserList();
+    private final UserList _userList = new UserList();
 
     /**
      * A list of donationData objects
      */
-    public static final List<Location> locationList = new ArrayList<>();
+    private final List<Location> locationList = new ArrayList<>();
 
     /**
      * The currently selected location
      * Transient so that it does not persist when saving
      */
-    public static transient Location currentLocation;
+    private transient Location currentLocation;
 
     /**
      * The currently selected donation
      * Transient so that it does not persist when saving
      */
-    public static transient Donation currentDonation;
+    private transient Donation currentDonation;
 
     /**
      * Current logged-in user.
      */
-    private static transient User currentUser;
+    private transient User currentUser;
 
     /**
      * Gets the instance of the model class.
@@ -69,111 +69,91 @@ public final class Model implements Serializable {
      * Sets the currently logged in user.
      * @param u the user currently logged in.
      */
-    public static void setCurrentUser(User u) {
-
-        /*
-      Sets the current user on log in
-     */
+    public void setCurrentUser(User u) {
         currentUser = u;
-        /*
-      The user that is currently logged in.
-      Transient so that it does not persist when saving
-     */
     }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Gets the active user. If the app is logged out, then this returns null.
-//     * @return The user currently logged in.
-//     */
-//    public User getCurrentUser() {
-//        return loggedInUser;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Gets the active user. If the app is logged out, then this returns null.
+     * @return The user currently logged in.
+     */
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
     /**
      * @return the currently selected location.
      */
-    public static Location getCurrentLocation() {
+    public Location getCurrentLocation() {
         return currentLocation;
     }
 
-//    /**
-//     * @return the list of locations
-//     */
-//    public SearchableList<Location> getLocationList() { return locationList; }
+    /**
+     * @return the list of locations
+     */
+    public List<Location> getLocationList() {
+        return locationList;
+    }
 
     /**
      * Sets the currently selected location.
      * @param location the currently selected location.
      */
-    public static void setCurrentLocation(Location location) {
+    public void setCurrentLocation(Location location) {
         currentLocation = location;
     }
 
-// --Commented out by Inspection START (11/15/2018 6:29 PM):
-//    /**
-//     *
-//     * @return currently selected donation item
-//     */
-//    public static Donation getCurrentDonation() {return currentDonation;}
-// --Commented out by Inspection STOP (11/15/2018 6:29 PM)
+    /**
+     * Gets the current donation item.
+     * @return currently selected donation item
+     */
+    public Donation getCurrentDonation() {
+        return currentDonation;
+    }
 
     /**
      *
      * @param donation sets currently selected donation item
      */
-    public static void setCurrentDonation(Donation donation) {
-        currentDonation = donation;}
+    public void setCurrentDonation(Donation donation) {
+        currentDonation = donation;
+    }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Return the location with a given key.
-//     * @param key the key of the location to look for
-//     * @return the correct location or null if no such location exists
-//     */
-//    public Location getLocationByKey(int key) {
-//        for (Location d : locationList) {
-//            if (d.getKey() == key) {
-//                return d;
-//            }
-//        }
-//        return null;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Return the location with a given key.
+     * @param key the key of the location to look for
+     * @return the correct location or null if no such location exists
+     */
+    public Location getLocationByKey(int key) {
+        for (Location d : locationList) {
+            if (d.getKey() == key) {
+                return d;
+            }
+        }
+        return null;
+    }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Return the location with a given name.
-//     * @param name the name of the location to look for
-//     * @return the correct location or null if no such location exists
-//     */
-//    public Location getLocationByName(String name) {
-//        for (Location d : locationList) {
-//            String locationName = d.getName();
-//            if (locationName.equals(name)) {
-//                return d;
-//            }
-//        }
-//        return null;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Return the location with a given name.
+     * @param name the name of the location to look for
+     * @return the correct location or null if no such location exists
+     */
+    public Location getLocationByName(String name) {
+        for (Location d : locationList) {
+            String locationName = d.getName();
+            if (locationName.equals(name)) {
+                return d;
+            }
+        }
+        return null;
+    }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Gets a mapping of the location list's name to the object itself.
-//     * Used when searching.
-//     * @return a map of each location's name to its object reference
-//     */
-//    public Map<String, Location> getLabelLocationMap() {
-//        Map<String, Location> map = new HashMap<>();
-//        for (Location l : locationList) {
-//            map.put(l.getLabel(), l);
-//        }
-//
-//        return map;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Deletes all the locations from the model.
+     */
+    public void clearLocations() {
+        locationList.clear();
+    }
 
     /**
      * Saves the entire model to the phone
@@ -234,7 +214,7 @@ public final class Model implements Serializable {
      * Gets all donations in every location. Used to search through all locations.
      * @return SearchableList of all donations currently stored.
      */
-    public static List<Donation> getAllDonations() {
+    public List<Donation> getAllDonations() {
         List<Donation> list = new ArrayList<>();
         for (Location l : locationList) {
             list.addAll(l.getDonations());
@@ -253,7 +233,7 @@ public final class Model implements Serializable {
      * @return list of objects sorted by search similarity
      * @throws IllegalArgumentException if query or list is null
      */
-    public static <T extends LabeledObject> List<T> search(List<T> list, String query) {
+    public static <T extends Searchable> List<T> search(List<T> list, String query) {
         final int CUTOFF = 10;
         if ((query == null) || (list == null)) {
             throw new IllegalArgumentException("The query and the list must be non-null.");

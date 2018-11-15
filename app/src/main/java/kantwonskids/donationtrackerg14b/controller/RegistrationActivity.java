@@ -193,6 +193,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     break;
             }
             Model._userList.addUser(newUser);
+            Model.setCurrentUser(newUser);
 
             // save to file
             Model.saveToPhone();

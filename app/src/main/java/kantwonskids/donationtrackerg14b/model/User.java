@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * A basic user class
  */
-public class User implements Parcelable, LabeledObject, Serializable {
+public class User implements Parcelable, Searchable, Serializable {
 
     private final String username;
     private final String password;
@@ -72,16 +72,30 @@ public class User implements Parcelable, LabeledObject, Serializable {
         this.role = (UserRole)in.readSerializable();
     }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Sets the username
-//     *
-//     * @param newUsername The new username to set
-//     */
-//    public void setUsername(String newUsername) {
-//        username = newUsername;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Returns a boolean value determining whether this user can update info at a certain location.
+     * @param loc the location to update info at
+     * @return true if the user can, false if it cannot
+     * @throws IllegalArgumentException if the location is null
+     */
+    public boolean canUpdateDonationsAt(Location loc) {
+        if (loc == null) {
+            throw new IllegalArgumentException("Location cannot be null.");
+        }
+
+        // Managers/admins can add/remove donations at all locations
+        if (role.canAddOrRemoveDonationsAllLocations()) {
+            return true;
+        }
+
+        // Location employees can add/remove if the location matches
+        if (role.canAddOrRemoveDonationsSpecificLocation()) {
+            return loc.equals(location);
+        }
+
+        // Everybody else can do nothing
+        return false;
+    }
 
     /**
      * Gets the username
@@ -92,27 +106,38 @@ public class User implements Parcelable, LabeledObject, Serializable {
         return username;
     }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Sets the password
-//     *
-//     * @param newPassword The new password to set
-//     */
-//    public void setPassword(String newPassword) {
-//        password = newPassword;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Gets the role of the current user.
+     *
+     * @return the type of account that the current user has
+     */
+    public UserRole getUserRole() {
+        return this.role;
+    }
 
-// --Commented out by Inspection START (11/15/18, 1:33 PM):
 //    /**
-//     * Gets the password.
+//     * Sets the location where this user works (Location employees only).
 //     *
-//     * @return The user's password
+//     * @param location where this user works
+//     * @throws IllegalArgumentException if the user is not a location employee
 //     */
-//    public String getPassword() {
-//        return password;
+//    public void setLocation(Location location) {
+//        if (this.role != UserRole.LOCATION_EMPLOYEE) {
+//            throw new IllegalArgumentException("User type "
+//                    + this.role.toString()
+//                    + " cannot be assigned to a location.");
+//        }
+//        this.location = location;
 //    }
-// --Commented out by Inspection STOP (11/15/18, 1:33 PM)
+
+    /**
+     * Gets the location where this user works (Location employees only).
+     *
+     * @return the location described above.
+     */
+    public Location getLocation() {
+        return this.location;
+    }
 
     /**
      * Parcelable creator.
@@ -166,6 +191,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
 //
 //        return str;
 //    }
+
 
     @Override
     public boolean equals(Object other) {

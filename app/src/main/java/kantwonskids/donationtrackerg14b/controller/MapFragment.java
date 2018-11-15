@@ -33,6 +33,7 @@ import kantwonskids.donationtrackerg14b.model.Model;
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+<<<<<<< HEAD
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -41,6 +42,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         //set up maps
         MapView mMapView = rootView.findViewById(R.id.map);
+=======
+    private MapView mMapView;
+    private GoogleMap map;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Inflate the root view into the fragment.
+        View rootView = inflater.inflate(R.layout.activity_map, container, false);
+
+        // Set up maps.
+        mMapView = rootView.findViewById(R.id.map);
+>>>>>>> development
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         FragmentActivity nonNull = Objects.requireNonNull(getActivity());
@@ -57,6 +69,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         //Model model = Model.getInstance();
         List<Location> locations = Model.locationList;
 
+<<<<<<< HEAD
         //zoom camera
         Location location = locations.get(0);
         LatLng cameraPos = new LatLng(location.getLatitude(), location.getLongitude());
@@ -77,6 +90,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             MarkerOptions title = newMarkerOption.title(name);
             MarkerOptions marker = title.snippet(phoneNumber);
             googleMap.addMarker(marker);
+=======
+        // Zoom camera.
+        LatLng cameraPos = new LatLng(locs.get(0).getLatitude(), locs.get(0).getLongitude());
+        map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
+        // 15 is "street view" zoom level.
+        // 10 is "city view" zoom level.
+        // 10 is best to display all pins at once.
+        map.moveCamera(CameraUpdateFactory.zoomTo(10));
+
+
+        // Put a marker at every location in the location list.
+        for (Location loc : locs) {
+            LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
+            MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName()).snippet(loc.getPhoneNumber());
+            map.addMarker(marker);
+>>>>>>> development
         }
     }
 

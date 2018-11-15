@@ -59,10 +59,10 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             Intent newIntent = getIntent();
             String scope =  newIntent.getStringExtra("SCOPE");
             if ((scope != null) && "ALL".equals(scope)) {
-                toSearch = Model.getAllDonations();
+                toSearch = Model.getInstance().getAllDonations();
             } else {
                 //Location location = Model.getCurrentLocation();
-                toSearch = Model.currentLocation.getDonations();
+                toSearch = Model.getInstance().currentLocation.getDonations();
             }
 
             List<Donation> searchResults = Model.search(toSearch, query);

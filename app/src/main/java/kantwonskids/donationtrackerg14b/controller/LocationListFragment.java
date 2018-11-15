@@ -49,6 +49,10 @@ public class LocationListFragment extends Fragment {
 
         /**
          * Sets the items to be used by the adapter.
+<<<<<<< HEAD
+=======
+         * @param locations the list of locations
+>>>>>>> development
          */
         SimpleItemRecyclerViewAdapter() {
             mLocations = Model.locationList;

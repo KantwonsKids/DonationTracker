@@ -12,7 +12,7 @@ import java.util.Locale;
  * @author Juliana Petrillo
  * @version 1.0
  */
-public class Donation implements LabeledObject, Serializable, Parcelable {
+public class Donation implements Searchable, Serializable, Parcelable {
 
     private String time;
     private final String name;

@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,8 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.*;
 
 /**
  * an Activity to represent the inventory (list of donation items)
@@ -34,16 +34,25 @@ import kantwonskids.donationtrackerg14b.model.Model;
  */
 public class InventoryActivity extends AppCompatActivity {
 
+    private User user = Model.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
         FloatingActionButton addItemButton = findViewById(R.id.addItem);
-        addItemButton.setOnClickListener((view) -> {
-            Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
-            startActivity(intent_addToInventory);
-        });
+//        if ((role == UserRole.LOCATION_EMPLOYEE
+//                && location == Model.getInstance().getCurrentLocation())
+//                || role == UserRole.MANAGER) {
+        if (user.canUpdateDonationsAt(Model.getInstance().getCurrentLocation())) {
+            addItemButton.setOnClickListener((view) -> {
+                Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
+                startActivity(intent_addToInventory);
+            });
+        } else {
+            addItemButton.setVisibility(View.GONE);
+        }
 
         // set up the app bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -54,7 +63,7 @@ public class InventoryActivity extends AppCompatActivity {
         nonNull.setDisplayHomeAsUpEnabled(true);
         //Model model = Model.getInstance();
         //Location location = Model.getCurrentLocation();
-        ab.setTitle(Model.currentLocation.getName());
+        ab.setTitle(Model.getInstance().getCurrentLocation().getName());
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
@@ -65,7 +74,7 @@ public class InventoryActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
-            List<Donation> donationList = Model.currentLocation.getDonations();
+            List<Donation> donationList = Model.getInstance().getCurrentLocation().getDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
             Intent resultsIntent = new Intent(this,

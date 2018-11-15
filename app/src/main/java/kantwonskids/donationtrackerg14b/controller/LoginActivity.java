@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 //        Intent intent = new Intent(this, MainActivity.class);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CURRENT_USER", (Parcelable)potentialUser);
+        Model.getInstance().setCurrentUser(potentialUser);
         startActivity(intent);
     }
 

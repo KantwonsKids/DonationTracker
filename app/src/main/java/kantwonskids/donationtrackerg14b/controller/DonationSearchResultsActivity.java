@@ -122,7 +122,7 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
                 Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
-                Model.setCurrentDonation(holder.mDonation);
+                Model.getInstance().setCurrentDonation(holder.mDonation);
                 context.startActivity(item_detail_intent);
             });
 

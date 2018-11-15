@@ -13,7 +13,7 @@ import java.util.List;
  *
  * A wrapper that stores all data of a specific donation
  */
-public class Location implements LabeledObject, Serializable, Parcelable {
+public class Location implements Searchable, Serializable, Parcelable {
 
     private int key;
     private final String name;
