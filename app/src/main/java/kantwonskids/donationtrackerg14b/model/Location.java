@@ -130,6 +130,20 @@ public class Location implements LabeledObject, Serializable, Parcelable {
     }
 
     /**
+     * Returns a detail string containing all this location's details.
+     * @return a string with details about the location
+     */
+    public CharSequence detailString() {
+        return "Location: " + "\n" +
+                        address + "\n" +
+                        city + ", " +
+                        state + " " +
+                        zipcode + "\n\n" + "Contact: " + "\n" +
+                        phoneNumber + "\n" +
+                        website;
+    }
+
+    /**
      * Gets the key for a location
      * @return the key
      */

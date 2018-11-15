@@ -118,7 +118,6 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
             Donation donation = mInventory.get(position);
             holder.mContentView.setText(donation.toString());
             holder.locationNameView.setText(donation.getLocationString());
-            holder.itemIcon.setImageResource(R.drawable.ic_tshirt);
 
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
@@ -139,7 +138,6 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
             final View mView;
             final TextView mContentView;
             final TextView locationNameView;
-            final ImageView itemIcon;
             Donation mDonation;
 
 
@@ -148,7 +146,6 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
                 mView = view;
                 mContentView = view.findViewById(R.id.item_name);
                 locationNameView = view.findViewById(R.id.location_name);
-                itemIcon = view.findViewById(R.id.item_icon);
             }
 
         }

@@ -33,10 +33,11 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         // Populate the page with checkboxes for each category
         LinearLayout layout = findViewById(R.id.adv_search_linear_layout);
         ArrayList<String> selectedCategories = new ArrayList<>();
+        Button goButton = findViewById(R.id.adv_search_go_button);
         for (DonationCategory dc : DonationCategory.values()) {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(dc.toString());
-            int buttonLoc = layout.indexOfChild(findViewById(R.id.adv_search_go_button));
+            int buttonLoc = layout.indexOfChild(goButton);
             checkBox.setOnCheckedChangeListener((group, isChecked) -> {
                 if (isChecked) {
                     selectedCategories.add(dc.toString());
@@ -48,7 +49,6 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         // Set up the button click listener
         TextInputEditText queryView = findViewById(R.id.adv_search_query_text);
 //        String searchQuery = queryView.getText().toString();
-        Button goButton = findViewById(R.id.adv_search_go_button);
         goButton.setOnClickListener((view -> {
             Intent intent = new Intent(this, DonationSearchResultsActivity.class);
 //            intent.setAction(Intent.ACTION_SEARCH);
@@ -58,12 +58,11 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             List<Donation> toSearch;
             Intent newIntent = getIntent();
             String scope =  newIntent.getStringExtra("SCOPE");
-            Model model = Model.getInstance();
             if ((scope != null) && "ALL".equals(scope)) {
                 toSearch = Model.getAllDonations();
             } else {
                 //Location location = Model.getCurrentLocation();
-                toSearch = Model._currentLocation.getDonations();
+                toSearch = Model.currentLocation.getDonations();
             }
 
             List<Donation> searchResults = Model.search(toSearch, query);

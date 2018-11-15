@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * A class to represent a donation at a particular location.
@@ -169,6 +170,19 @@ public class Donation implements LabeledObject, Serializable, Parcelable {
     @Override
     public String getLabel() {
         return this.name;
+    }
+
+    /**
+     * Returns a detail string of this donation.
+     * @return a string containing details for this donation.
+     */
+    public CharSequence detailString() {
+        return "Category: " +
+                        category + "\n" + "Price: $" +
+                        String.format(Locale.ENGLISH, "%.2f", value) + "\n" + "Donated on: " +
+                        time + "\n" + "Description: " +
+                        description + "\n" + "Comments: " +
+                        comments;
     }
 
     /**

@@ -54,7 +54,7 @@ public class InventoryActivity extends AppCompatActivity {
         nonNull.setDisplayHomeAsUpEnabled(true);
         //Model model = Model.getInstance();
         //Location location = Model.getCurrentLocation();
-        ab.setTitle(Model._currentLocation.getName());
+        ab.setTitle(Model.currentLocation.getName());
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
@@ -65,7 +65,7 @@ public class InventoryActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
-            List<Donation> donationList = Model._currentLocation.getDonations();
+            List<Donation> donationList = Model.currentLocation.getDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
             Intent resultsIntent = new Intent(this,
@@ -113,7 +113,7 @@ public class InventoryActivity extends AppCompatActivity {
         //final Model model = Model.getInstance();
         //Location location = Model.getCurrentLocation();
         recyclerView.setAdapter(new InventoryActivity.SimpleItemRecyclerViewAdapter(
-                Model._currentLocation.getDonations()));
+                Model.currentLocation.getDonations()));
     }
 
     public static class SimpleItemRecyclerViewAdapter

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -41,14 +40,7 @@ public class LocationDetailActivity extends AppCompatActivity {
 //        TextView locationTitle = findViewById(R.id.locationTitle);
 //        locationTitle.setText(mLocation.getName());
         TextView locationDetail = findViewById(R.id.location_detail_text);
-        locationDetail.setText(
-                "Location: " + "\n" +
-                        Model._currentLocation.getAddress() + "\n" +
-                        Model._currentLocation.getCity() + ", " +
-                        Model._currentLocation.getState() + " " +
-                        Model._currentLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
-                        Model._currentLocation.getPhoneNumber() + "\n" +
-                        Model._currentLocation.getWebsite());
+        locationDetail.setText(Model.currentLocation.detailString());
 
         Button inventoryButton = findViewById(R.id.viewInventory);
         inventoryButton.setOnClickListener((view) -> {

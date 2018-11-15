@@ -43,13 +43,13 @@ public final class Model implements Serializable {
      * The currently selected location
      * Transient so that it does not persist when saving
      */
-    public static transient Location _currentLocation;
+    public static transient Location currentLocation;
 
     /**
      * The currently selected donation
      * Transient so that it does not persist when saving
      */
-    public static transient Donation _currentDonation;
+    public static transient Donation currentDonation;
 
     /**
      * Gets the instance of the model class.
@@ -90,7 +90,7 @@ public final class Model implements Serializable {
      * @return the currently selected location.
      */
     public static Location getCurrentLocation() {
-        return _currentLocation;
+        return currentLocation;
     }
 
 //    /**
@@ -103,20 +103,21 @@ public final class Model implements Serializable {
      * @param location the currently selected location.
      */
     public static void setCurrentLocation(Location location) {
-        _currentLocation = location;
+        currentLocation = location;
     }
 
     /**
      *
      * @return currently selected donation item
      */
-    public static Donation getCurrentDonation() {return _currentDonation;}
+    public static Donation getCurrentDonation() {return currentDonation;}
 
     /**
      *
      * @param donation sets currently selected donation item
      */
-    public static void setCurrentDonation(Donation donation) {_currentDonation = donation;}
+    public static void setCurrentDonation(Donation donation) {
+        currentDonation = donation;}
 
 // --Commented out by Inspection START (11/15/18, 12:37 PM):
 //    /**

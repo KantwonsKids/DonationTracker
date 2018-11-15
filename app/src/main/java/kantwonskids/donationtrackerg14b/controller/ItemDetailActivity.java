@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Donation;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -38,16 +37,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         //Donation mDonation = Model.getCurrentDonation();
         TextView donationTitle = findViewById(R.id.item_title);
-        donationTitle.setText(Model._currentDonation.getName());
+        donationTitle.setText(Model.currentDonation.getName());
         TextView donationDetail = findViewById(R.id.item_detail_text);
-        String price = String.format("%.2f", Model._currentDonation.getValue());
-        donationDetail.setText(
-                "Category: " +
-                        Model._currentDonation.getCategory() + "\n" + "Price: $" +
-                        price + "\n" + "Donated on: " +
-                        Model._currentDonation.getTime() + "\n" + "Description: " +
-                        Model._currentDonation.getDescription() + "\n" + "Comments: " +
-                        Model._currentDonation.getComments());
+        donationDetail.setText(Model.currentDonation.detailString());
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
