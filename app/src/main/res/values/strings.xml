@@ -1,21 +1,25 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Don8ion</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Login</string>
-    <string name="error_invalid_username">This is not a valid username.</string>
+    <string name="error_invalid_username" tools:keep="@string/error_invalid_username">
+        This is not a valid username.</string>
     <string name="error_invalid_password">The password must be at least 8 characters.</string>
     <string name="error_incorrect_password">The username or password was incorrect.</string>
-    <string name="error_field_required">This field is required!</string>
-    <string name="permission_rationale">"Contacts permissions are needed for
+    <string name="error_field_required" tools:keep="@string/error_field_required">
+        This field is required!</string>
+    <string name="permission_rationale" tools:keep=
+        "@string/permission_rationale">"Contacts permissions are needed for
         providing email completions."
     </string>
     <string name="no_account"><u>Don\'t have an account?</u></string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" tools:keep="@string/title_activity_main">
+        MainActivity</string>
     <string name="login">Login</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel" tools:keep="@string/cancel">Cancel</string>
     <string name="create_account">Create an account</string>
     <string name="title_location_list">Locations</string>
     <string name="title_location_detail">Location Detail</string>

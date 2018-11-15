@@ -16,12 +16,12 @@ import java.util.List;
 public class Location implements LabeledObject, Serializable, Parcelable {
 
     private int key;
-    private String name;
+    private final String name;
     private double latitude;
     private double longitude;
     private String address;
-    private String city;
-    private String state; // could be a (really big) enum with the 2 letter abbreviations
+    private final String city;
+    private final String state; // could be a (really big) enum with the 2 letter abbreviations
     private int zipcode;
     private String type;  // could be an enum
     private String phoneNumber; // String because it has the () and -
@@ -29,7 +29,21 @@ public class Location implements LabeledObject, Serializable, Parcelable {
     private List<Donation> donations;
 
     /**
-     * Constructor that takes in type-appropriate data
+     * A constructor for a location that takes in a variant of data types to give the
+     * location its attributes
+     *
+     * @param key           key to identify different locations based on position
+     * @param name          name of location
+     * @param latitude      latitude coordinate of location
+     * @param longitude     longitude coordinate  of location
+     * @param address       street address of location
+     * @param city          city that location is located in
+     * @param state         state that location is located in
+     * @param zipcode       zipcode of location
+     * @param type          type of location
+     * @param phoneNumber   phone number of location
+     * @param website       website of location
+     * @param donations     list of donations donated to the location
      */
     public Location(int key, String name, double latitude, double longitude, String address,
                     String city, String state, int zipcode, String type, String phoneNumber,
@@ -49,7 +63,19 @@ public class Location implements LabeledObject, Serializable, Parcelable {
     }
 
     /**
-     * Constructor that takes in all Strings then automatically casts
+     * This constructor takes in all strings instead of a variant of data types
+     *
+     * @param key           key to identify location by position
+     * @param name          name of location
+     * @param latitude      latitude coordinate of location
+     * @param longitude     longitude coordinate of location
+     * @param address       street address of location
+     * @param city          city that location is in
+     * @param state         state that location is in
+     * @param zipcode       zipcode of location
+     * @param type          type of the location
+     * @param phoneNumber   phone number of location
+     * @param website       website of location
      */
     public Location(String key, String name, String latitude, String longitude, String address,
                     String city, String state, String zipcode, String type, String phoneNumber,
@@ -68,9 +94,23 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         this.donations = new ArrayList<>();
     }
 
-    /**
+
+
+     /**
      * Constructor that takes in type-appropriate data but allows a user class
      * not to specify a list of donation items.
+     *
+     * @param key           key to identify location by position
+     * @param name          name of location
+     * @param latitude      latitude coordinate of location
+     * @param longitude     longitude coordinate of location
+     * @param address       street address of location
+     * @param city          city that location is in
+     * @param state         state that location is in
+     * @param zipcode       zipcode of location
+     * @param type          type of the location
+     * @param phoneNumber   phone number of location
+     * @param website       website of location
      */
     public Location(int key, String name, double latitude, double longitude, String address,
                     String city, String state, int zipcode, String type, String phoneNumber,
@@ -97,13 +137,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return key;
     }
 
-    /**
-     * Sets the key for a current location
-     * @param x a unique int for a certain location
-     */
-    public void setKey(int x) {
-        key = x;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the key for a current location
+//     * @param x a unique int for a certain location
+//     */
+//    public void setKey(int x) {
+//        key = x;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the name of the location
@@ -113,13 +155,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return name;
     }
 
-    /**
-     * Sets the name of a location.
-     * @param s a string representing the name
-     */
-    public void setName(String s) {
-        name = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the name of a location.
+//     * @param s a string representing the name
+//     */
+//    public void setName(String s) {
+//        name = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the latitude of a location.
@@ -129,29 +173,33 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return latitude;
     }
 
-    /**
-     * Sets the latitude of a location.
-     * @param d the double representing the lattitude
-     */
-    public void setLatitude(double d) {
-        latitude = d;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the latitude of a location.
+//     * @param d the double representing the latitude
+//     */
+//    public void setLatitude(double d) {
+//        latitude = d;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
-     * Gets the logitude of a location
+     * Gets the longitude of a location
      * @return the longitude
      */
     public double getLongitude() {
         return longitude;
     }
 
-    /**
-     * Sets the longitude of a location.
-     * @param d a double representing the longitude
-     */
-    public void setLongitude(double d) {
-        longitude = d;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the longitude of a location.
+//     * @param d a double representing the longitude
+//     */
+//    public void setLongitude(double d) {
+//        longitude = d;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the address of a location.
@@ -161,13 +209,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return address;
     }
 
-    /**
-     * Sets the address of a location
-     * @param s a string representing the address
-     */
-    public void setAddress(String s) {
-        address = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the address of a location
+//     * @param s a string representing the address
+//     */
+//    public void setAddress(String s) {
+//        address = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the city in which the location is
@@ -177,13 +227,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return city;
     }
 
-    /**
-     * Sets the city in which a location is
-     * @param s a string representing the city
-     */
-    public void setCity(String s) {
-        city = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the city in which a location is
+//     * @param s a string representing the city
+//     */
+//    public void setCity(String s) {
+//        city = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the state that a location is in
@@ -193,13 +245,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return state;
     }
 
-    /**
-     * Sets the state that the location is in
-     * @param s a string representing the state
-     */
-    public void setState(String s) {
-        state = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the state that the location is in
+//     * @param s a string representing the state
+//     */
+//    public void setState(String s) {
+//        state = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the zipcode that a location is in
@@ -209,29 +263,35 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return zipcode;
     }
 
-    /**
-     * Sets a location's zipcode
-     * @param x an int representing the zipcode
-     */
-    public void setZipcode(int x) {
-        zipcode = x;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets a location's zipcode
+//     * @param x an int representing the zipcode
+//     */
+//    public void setZipcode(int x) {
+//        zipcode = x;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
-    /**
-     * Gets the type of location
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Gets the type of location
+//     * @return the type
+//     */
+//    public String getType() {
+//        return type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
-    /**
-     * Sets the type of the location
-     * @param s a String representing the type of location
-     */
-    public void setType(String s) {
-        type = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the type of the location
+//     * @param s a String representing the type of location
+//     */
+//    public void setType(String s) {
+//        type = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the phone number of a location, formatted (XXX) XXX-XXXX
@@ -241,13 +301,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return phoneNumber;
     }
 
-    /**
-     * Sets the phone number of a location
-     * @param s a phone number formatted (XXX) XXX-XXXX
-     */
-    public void setPhoneNumber(String s) {
-        phoneNumber = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the phone number of a location
+//     * @param s a phone number formatted (XXX) XXX-XXXX
+//     */
+//    public void setPhoneNumber(String s) {
+//        phoneNumber = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the website for a location
@@ -257,17 +319,20 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return website;
     }
 
-    /**
-     * Sets the website for a location
-     * @param s a string representing the website
-     */
-    public void setWebsite(String s) {
-        website = s;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the website for a location
+//     * @param s a string representing the website
+//     */
+//    public void setWebsite(String s) {
+//        website = s;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Returns a string representation of the location Name (City, State)
-     * @return
+     * @return returns the toString of a location. A formatted version, containing
+     * the location's name, city and state.
      */
     @Override
     public String toString() {
@@ -282,13 +347,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         return donations;
     }
 
-    /**
-     * Sets the collection of all donations made at this loction
-     * @param donations a list of Donations
-     */
-    public void setDonations(List<Donation> donations) {
-        this.donations = donations;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Sets the collection of all donations made at this location
+//     * @param donations a list of Donations
+//     */
+//    public void setDonations(List<Donation> donations) {
+//        this.donations = donations;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Adds a Donation to the collection for this location
@@ -298,13 +365,15 @@ public class Location implements LabeledObject, Serializable, Parcelable {
         donations.add(donation);
     }
 
-    /**
-     * Adds multiple donatinos at once
-     * @param donations a collection of Donations
-     */
-    public void addDonation(List<Donation> donations) {
-        this.donations.addAll(donations);
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Adds multiple donations at once
+//     * @param donations a collection of Donations
+//     */
+//    public void addDonation(List<Donation> donations) {
+//        this.donations.addAll(donations);
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     @Override
     public String getLabel() {

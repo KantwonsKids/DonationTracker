@@ -13,13 +13,16 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Donation;
@@ -43,12 +46,15 @@ public class InventoryActivity extends AppCompatActivity {
         });
 
         // set up the app bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle(Model.getInstance().getCurrentLocation().getName());
+        ActionBar nonNull = Objects.requireNonNull(ab);
+        nonNull.setDisplayHomeAsUpEnabled(true);
+        //Model model = Model.getInstance();
+        //Location location = Model.getCurrentLocation();
+        ab.setTitle(Model._currentLocation.getName());
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
@@ -59,11 +65,13 @@ public class InventoryActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
-            List<Donation> donationList = Model.getInstance().getCurrentLocation().getDonations();
+            List<Donation> donationList = Model._currentLocation.getDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
-            Intent resultsIntent = new Intent(this, DonationSearchResultsActivity.class);
-            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>) searchResults);
+            Intent resultsIntent = new Intent(this,
+                    DonationSearchResultsActivity.class);
+            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS",
+                    (ArrayList<Donation>) searchResults);
             startActivity(resultsIntent);
         }
     }
@@ -71,13 +79,16 @@ public class InventoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
 
         // Set up the search bar
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        final SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)menuItem.getActionView();
+        SearchManager nonNull = Objects.requireNonNull(searchManager);
+        searchView.setSearchableInfo(nonNull.getSearchableInfo(getComponentName()));
 
         return true;
     }
@@ -99,13 +110,15 @@ public class InventoryActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        final Model model = Model.getInstance();
+        //final Model model = Model.getInstance();
+        //Location location = Model.getCurrentLocation();
         recyclerView.setAdapter(new InventoryActivity.SimpleItemRecyclerViewAdapter(
-                model.getCurrentLocation().getDonations()));
+                Model._currentLocation.getDonations()));
     }
 
     public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
+            extends RecyclerView.Adapter<InventoryActivity.
+            SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         /**
          * The items to be shown in the list
@@ -115,29 +128,34 @@ public class InventoryActivity extends AppCompatActivity {
         /**
          * Sets the items to be used by the adapter.
          *
-         * @param inventory
+         * @param inventory donations per location
          */
-        SimpleItemRecyclerViewAdapter(List<Donation> inventory) {
-            mInventory = inventory;
+        SimpleItemRecyclerViewAdapter(Collection<Donation> inventory) {
+            mInventory = new ArrayList<>(inventory);
         }
 
+        @NonNull
         @Override
-        public InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
+        public InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder
+        onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater
                     .inflate(R.layout.inventory_content, parent, false);
             return new InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final InventoryActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
-            final Model model = Model.getInstance();
+        public void onBindViewHolder(@NonNull final InventoryActivity.SimpleItemRecyclerViewAdapter.
+                ViewHolder holder, int position) {
+            //final Model model = Model.getInstance();
             holder.mDonation = mInventory.get(position);
-            holder.mContentView.setText(mInventory.get(position).toString());
+            Donation donation = mInventory.get(position);
+            holder.mContentView.setText(donation.toString());
 
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
                 Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
-                model.setCurrentDonation(holder.mDonation);
+                Model.setCurrentDonation(holder.mDonation);
                 context.startActivity(item_detail_intent);
             });
 
@@ -150,15 +168,15 @@ public class InventoryActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mContentView;
-            public Donation mDonation;
+            final View mView;
+            final TextView mContentView;
+            Donation mDonation;
 
 
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.item_name);
+                mContentView = view.findViewById(R.id.item_name);
 //                locationNameView = view.findViewById(R.id.location_name);
             }
 

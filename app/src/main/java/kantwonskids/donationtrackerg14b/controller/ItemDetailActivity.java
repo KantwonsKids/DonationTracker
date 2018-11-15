@@ -27,7 +27,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -35,19 +35,19 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Item details");
         }
-        Model model = Model.getInstance();
-        Donation mDonation = model.getCurrentDonation();
+        //Model model = Model.getInstance();
+        //Donation mDonation = Model.getCurrentDonation();
         TextView donationTitle = findViewById(R.id.item_title);
-        donationTitle.setText(mDonation.getName());
+        donationTitle.setText(Model._currentDonation.getName());
         TextView donationDetail = findViewById(R.id.item_detail_text);
+        String price = String.format("%.2f", Model._currentDonation.getValue());
         donationDetail.setText(
-                String.format("Details: " + "\n" +
-                        mDonation.getCategory() + "\n" +
-                        mDonation.getValue() + ", " +
-                        mDonation.getTime() + " " +
-                        mDonation.getDescription() + "\n" +
-                        mDonation.getComments()
-                ));
+                "Category: " +
+                        Model._currentDonation.getCategory() + "\n" + "Price: $" +
+                        price + "\n" + "Donated on: " +
+                        Model._currentDonation.getTime() + "\n" + "Description: " +
+                        Model._currentDonation.getDescription() + "\n" + "Comments: " +
+                        Model._currentDonation.getComments());
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

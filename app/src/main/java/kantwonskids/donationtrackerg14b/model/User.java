@@ -2,6 +2,7 @@ package kantwonskids.donationtrackerg14b.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 
@@ -13,10 +14,11 @@ import java.io.Serializable;
  */
 public class User implements Parcelable, LabeledObject, Serializable {
 
-    private String username;
-    private String password;
-    private UserRole role;
-    private Location location;
+    private final String username;
+    private final String password;
+    private final UserRole role;
+    @Nullable
+    private final Location location;
 
     /**
      * Creates a new user with a given username, password, role, and assigned location.
@@ -26,13 +28,14 @@ public class User implements Parcelable, LabeledObject, Serializable {
      * @param password the password
      * @param role the user's role
      * @param location the user's location
-     * @throws IllegalArgumentException If the role is not location employee and "location" is anything other than null
+     * @throws IllegalArgumentException If the role is not location employee and "location"
+     * is anything other than null
      */
-    public User(String username, String password, UserRole role, Location location) {
+    public User(String username, String password, UserRole role, @Nullable Location location) {
         this.username = username;
         this.password = password;
         this.role = role;
-        if (location != null && role != UserRole.LOCATION_EMPLOYEE) {
+        if ((location != null) && (role != UserRole.LOCATION_EMPLOYEE)) {
             throw new IllegalArgumentException("Only location employees can have assigned" +
                     "locations");
         }
@@ -52,7 +55,8 @@ public class User implements Parcelable, LabeledObject, Serializable {
     public User(String username, String password, UserRole role) {
         this(username, password, role, null);
         if (role == UserRole.LOCATION_EMPLOYEE) {
-            throw new IllegalArgumentException("A location must be specified for location employees.");
+            throw new IllegalArgumentException("A location must be specified for " +
+                    "location employees.");
         }
     }
 
@@ -60,7 +64,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
      * Create a new user from a parcel.
      * @param in The parcel to create a new user from.
      */
-    public User(Parcel in) {
+    private User(Parcel in) {
         this.username = in.readString();
         this.password = in.readString();
         // this.location = in.readString(); idk what this parcel thing is but it is bad
@@ -68,14 +72,16 @@ public class User implements Parcelable, LabeledObject, Serializable {
         this.role = (UserRole)in.readSerializable();
     }
 
-    /**
-     * Sets the username
-     *
-     * @param newUsername The new username to set
-     */
-    public void setUsername(String newUsername) {
-        username = newUsername;
-    }
+// --Commented out by Inspection START (11/15/18, 12:37 PM):
+//    /**
+//     * Sets the username
+//     *
+//     * @param newUsername The new username to set
+//     */
+//    public void setUsername(String newUsername) {
+//        username = newUsername;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
 
     /**
      * Gets the username
@@ -86,23 +92,27 @@ public class User implements Parcelable, LabeledObject, Serializable {
         return username;
     }
 
-    /**
-     * Sets the password
-     *
-     * @param newPassword The new password to set
-     */
-    public void setPassword(String newPassword) {
-        password = newPassword;
-    }
+// --Commented out by Inspection START (11/15/18, 12:37 PM):
+//    /**
+//     * Sets the password
+//     *
+//     * @param newPassword The new password to set
+//     */
+//    public void setPassword(String newPassword) {
+//        password = newPassword;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
 
-    /**
-     * Gets the password.
-     *
-     * @return The user's password
-     */
-    public String getPassword() {
-        return password;
-    }
+// --Commented out by Inspection START (11/15/18, 1:33 PM):
+//    /**
+//     * Gets the password.
+//     *
+//     * @return The user's password
+//     */
+//    public String getPassword() {
+//        return password;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 1:33 PM)
 
     /**
      * Parcelable creator.
@@ -156,12 +166,17 @@ public class User implements Parcelable, LabeledObject, Serializable {
 
     @Override
     public boolean equals(Object other) {
-        if (other == null || !(other instanceof User)) {
+        if ((other == null) || !(other instanceof User)) {
             return false;
         }
 
         User u = (User) other;
         return this.username.equals(u.getUsername());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.username.hashCode() + 17;
     }
 
     @Override

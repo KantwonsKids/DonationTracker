@@ -1,16 +1,16 @@
 package kantwonskids.donationtrackerg14b.model;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A class for the list of valid users
  */
 public class UserList implements Serializable {
 
-    // Mapping of usernames to user objects, for quick lookup of users by name.
-    // TODO: make this work with NameSearchableLists
-    private HashMap<String, User> usernameObjectMap;
+    // Mapping of user names to user objects, for quick lookup of users by name.
+    // Make work with searchable lists
+    private final Map<String, User> usernameObjectMap;
 
     /**
      * Creates an empty user list.
@@ -27,13 +27,15 @@ public class UserList implements Serializable {
         usernameObjectMap.put(user.getUsername(), user);
     }
 
-    /**
-     * Method to remove a user from the list
-     * @param user the user to be removed
-     */
-    public void removeUser(User user) {
-        usernameObjectMap.remove(user);
-    }
+// --Commented out by Inspection START (11/15/18, 12:37 PM):
+//    /**
+//     * Method to remove a user from the list
+//     * @param user the user to be removed
+//     */
+//    public void removeUser(User user) {
+//        usernameObjectMap.remove(user);
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
 
     /**
      * Method to check if the user is a valid user
@@ -53,16 +55,20 @@ public class UserList implements Serializable {
         return this.usernameObjectMap.containsKey(username);
     }
 
-    /**
-     *
-     * @param username username for user to check
-     * @param password password for user to check
-     * @return if user is valid
-     */
-    public boolean isValidUser(String username, String password) {
-        return this.usernameObjectMap.containsKey(username)
-                && usernameObjectMap.get(username).getPassword().equals(password);
-    }
+// --Commented out by Inspection START (11/15/18, 12:37 PM):
+//    /**
+//     *
+//     * @param username username for user to check
+//     * @param password password for user to check
+//     * @return if user is valid
+//     */
+//    public boolean isValidUser(String username, String password) {
+//        User user = usernameObjectMap.get(username);
+//        String userPassword = user.getPassword();
+//        return this.usernameObjectMap.containsKey(username)
+//                && userPassword.equals(password);
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
 
     /**
      * Gets a user by username.

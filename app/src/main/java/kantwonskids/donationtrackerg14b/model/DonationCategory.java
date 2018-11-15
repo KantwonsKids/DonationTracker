@@ -10,13 +10,24 @@ public enum DonationCategory {
     HOUSEHOLD ("Household", 104),
     OTHER ("Other", 105);
 
-    String categoryName;
-    int menuId;
+    final String categoryName;
+    final int menuId;
+
+    public static transient DonationCategory _currentDonation;
+
+    /**
+     * Sets the current donation category
+     * @param category current donation category
+     */
+    public static void setCurrentDonationCategory(DonationCategory category) {
+        _currentDonation = category;
+    }
 
     /**
      * Creates a new donation category
      * @param name name of the category
-     * @param id unique integer (used to populate the toolbar menu). Arbitrary value as long as it is unique.
+     * @param id unique integer (used to populate the toolbar menu).
+     *           Arbitrary value as long as it is unique.
      */
     DonationCategory(String name, int id) {
         this.categoryName = name;
@@ -28,11 +39,13 @@ public enum DonationCategory {
         return this.categoryName;
     }
 
-    /**
-     * Gets the menu ID.
-     * @return the menu ID
-     */
-    public int getMenuId() {
-        return menuId;
-    }
+// --Commented out by Inspection START (11/15/18, 12:38 PM):
+//    /**
+//     * Gets the menu ID.
+//     * @return the menu ID
+//     */
+//    public int getMenuId() {
+//        return menuId;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 }

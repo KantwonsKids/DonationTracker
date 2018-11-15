@@ -81,7 +81,8 @@
         <activity android:name=".controller.AdvancedSearchActivity"></activity>
 
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDOvJ3tqK627Tkd5leeMK_LBvu2sw65VAc"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value=
+            "AIzaSyDOvJ3tqK627Tkd5leeMK_LBvu2sw65VAc"/>
     </application>
 
 </manifest>
