@@ -52,6 +52,11 @@ public final class Model implements Serializable {
     public static transient Donation currentDonation;
 
     /**
+     * Current logged-in user.
+     */
+    private static transient User currentUser;
+
+    /**
      * Gets the instance of the model class.
      * @return the instance of the Model, which stores all relevant application data
      */
@@ -69,7 +74,7 @@ public final class Model implements Serializable {
         /*
       Sets the current user on log in
      */
-        User _currentUser = u;
+        currentUser = u;
         /*
       The user that is currently logged in.
       Transient so that it does not persist when saving
@@ -106,11 +111,13 @@ public final class Model implements Serializable {
         currentLocation = location;
     }
 
-    /**
-     *
-     * @return currently selected donation item
-     */
-    public static Donation getCurrentDonation() {return currentDonation;}
+// --Commented out by Inspection START (11/15/2018 6:29 PM):
+//    /**
+//     *
+//     * @return currently selected donation item
+//     */
+//    public static Donation getCurrentDonation() {return currentDonation;}
+// --Commented out by Inspection STOP (11/15/2018 6:29 PM)
 
     /**
      *

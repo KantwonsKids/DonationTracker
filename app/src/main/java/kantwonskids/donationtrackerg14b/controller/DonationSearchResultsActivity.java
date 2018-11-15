@@ -74,7 +74,7 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
         if (list.isEmpty()) {
             TextView message = findViewById(R.id.search_results_message);
             message.setVisibility(View.VISIBLE);
-            message.setText("Your search returned no results.");
+            message.setText(R.string.no_results);
         }
         recyclerView.setAdapter(new DonationSearchResultsActivity.
                 SimpleItemRecyclerViewAdapter(list));

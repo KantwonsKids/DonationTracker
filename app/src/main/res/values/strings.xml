@@ -7,7 +7,6 @@
     <string name="action_sign_in">Login</string>
     <string name="error_invalid_username" tools:keep="@string/error_invalid_username">
         This is not a valid username.</string>
-    <string name="error_invalid_password">The password must be at least 8 characters.</string>
     <string name="error_incorrect_password">The username or password was incorrect.</string>
     <string name="error_field_required" tools:keep="@string/error_field_required">
         This field is required!</string>
@@ -32,4 +31,25 @@
     <string name="location_detail_title">Location Details</string>
     <string name="search_results">Search results</string>
     <string name="advanced_search">Advanced search</string>
+    <string name="search">Search</string>
+
+    <!--New item strings-->
+    <string name="category">Category</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_desc">Item Description</string>
+    <string name="price">Price</string>
+    <string name="comments">Comments</string>
+    <string name="create_donation">Create Donation</string>
+
+    <!--Location detail strings-->
+    <string name="view_inventory">View Inventory</string>
+
+    <!--Registration strings-->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Confirm password</string>
+    <string name="reg_create_account">Create account</string>
+
+    <!--Search results strings-->
+    <string name="no_results">Your search returned no results.</string>
 </resources>

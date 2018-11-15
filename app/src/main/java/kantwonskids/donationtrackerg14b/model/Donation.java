@@ -55,35 +55,11 @@ public class Donation implements LabeledObject, Serializable, Parcelable {
     }
 
     /**
-     * Gets the time that the item was donated.
-     * @return the time
-     */
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * Gets the description of the item that was donated.
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * Gets the name of the item that was donated.
      * @return the name
      */
     public CharSequence getName() {
         return name;
-    }
-
-    /**
-     * Gets the value of the item that was donated.
-     * @return the value in USD.
-     */
-    public float getValue() {
-        return value;
     }
 
     /**
@@ -94,15 +70,7 @@ public class Donation implements LabeledObject, Serializable, Parcelable {
         return category;
     }
 
-    /**
-     * Gets the comments input by the employee who entered the item.
-     * @return the comments
-     */
-    public String getComments() {
-        return comments;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
+    // --Commented out by Inspection START (11/15/18, 12:37 PM):
 //    /**
 //     * Sets the time that the item was donated.
 //     * @param time the time the item was donated

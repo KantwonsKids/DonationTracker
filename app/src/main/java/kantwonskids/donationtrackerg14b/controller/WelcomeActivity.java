@@ -114,7 +114,7 @@ public class WelcomeActivity extends AppCompatActivity {
             Log.d("DATA", "Successfully populated the locationList");
             br.close();
         } catch (Exception e) {
-            System.out.print(e.getMessage());
+            Log.e("DATA", e.getMessage());
         }
     }
 

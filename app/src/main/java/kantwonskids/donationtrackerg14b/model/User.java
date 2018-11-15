@@ -142,27 +142,30 @@ public class User implements Parcelable, LabeledObject, Serializable {
         dest.writeSerializable(this.role);
     }
 
-    @Override
-    public String toString() {
-        if (this.role == UserRole.GUEST) {
-            return "Guest";
-        }
-
-        String str = "Username: " + this.username;
-        switch (this.role) {
-            case LOCATION_EMPLOYEE:
-                str += "\nLocation Employee\nAssigned Location: " + location;
-                break;
-            case MANAGER:
-                str += "\nManager";
-                break;
-            case ADMINISTRATOR:
-                str += "\nAdministrator";
-                break;
-        }
-
-        return str;
-    }
+//    @Override
+//    public String toString() {
+//        if (this.role == UserRole.GUEST) {
+//            return "Guest";
+//        }
+//
+//        String str = "Username: " + this.username;
+//        switch (this.role) {
+//            case LOCATION_EMPLOYEE:
+//                str += "\nLocation Employee\nAssigned Location: " + location;
+//                break;
+//            case MANAGER:
+//                str += "\nManager";
+//                break;
+//            case ADMINISTRATOR:
+//                str += "\nAdministrator";
+//                break;
+//            default:
+//                str += "\nUser";
+//                break;
+//        }
+//
+//        return str;
+//    }
 
     @Override
     public boolean equals(Object other) {

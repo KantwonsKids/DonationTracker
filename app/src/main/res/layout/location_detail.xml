@@ -10,7 +10,7 @@
             android:id="@+id/location_detail_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text=""
             android:paddingBottom="30dp"
             android:textSize="20sp" />
 
@@ -18,7 +18,7 @@
             android:id="@+id/viewInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Inventory"/>
+            android:text="@string/view_inventory"/>
 
 
 </LinearLayout>

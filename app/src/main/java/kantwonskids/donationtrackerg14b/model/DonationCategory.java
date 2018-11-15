@@ -11,7 +11,7 @@ public enum DonationCategory {
     OTHER ("Other", 105);
 
     final String categoryName;
-    final int menuId;
+    // --Commented out by Inspection (11/15/2018 6:26 PM):final int menuId;
 
     public static transient DonationCategory _currentDonation;
 

@@ -31,8 +31,7 @@ public class LocationListFragment extends Fragment {
      * @param recyclerView the recycler view to set up
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
-                Model.locationList));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -50,10 +49,9 @@ public class LocationListFragment extends Fragment {
 
         /**
          * Sets the items to be used by the adapter.
-         * @param locations locations currently stored in the app
          */
-        SimpleItemRecyclerViewAdapter(List<Location> locations) {
-            mLocations = locations;
+        SimpleItemRecyclerViewAdapter() {
+            mLocations = Model.locationList;
         }
 
         @NonNull
