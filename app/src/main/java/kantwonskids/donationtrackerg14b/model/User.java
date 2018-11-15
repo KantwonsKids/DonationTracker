@@ -69,6 +69,31 @@ public class User implements Parcelable, LabeledObject, Serializable {
     }
 
     /**
+     * Returns a boolean value determining whether this user can update info at a certain location.
+     * @param loc the location to update info at
+     * @return true if the user can, false if it cannot
+     * @throws IllegalArgumentException if the location is null
+     */
+    public boolean canUpdateDonationsAt(Location loc) {
+        if (loc == null) {
+            throw new IllegalArgumentException("Location cannot be null.");
+        }
+
+        // Managers/admins can add/remove donations at all locations
+        if (role.canAddOrRemoveDonationsAllLocations()) {
+            return true;
+        }
+
+        // Location employees can add/remove if the location matches
+        if (role.canAddOrRemoveDonationsSpecificLocation()) {
+            return loc.equals(location);
+        }
+
+        // Everybody else can do nothing
+        return false;
+    }
+
+    /**
      * Sets the username
      *
      * @param newUsername The new username to set
@@ -102,6 +127,48 @@ public class User implements Parcelable, LabeledObject, Serializable {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Sets the role of the current user.
+     *
+     * @param role the type of account that the user should have
+     */
+    public void setUserRole(UserRole role) {
+        this.role = role;
+    }
+
+    /**
+     * Gets the role of the current user.
+     *
+     * @return the type of account that the current user has
+     */
+    public UserRole getUserRole() {
+        return this.role;
+    }
+
+    /**
+     * Sets the location where this user works (Location employees only).
+     *
+     * @param location where this user works
+     * @throws IllegalArgumentException if the user is not a location employee
+     */
+    public void setLocation(Location location) {
+        if (this.role != UserRole.LOCATION_EMPLOYEE) {
+            throw new IllegalArgumentException("User type "
+                    + this.role.toString()
+                    + " cannot be assigned to a location.");
+        }
+        this.location = location;
+    }
+
+    /**
+     * Gets the location where this user works (Location employees only).
+     *
+     * @return the location described above.
+     */
+    public Location getLocation() {
+        return this.location;
     }
 
     /**
@@ -153,6 +220,7 @@ public class User implements Parcelable, LabeledObject, Serializable {
 
         return str;
     }
+
 
     @Override
     public boolean equals(Object other) {

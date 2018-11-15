@@ -50,7 +50,7 @@ public class LocationListFragment extends Fragment {
 
         /**
          * Sets the items to be used by the adapter.
-         * @param locations
+         * @param locations the list of locations
          */
         SimpleItemRecyclerViewAdapter(List<Location> locations) {
             mLocations = locations;

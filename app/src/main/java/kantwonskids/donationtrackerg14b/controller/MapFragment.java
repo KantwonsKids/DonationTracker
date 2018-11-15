@@ -26,15 +26,15 @@ import kantwonskids.donationtrackerg14b.model.Model;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    MapView mMapView;
+    private MapView mMapView;
     private GoogleMap map;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the root view into the fragment
+        // Inflate the root view into the fragment.
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
-        //set up maps
-        mMapView = (MapView) rootView.findViewById(R.id.map);
+        // Set up maps.
+        mMapView = rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
@@ -52,16 +52,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Model model = Model.getInstance();
         List<Location> locs = model.locationList;
 
-        //zoom camera
+        // Zoom camera.
         LatLng cameraPos = new LatLng(locs.get(0).getLatitude(), locs.get(0).getLongitude());
         map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
-        //15 is "street view" zoom level
-        //10 is "city view" zoom level
-        //10 is best to display all pins at once
+        // 15 is "street view" zoom level.
+        // 10 is "city view" zoom level.
+        // 10 is best to display all pins at once.
         map.moveCamera(CameraUpdateFactory.zoomTo(10));
 
 
-        //put a marker at every location in the location list
+        // Put a marker at every location in the location list.
         for (Location loc : locs) {
             LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
             MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName()).snippet(loc.getPhoneNumber());

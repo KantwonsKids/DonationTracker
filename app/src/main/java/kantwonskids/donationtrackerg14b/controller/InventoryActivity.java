@@ -16,14 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.*;
 
 /**
  * an Activity to represent the inventory (list of donation items)
@@ -31,16 +31,25 @@ import kantwonskids.donationtrackerg14b.model.Model;
  */
 public class InventoryActivity extends AppCompatActivity {
 
+    private User user = Model.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
         FloatingActionButton addItemButton = findViewById(R.id.addItem);
-        addItemButton.setOnClickListener((view) -> {
-            Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
-            startActivity(intent_addToInventory);
-        });
+//        if ((role == UserRole.LOCATION_EMPLOYEE
+//                && location == Model.getInstance().getCurrentLocation())
+//                || role == UserRole.MANAGER) {
+        if (user.canUpdateDonationsAt(Model.getInstance().getCurrentLocation())) {
+            addItemButton.setOnClickListener((view) -> {
+                Intent intent_addToInventory = new Intent(this, NewItemActivity.class);
+                startActivity(intent_addToInventory);
+            });
+        } else {
+            addItemButton.setVisibility(View.GONE);
+        }
 
         // set up the app bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
