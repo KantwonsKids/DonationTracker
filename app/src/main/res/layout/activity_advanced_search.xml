@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".controller.AdvancedSearchActivity">
 
-    <include layout="@layout/toolbar"></include>
+    <include layout="@layout/toolbar" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/adv_search_query"

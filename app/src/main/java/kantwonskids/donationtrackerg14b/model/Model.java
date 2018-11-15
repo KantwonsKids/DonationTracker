@@ -178,14 +178,18 @@ public final class Model implements Serializable {
         ObjectOutputStream out;
 
         try {
-            path.mkdirs();
-            filename.createNewFile();
+            boolean success = path.mkdirs();
+            success = success && filename.createNewFile();
             fOS = new FileOutputStream(filename);
             out = new ObjectOutputStream(fOS);
             out.writeObject(_instance);
             out.close();
             fOS.close();
-            Log.v("Serializing", "Wrote model to file successfully");
+            if (success) {
+                Log.v("Serializing", "Wrote model to file successfully");
+            } else {
+                Log.v("Serializing", "Failed to write model to file, aborting");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

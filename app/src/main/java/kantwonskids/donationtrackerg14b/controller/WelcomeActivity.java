@@ -49,7 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // Load the serialized model
         Model.loadSavedData();
         //Model instance = Model.getInstance();
-        if (Model.locationList == null)
+        if (Model.locationList.isEmpty())
         {
             readSampleData();
         }

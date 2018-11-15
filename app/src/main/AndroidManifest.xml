@@ -78,7 +78,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".controller.AdvancedSearchActivity"></activity>
+        <activity android:name=".controller.AdvancedSearchActivity" />
 
 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value=
