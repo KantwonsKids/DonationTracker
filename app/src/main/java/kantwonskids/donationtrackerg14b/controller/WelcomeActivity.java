@@ -49,7 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // Load the serialized model
         Model.loadSavedData();
         //Model instance = Model.getInstance();
-        if (Model.locationList.isEmpty())
+        if (Model.getInstance().getLocationList().isEmpty())
         {
             readSampleData();
         }
@@ -108,7 +108,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         phoneNumber,
                         website
                 );
-                Model.locationList.add(d);
+                Model.getInstance().getLocationList().add(d);
             }
             // print the success
             Log.d("DATA", "Successfully populated the locationList");

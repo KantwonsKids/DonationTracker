@@ -74,6 +74,14 @@ public final class Model implements Serializable {
     }
 
     /**
+     * Gets the list of all users.
+     * @return the user list
+     */
+    public UserList getUserList() {
+        return _userList;
+    }
+
+    /**
      * Gets the active user. If the app is logged out, then this returns null.
      * @return The user currently logged in.
      */

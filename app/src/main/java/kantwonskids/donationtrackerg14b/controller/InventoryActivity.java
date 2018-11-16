@@ -122,7 +122,7 @@ public class InventoryActivity extends AppCompatActivity {
         //final Model model = Model.getInstance();
         //Location location = Model.getCurrentLocation();
         recyclerView.setAdapter(new InventoryActivity.SimpleItemRecyclerViewAdapter(
-                Model.currentLocation.getDonations()));
+                Model.getInstance().getCurrentLocation().getDonations()));
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -164,7 +164,7 @@ public class InventoryActivity extends AppCompatActivity {
             holder.mView.setOnClickListener( (View v) -> {
                 Context context = v.getContext();
                 Intent item_detail_intent = new Intent(context, ItemDetailActivity.class);
-                Model.setCurrentDonation(holder.mDonation);
+                Model.getInstance().setCurrentDonation(holder.mDonation);
                 context.startActivity(item_detail_intent);
             });
 

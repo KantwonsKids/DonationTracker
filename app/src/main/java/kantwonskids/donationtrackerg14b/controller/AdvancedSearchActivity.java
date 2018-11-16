@@ -62,7 +62,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
                 toSearch = Model.getInstance().getAllDonations();
             } else {
                 //Location location = Model.getCurrentLocation();
-                toSearch = Model.getInstance().currentLocation.getDonations();
+                toSearch = Model.getInstance().getCurrentLocation().getDonations();
             }
 
             List<Donation> searchResults = Model.search(toSearch, query);

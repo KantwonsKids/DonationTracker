@@ -40,7 +40,7 @@ public class LocationDetailActivity extends AppCompatActivity {
 //        TextView locationTitle = findViewById(R.id.locationTitle);
 //        locationTitle.setText(mLocation.getName());
         TextView locationDetail = findViewById(R.id.location_detail_text);
-        locationDetail.setText(Model.currentLocation.detailString());
+        locationDetail.setText(Model.getInstance().getCurrentLocation().detailString());
 
         Button inventoryButton = findViewById(R.id.viewInventory);
         inventoryButton.setOnClickListener((view) -> {

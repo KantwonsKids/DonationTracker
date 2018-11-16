@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Get instance of model to compare the username / password with the list of valid users
         //Model model = Model.getInstance();
-        UserList userList = Model._userList;
+        UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
 
         if (userList.isValidUser(potentialUser)) {

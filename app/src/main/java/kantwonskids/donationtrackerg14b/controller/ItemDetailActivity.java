@@ -37,9 +37,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         //Donation mDonation = Model.getCurrentDonation();
         TextView donationTitle = findViewById(R.id.item_title);
-        donationTitle.setText(Model.currentDonation.getName());
+        donationTitle.setText(Model.getInstance().getCurrentDonation().getName());
         TextView donationDetail = findViewById(R.id.item_detail_text);
-        donationDetail.setText(Model.currentDonation.detailString());
+        donationDetail.setText(Model.getInstance().getCurrentDonation().detailString());
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

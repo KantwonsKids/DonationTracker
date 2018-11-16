@@ -33,16 +33,6 @@ import kantwonskids.donationtrackerg14b.model.Model;
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-<<<<<<< HEAD
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        // Inflate the root view into the fragment
-        View rootView = inflater.inflate(R.layout.activity_map, container, false);
-
-        //set up maps
-        MapView mMapView = rootView.findViewById(R.id.map);
-=======
     private MapView mMapView;
     private GoogleMap map;
 
@@ -52,7 +42,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         // Set up maps.
         mMapView = rootView.findViewById(R.id.map);
->>>>>>> development
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         FragmentActivity nonNull = Objects.requireNonNull(getActivity());
@@ -60,37 +49,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(this);
 
         return rootView;
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         //Model model = Model.getInstance();
-        List<Location> locations = Model.locationList;
+        List<Location> locs = Model.getInstance().getLocationList();
 
-<<<<<<< HEAD
-        //zoom camera
-        Location location = locations.get(0);
-        LatLng cameraPos = new LatLng(location.getLatitude(), location.getLongitude());
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
-        //15 is "street view" zoom level
-        //10 is "city view" zoom level
-        //10 is best to display all pins at once
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10));
-
-
-        //put a marker at every location in the location list
-        for (Location loc : locations) {
-            LatLng thing = new LatLng(loc.getLatitude(), loc.getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
-            MarkerOptions newMarkerOption = markerOptions.position(thing);
-            String name = loc.getName();
-            String phoneNumber = loc.getPhoneNumber();
-            MarkerOptions title = newMarkerOption.title(name);
-            MarkerOptions marker = title.snippet(phoneNumber);
-            googleMap.addMarker(marker);
-=======
         // Zoom camera.
         LatLng cameraPos = new LatLng(locs.get(0).getLatitude(), locs.get(0).getLongitude());
         map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
@@ -105,7 +71,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
             MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName()).snippet(loc.getPhoneNumber());
             map.addMarker(marker);
->>>>>>> development
         }
     }
 

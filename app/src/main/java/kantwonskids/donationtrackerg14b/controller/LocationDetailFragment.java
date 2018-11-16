@@ -42,7 +42,7 @@ public class LocationDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle.containsKey(ARG_NAME)) {
             //Model model = Model.getInstance();
-            mLocation = Model.getCurrentLocation();
+            mLocation = Model.getInstance().getCurrentLocation();
 //            Activity activity = this.getActivity();
 //            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
 //            if (appBarLayout != null) {

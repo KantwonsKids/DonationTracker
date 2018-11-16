@@ -60,7 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
         locationSpinner = findViewById(R.id.registration_location_spinner);
 
         // Get location names
-        List<Location> locations = Model.locationList;
+        List<Location> locations = Model.getInstance().getLocationList();
         String[] locNames = new String[locations.size()];
         for (int i = 0; i < locations.size(); i++) {
             Location location = locations.get(i);
@@ -148,11 +148,11 @@ public class RegistrationActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         // find the real location
         if ("Location Employee".equals(accType)) {
-            for (int i = 0; i < Model.locationList.size(); i++) {
-                Location location = Model.locationList.get(i);
+            for (int i = 0; i < Model.getInstance().getLocationList().size(); i++) {
+                Location location = Model.getInstance().getLocationList().get(i);
                 String name = location.getName();
                 if (name.equals(locationStr)) {
-                    loc = Model.locationList.get(i);
+                    loc = Model.getInstance().getLocationList().get(i);
                 }
             }
         }
@@ -162,7 +162,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // get reference to the model
 
         // check to see if the username exists in the list
-        if (Model._userList.isUsernameTaken(u)) {
+        if (Model.getInstance().getUserList().isUsernameTaken(u)) {
             usernameField.setError("This username is taken!");
 
         } else if (!"VALID".equals(validUsername)) {
@@ -192,8 +192,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     newUser = new User(u, p, UserRole.USER);
                     break;
             }
-            Model._userList.addUser(newUser);
-            Model.setCurrentUser(newUser);
+            Model.getInstance().getUserList().addUser(newUser);
+            Model.getInstance().setCurrentUser(newUser);
 
             // save to file
             Model.saveToPhone();
@@ -263,6 +263,6 @@ public class RegistrationActivity extends AppCompatActivity {
      */
     private boolean isValidLocation(Location l) {
 
-        return Model.locationList.contains(l);
+        return Model.getInstance().getLocationList().contains(l);
     }
 }

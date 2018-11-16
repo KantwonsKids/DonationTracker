@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
             //Model model = Model.getInstance();
-            List<Donation> donationList = Model.getAllDonations();
+            List<Donation> donationList = Model.getInstance().getAllDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
             Intent resultsIntent = new Intent(this,
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         // Log out the current user
         //Model model = Model.getInstance();
-        Model.setCurrentUser(null);
+        Model.getInstance().setCurrentUser(null);
         startActivity(intent);
     }
 

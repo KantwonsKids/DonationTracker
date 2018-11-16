@@ -49,13 +49,9 @@ public class LocationListFragment extends Fragment {
 
         /**
          * Sets the items to be used by the adapter.
-<<<<<<< HEAD
-=======
-         * @param locations the list of locations
->>>>>>> development
          */
         SimpleItemRecyclerViewAdapter() {
-            mLocations = Model.locationList;
+            mLocations = Model.getInstance().getLocationList();
         }
 
         @NonNull
@@ -80,7 +76,7 @@ public class LocationListFragment extends Fragment {
                         LocationDetailActivity.class);
                 //intent.putExtra(LocationDetailFragment.ARG_NAME,
                 //      holder.mLocation.getName());
-                Model.setCurrentLocation(holder.mLocation);
+                Model.getInstance().setCurrentLocation(holder.mLocation);
                 context.startActivity(intent);
             });
 
