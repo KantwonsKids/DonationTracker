@@ -34,13 +34,12 @@ public enum UserRole {
 //     *     - Add/remove users and locations
 //     *     - Lock/unlock accounts
 //     */
-//    private final boolean canLogIn;
-// --Commented out by Inspection STOP (11/15/2018 8:46 PM)
+    private final boolean canLogIn;
     private final boolean canUpdateInfo;
     private final boolean canUpdateInfoAtAllLocations;
-    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canAddOrRemoveUsers;
-    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canLockOrUnlockUsers;
-    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canAddOrRemoveLocations;
+    private final boolean canAddOrRemoveUsers;
+    private final boolean canLockOrUnlockUsers;
+    private final boolean canAddOrRemoveLocations;
 
     // String representation for nice displaying
     private final String name;

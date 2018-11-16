@@ -1,6 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +34,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) throws NullPointerException {
         // Inflate the root view into the fragment.
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
@@ -42,7 +43,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
-        MapsInitializer.initialize(getActivity().getApplicationContext());
+        Activity activity = getActivity();
+
+        MapsInitializer.initialize(activity.getApplicationContext());
         mMapView.getMapAsync(this);
 
         return rootView;

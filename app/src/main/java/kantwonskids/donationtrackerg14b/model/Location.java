@@ -214,63 +214,6 @@ public class Location implements Searchable, Serializable, Parcelable {
     }
 
     /**
-     * This constructor takes in all strings instead of a variant of data types
-     *
-     * @param key           key to identify location by position
-     * @param name          name of location
-     * @param latitude      latitude coordinate of location
-     * @param longitude     longitude coordinate of location
-     * @param address       street address of location
-     * @param city          city that location is in
-     * @param state         state that location is in
-     * @param zipCode       zipCode of location
-     * @param type          type of the location
-     * @param phoneNumber   phone number of location
-     * @param website       website of location
-     */
-    public Location(String key, String name, String latitude, String longitude, String address,
-                    String city, String state, String zipCode, String type, String phoneNumber,
-                    String website) {
-        this.key = Integer.parseInt(key);
-        this.name = name;
-        this.latitude = Double.parseDouble(latitude);
-        this.longitude = Double.parseDouble(longitude);
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipCode = Integer.parseInt(zipCode);
-        this.type = type;
-        this.phoneNumber = phoneNumber;
-        this.website = website;
-        this.donations = new ArrayList<>();
-    }
-
-
-
-     /**
-     * Constructor that takes in type-appropriate data but allows a user class
-     * not to specify a list of donation items.
-     *
-     * @param key           key to identify location by position
-     * @param name          name of location
-     * @param latitude      latitude coordinate of location
-     * @param longitude     longitude coordinate of location
-     * @param address       street address of location
-     * @param city          city that location is in
-     * @param state         state that location is in
-     * @param zipCode       zip code of location
-     * @param type          type of the location
-     * @param phoneNumber   phone number of location
-     * @param website       website of location
-     */
-    public Location(int key, String name, double latitude, double longitude, String address,
-                    String city, String state, int zipCode, String type, String phoneNumber,
-                    String website) {
-        this(key, name, latitude, longitude, address, city, state, zipCode,
-                type, phoneNumber, website, new ArrayList<>());
-    }
-
-    /**
      * Constructs a Location object using a parcel.
      * @param in a parcel
      */

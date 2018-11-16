@@ -157,10 +157,46 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
 
+        User newUser = validate(u, p, c, accType, loc);
+        if (newUser != null) {
+            model.getUserList().addUser(newUser);
+            model.setCurrentUser(newUser);
+
+            // save to file
+            Model.saveToPhone();
+
+            Intent welcomeIntent = new Intent(this, MainActivity.class);
+            // Pass the user just created to the main activity to set as the logged in user
+            welcomeIntent.putExtra("CURRENT_USER", (Parcelable)newUser);
+            startActivity(welcomeIntent);
+        }
+    }
+
+    private User createNewUser(String accType, String u, String p, Location loc) {
+        User newUser = null;
+        switch (accType) {
+            case "Administrator":
+                newUser = new User(u, p, UserRole.ADMINISTRATOR);
+                break;
+            case "Manager":
+                newUser = new User(u, p, UserRole.MANAGER);
+                break;
+            case "Location Employee":
+                newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, loc);
+                break;
+            case "User":
+                newUser = new User(u, p, UserRole.USER);
+                break;
+        }
+
+        return newUser;
+    }
+
+    private User validate(String u, String p, String c, String accType,
+                            Location loc) {
+        User newUser = null;
         String validUsername = validateUsername(u);
         String validPassword = validatePassword(p);
-        // get reference to the model
-
         // check to see if the username exists in the list
         if (Model.getInstance().getUserList().isUsernameTaken(u)) {
             usernameField.setError("This username is taken!");
@@ -173,38 +209,13 @@ public class RegistrationActivity extends AppCompatActivity {
             passwordField.setError(validatePassword(p));
         } else if ("Location Employee".equals(accType) && !isValidLocation(loc)) {
             locationTextField.setError("Invalid location!");
-        }
-        else
-        {
+        } else {
             // Determine the selected account type and create object accordingly
-            User newUser = null;
-            switch (accType) {
-                case "Administrator":
-                    newUser = new User(u, p, UserRole.ADMINISTRATOR);
-                    break;
-                case "Manager":
-                    newUser = new User(u, p, UserRole.MANAGER);
-                    break;
-                case "Location Employee":
-                    newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, loc);
-                    break;
-                case "User":
-                    newUser = new User(u, p, UserRole.USER);
-                    break;
-            }
-            model.getUserList().addUser(newUser);
-            model.setCurrentUser(newUser);
+            newUser = createNewUser(accType, u, p, loc);
 
-            // save to file
-            Model.saveToPhone();
+       }
 
-            Intent welcomeIntent = new Intent(this, MainActivity.class);
-            // Pass the user just created to the main activity to set as the logged in user
-            welcomeIntent.putExtra("CURRENT_USER", (Parcelable)newUser);
-            startActivity(welcomeIntent);
-        }
-
-
+        return newUser;
     }
 
     /**
