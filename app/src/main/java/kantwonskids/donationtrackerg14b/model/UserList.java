@@ -10,12 +10,12 @@ public class UserList implements Serializable {
 
     // Mapping of usernames to user objects, for quick lookup of users by name.
     // TODO: make this work with NameSearchableLists
-    private HashMap<String, User> usernameObjectMap;
+    public HashMap<String, User> usernameObjectMap;
 
     /**
      * Creates an empty user list.
      */
-    UserList() {
+    public UserList() {
         usernameObjectMap = new HashMap<>();
     }
 
@@ -29,10 +29,10 @@ public class UserList implements Serializable {
 
     /**
      * Method to remove a user from the list
-     * @param user the user to be removed
+     * @param username the user to be removed
      */
-    public void removeUser(User user) {
-        usernameObjectMap.remove(user);
+    public void removeUser(String username) {
+        usernameObjectMap.remove(username);
     }
 
     /**
