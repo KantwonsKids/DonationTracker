@@ -53,20 +53,18 @@ public class UserList implements Serializable {
         return this.usernameObjectMap.containsKey(username);
     }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     *
-//     * @param username username for user to check
-//     * @param password password for user to check
-//     * @return if user is valid
-//     */
-//    public boolean isValidUser(String username, String password) {
-//        User user = usernameObjectMap.get(username);
-//        String userPassword = user.getPassword();
-//        return this.usernameObjectMap.containsKey(username)
-//                && userPassword.equals(password);
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     *
+     * @param username username for user to check
+     * @param password password for user to check
+     * @return if user is valid
+     */
+    public boolean isValidUser(String username, String password) {
+        User user = usernameObjectMap.get(username);
+        String userPassword = user.getPassword();
+        return this.usernameObjectMap.containsKey(username)
+                && userPassword.equals(password);
+    }
 
     /**
      * Gets a user by username.

@@ -6,6 +6,7 @@ import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.User;
 import kantwonskids.donationtrackerg14b.model.UserRole;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 /**

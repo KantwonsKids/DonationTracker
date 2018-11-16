@@ -107,6 +107,14 @@ public class User implements Parcelable, Searchable, Serializable {
     }
 
     /**
+     * Gets the password
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
      * Parcelable creator.
      */
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator<User>() {

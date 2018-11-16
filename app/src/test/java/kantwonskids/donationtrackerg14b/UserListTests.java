@@ -3,7 +3,6 @@ package kantwonskids.donationtrackerg14b;
 
 import org.junit.Test;
 
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.User;
 import kantwonskids.donationtrackerg14b.model.UserList;
 import kantwonskids.donationtrackerg14b.model.UserRole;
