@@ -20,9 +20,7 @@ public class UserTests {
 
     @Test
     public void userToString_locationEmployee() {
-        Location location = new Location(0, "fake location", 0.0,
-                0.0, "fake", "fake", "fake", 0,
-                "fake", "fake", "fake", null);
+        Location location = new Location.LocationBuilder().setKey(0).setName("fake location").setLatitude(0.0).setLongitude(0.0).setAddress("fake").setCity("fake").setState("fake").setZipCode(0).setType("fake").setPhoneNumber("fake").setWebsite("fake").setDonations(null).createLocation();
         User locationEmployee = new User("username", "password", UserRole.LOCATION_EMPLOYEE, location);
         String expected = "Username: username" +
                             "\nLocation Employee" +

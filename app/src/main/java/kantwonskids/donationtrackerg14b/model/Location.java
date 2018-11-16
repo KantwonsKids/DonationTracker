@@ -22,11 +22,95 @@ public class Location implements Searchable, Serializable, Parcelable {
     private String address;
     private final String city;
     private final String state; // could be a (really big) enum with the 2 letter abbreviations
-    private int zipcode;
+    private int zipCode;
     private String type;  // could be an enum
     private String phoneNumber; // String because it has the () and -
     private String website;
     private List<Donation> donations;
+
+    /**
+     * Builder for locations.
+     */
+    public static class LocationBuilder {
+
+        private int key;
+        private String name;
+        private double latitude;
+        private double longitude;
+        private String address;
+        private String city;
+        private String state; // could be a (really big) enum with the 2 letter abbreviations
+        private int zipCode;
+        private String type;  // could be an enum
+        private String phoneNumber; // String because it has the () and -
+        private String website;
+        private List<Donation> donations = new ArrayList<>();
+
+
+        public LocationBuilder setKey(int key) {
+            this.key = key;
+            return this;
+        }
+
+        public LocationBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public LocationBuilder setLatitude(double latitude) {
+            this.latitude = latitude;
+            return this;
+        }
+
+        public LocationBuilder setLongitude(double longitude) {
+            this.longitude = longitude;
+            return this;
+        }
+
+        public LocationBuilder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public LocationBuilder setCity(String city) {
+            this.city = city;
+            return this;
+        }
+
+        public LocationBuilder setState(String state) {
+            this.state = state;
+            return this;
+        }
+
+        public LocationBuilder setZipCode(int zipCode) {
+            this.zipCode = zipCode;
+            return this;
+        }
+
+        public LocationBuilder setType(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public LocationBuilder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public LocationBuilder setWebsite(String website) {
+            this.website = website;
+            return this;
+        }
+
+        public LocationBuilder setDonations(List<Donation> donations) {
+            this.donations = donations;
+            return this;
+        }
+
+        public Location createLocation() {
+            return new Location(key, name, latitude, longitude, address, city, state, zipCode, type, phoneNumber, website, donations);
+        }
+    }
 
     /**
      * A constructor for a location that takes in a variant of data types to give the
@@ -39,14 +123,14 @@ public class Location implements Searchable, Serializable, Parcelable {
      * @param address       street address of location
      * @param city          city that location is located in
      * @param state         state that location is located in
-     * @param zipcode       zipcode of location
+     * @param zipCode       zipCode of location
      * @param type          type of location
      * @param phoneNumber   phone number of location
      * @param website       website of location
      * @param donations     list of donations donated to the location
      */
-    public Location(int key, String name, double latitude, double longitude, String address,
-                    String city, String state, int zipcode, String type, String phoneNumber,
+    private Location(int key, String name, double latitude, double longitude, String address,
+                    String city, String state, int zipCode, String type, String phoneNumber,
                     String website, List<Donation> donations) {
         this.key = key;
         this.name = name;
@@ -55,7 +139,7 @@ public class Location implements Searchable, Serializable, Parcelable {
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zipcode = zipcode;
+        this.zipCode = zipCode;
         this.type = type;
         this.phoneNumber = phoneNumber;
         this.website = website;
@@ -72,13 +156,13 @@ public class Location implements Searchable, Serializable, Parcelable {
      * @param address       street address of location
      * @param city          city that location is in
      * @param state         state that location is in
-     * @param zipcode       zipcode of location
+     * @param zipCode       zipCode of location
      * @param type          type of the location
      * @param phoneNumber   phone number of location
      * @param website       website of location
      */
     public Location(String key, String name, String latitude, String longitude, String address,
-                    String city, String state, String zipcode, String type, String phoneNumber,
+                    String city, String state, String zipCode, String type, String phoneNumber,
                     String website) {
         this.key = Integer.parseInt(key);
         this.name = name;
@@ -87,7 +171,7 @@ public class Location implements Searchable, Serializable, Parcelable {
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zipcode = Integer.parseInt(zipcode);
+        this.zipCode = Integer.parseInt(zipCode);
         this.type = type;
         this.phoneNumber = phoneNumber;
         this.website = website;
@@ -107,15 +191,15 @@ public class Location implements Searchable, Serializable, Parcelable {
      * @param address       street address of location
      * @param city          city that location is in
      * @param state         state that location is in
-     * @param zipcode       zipcode of location
+     * @param zipCode       zip code of location
      * @param type          type of the location
      * @param phoneNumber   phone number of location
      * @param website       website of location
      */
     public Location(int key, String name, double latitude, double longitude, String address,
-                    String city, String state, int zipcode, String type, String phoneNumber,
+                    String city, String state, int zipCode, String type, String phoneNumber,
                     String website) {
-        this(key, name, latitude, longitude, address, city, state, zipcode,
+        this(key, name, latitude, longitude, address, city, state, zipCode,
                 type, phoneNumber, website, new ArrayList<>());
     }
 
@@ -138,7 +222,7 @@ public class Location implements Searchable, Serializable, Parcelable {
                         address + "\n" +
                         city + ", " +
                         state + " " +
-                        zipcode + "\n\n" + "Contact: " + "\n" +
+                zipCode + "\n\n" + "Contact: " + "\n" +
                         phoneNumber + "\n" +
                         website;
     }
@@ -270,20 +354,20 @@ public class Location implements Searchable, Serializable, Parcelable {
 // --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
-     * Gets the zipcode that a location is in
-     * @return an int representing the zipcode
+     * Gets the zipCode that a location is in
+     * @return an int representing the zipCode
      */
-    public int getZipcode() {
-        return zipcode;
+    public int getZipCode() {
+        return zipCode;
     }
 
 // --Commented out by Inspection START (11/15/18, 12:38 PM):
 //    /**
-//     * Sets a location's zipcode
-//     * @param x an int representing the zipcode
+//     * Sets a location's zipCode
+//     * @param x an int representing the zipCode
 //     */
 //    public void setZipcode(int x) {
-//        zipcode = x;
+//        zipCode = x;
 //    }
 // --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 

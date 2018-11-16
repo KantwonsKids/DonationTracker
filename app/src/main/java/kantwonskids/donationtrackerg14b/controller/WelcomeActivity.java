@@ -95,19 +95,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 String website = tokens[10];
 
                 // create a donationData from these parameters and add it to model
-                Location d = new Location(
-                        key,
-                        name,
-                        latitude,
-                        longitude,
-                        address,
-                        city,
-                        state,
-                        zipcode,
-                        type,
-                        phoneNumber,
-                        website
-                );
+                Location d = new Location.LocationBuilder().setKey(key).setName(name)
+                        .setLatitude(latitude).setLongitude(longitude).setAddress(address)
+                        .setCity(city).setState(state).setZipCode(zipcode).setType(type)
+                        .setPhoneNumber(phoneNumber).setWebsite(website).createLocation();
                 Model.getInstance().getLocationList().add(d);
             }
             // print the success
