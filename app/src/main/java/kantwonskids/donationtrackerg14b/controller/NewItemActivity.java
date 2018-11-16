@@ -95,7 +95,6 @@ public class NewItemActivity extends AppCompatActivity{
 
     private void createDonation() {
         final Model model = Model.getInstance();
-        Location loc = model.getCurrentLocation();
 
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu");

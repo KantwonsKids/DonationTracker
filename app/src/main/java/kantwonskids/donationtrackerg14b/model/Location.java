@@ -217,7 +217,7 @@ public class Location implements Searchable, Serializable, Parcelable {
      * Constructs a Location object using a parcel.
      * @param in a parcel
      */
-    public Location(Parcel in) {
+    private Location(Parcel in) {
         this.name = in.readString();
         this.city = in.readString();
         this.state = in.readString();
@@ -234,7 +234,7 @@ public class Location implements Searchable, Serializable, Parcelable {
                         state + " " +
                 zipCode + "\n\n" + "Contact: " + "\n" +
                         phoneNumber + "\n" +
-                        website;
+                        website + "\n" + type;
     }
 
     /**

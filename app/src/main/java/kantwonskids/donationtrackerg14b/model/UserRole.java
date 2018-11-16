@@ -7,11 +7,11 @@ package kantwonskids.donationtrackerg14b.model;
  */
 
 public enum UserRole {
-    GUEST("Guest", false, false, false, false, false, false),
-    USER("User", true, false, false, false, false, false),
-    LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false, false),
-    MANAGER("Manager", true, false, true, false, false, false),
-    ADMINISTRATOR("Administrator", true, false, true, true, true, true);
+    GUEST("Guest", false, false),
+    USER("User", false, false),
+    LOCATION_EMPLOYEE("Location Employee", true, false),
+    MANAGER("Manager", false, true),
+    ADMINISTRATOR("Administrator", false, true);
 
 // --Commented out by Inspection START (11/15/2018 8:46 PM):
 //    /*
@@ -34,35 +34,22 @@ public enum UserRole {
 //     *     - Add/remove users and locations
 //     *     - Lock/unlock accounts
 //     */
-    private final boolean canLogIn;
     private final boolean canUpdateInfo;
     private final boolean canUpdateInfoAtAllLocations;
-    private final boolean canAddOrRemoveUsers;
-    private final boolean canLockOrUnlockUsers;
-    private final boolean canAddOrRemoveLocations;
 
     // String representation for nice displaying
     private final String name;
 
     /**
      * Constructor. Initializes all the permissions for a user type.
-     * @param canLogIn Whether the user type can log in
      * @param canUpdateInfo Whether the user type can update info at a single location
      * @param canUpdateInfoAtAllLocations whether the user type can update info at ALL locations
-     * @param canAddOrRemoveUsers Whether the user type can add or remove users
-     * @param canLockOrUnlockUsers Whether the user type can lock or unlock users
-     * @param canAddOrRemoveLocations Whether the user type can add or remove locations
      */
-    UserRole(String name, boolean canLogIn, boolean canUpdateInfo,
-             boolean canUpdateInfoAtAllLocations, boolean canAddOrRemoveUsers,
-             boolean canLockOrUnlockUsers, boolean canAddOrRemoveLocations) {
+    UserRole(String name, boolean canUpdateInfo,
+             boolean canUpdateInfoAtAllLocations) {
         this.name = name;
-        this.canLogIn = canLogIn;
         this.canUpdateInfo = canUpdateInfo;
         this.canUpdateInfoAtAllLocations = canUpdateInfoAtAllLocations;
-        this.canAddOrRemoveUsers = canAddOrRemoveUsers;
-        this.canLockOrUnlockUsers = canLockOrUnlockUsers;
-        this.canAddOrRemoveLocations = canAddOrRemoveLocations;
     }
 
    /**
