@@ -1,7 +1,6 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 
-import android.graphics.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,10 +23,17 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
+/**
+ * Fragment for a map view of all locations.
+ * @author Amanda
+ * @version 1.0
+ */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the root view into the fragment.
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
@@ -60,7 +66,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Put a marker at every location in the location list.
         for (Location loc : locs) {
             LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName()).snippet(loc.getPhoneNumber());
+            MarkerOptions marker = new MarkerOptions().position(ltlng)
+                    .title(loc.getName()).snippet(loc.getPhoneNumber());
             map.addMarker(marker);
         }
     }

@@ -57,7 +57,8 @@ public class LocationDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.location_detail, container, false);
 
         if (mLocation != null) {
-            ((TextView) rootView.findViewById(R.id.location_detail_container)).setText(mLocation.detailString());
+            TextView locationTextView = rootView.findViewById(R.id.location_detail_container);
+            locationTextView.setText(mLocation.detailString());
 
             // store each donation's info
 //            Collection<Donation> donations = mLocation.getDonations();

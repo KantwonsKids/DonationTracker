@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,7 +25,9 @@ import java.util.List;
 import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.*;
+import kantwonskids.donationtrackerg14b.model.Donation;
+import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.User;
 
 /**
  * an Activity to represent the inventory (list of donation items)

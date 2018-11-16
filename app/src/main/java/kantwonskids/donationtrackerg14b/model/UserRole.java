@@ -1,7 +1,5 @@
 package kantwonskids.donationtrackerg14b.model;
 
-import java.io.Serializable;
-
 /**
  * @author Daniel Profili
  * @version 1.0
@@ -54,8 +52,9 @@ public enum UserRole {
      * @param canLockOrUnlockUsers Whether the user type can lock or unlock users
      * @param canAddOrRemoveLocations Whether the user type can add or remove locations
      */
-    UserRole(String name, boolean canLogIn, boolean canUpdateInfo, boolean canUpdateInfoAtAllLocations,
-             boolean canAddOrRemoveUsers, boolean canLockOrUnlockUsers, boolean canAddOrRemoveLocations) {
+    UserRole(String name, boolean canLogIn, boolean canUpdateInfo,
+             boolean canUpdateInfoAtAllLocations, boolean canAddOrRemoveUsers,
+             boolean canLockOrUnlockUsers, boolean canAddOrRemoveLocations) {
         this.name = name;
         this.canLogIn = canLogIn;
         this.canUpdateInfo = canUpdateInfo;
