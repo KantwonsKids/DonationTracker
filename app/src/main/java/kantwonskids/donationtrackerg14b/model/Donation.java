@@ -20,29 +20,27 @@ public class Donation implements Searchable, Serializable, Parcelable {
     private final float value;
     private final DonationCategory category;
     private final String comments;
-    private final Location owner;
+    private final String ownerString;
 
 
     /**
      * Constructor for a new Donation
-     *
-     * @param time          time of donation
+     *  @param time          time of donation
      * @param item          item donated
      * @param description   description of donation
      * @param value         price of donation
      * @param category      category that donation is in
      * @param comments      additional comments about donation
-     * @param owner         previous owner of item
      */
     public Donation(String time, String item, String description, float value,
-                    DonationCategory category, String comments, Location owner) {
+                    DonationCategory category, String comments, String ownerString) {
         this.time = time;
         this.name = item;
         this.description = description;
         this.value = value;
         this.category = category;
         this.comments = comments;
-        this.owner = owner;
+        this.ownerString = ownerString;
     }
 
     private Donation(Parcel in) {
@@ -51,7 +49,7 @@ public class Donation implements Searchable, Serializable, Parcelable {
         this.comments = in.readString();
         this.value = in.readFloat();
         this.category = (DonationCategory)in.readSerializable();
-        this.owner = in.readParcelable(Location.class.getClassLoader());
+        this.ownerString = in.readString();
     }
 
     /**
@@ -158,7 +156,7 @@ public class Donation implements Searchable, Serializable, Parcelable {
      * @return the string representation of this donation's owner location
      */
     public CharSequence getLocationString() {
-        return this.owner.toString();
+        return this.ownerString;
     }
     /**
      * Parcelable creator.
@@ -187,6 +185,6 @@ public class Donation implements Searchable, Serializable, Parcelable {
         dest.writeString(this.comments);
         dest.writeFloat(this.value);
         dest.writeSerializable(this.category);
-        dest.writeParcelable(this.owner, flags);
+        dest.writeString(this.ownerString);
     }
 }

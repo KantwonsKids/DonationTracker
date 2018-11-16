@@ -89,7 +89,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 String address = tokens[4];
                 String city = tokens[5];
                 String state = tokens[6];
-                int zipcode = Integer.parseInt(tokens[7]);
+                int zipCode = Integer.parseInt(tokens[7]);
                 String type = tokens[8];
                 String phoneNumber = tokens[9];
                 String website = tokens[10];
@@ -97,7 +97,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 // create a donationData from these parameters and add it to model
                 Location d = new Location.LocationBuilder().setKey(key).setName(name)
                         .setLatitude(latitude).setLongitude(longitude).setAddress(address)
-                        .setCity(city).setState(state).setZipCode(zipcode).setType(type)
+                        .setCity(city).setState(state).setZipCode(zipCode).setType(type)
                         .setPhoneNumber(phoneNumber).setWebsite(website).createLocation();
                 Model.getInstance().getLocationList().add(d);
             }

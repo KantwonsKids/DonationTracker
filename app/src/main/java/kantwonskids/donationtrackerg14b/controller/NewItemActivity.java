@@ -118,9 +118,10 @@ public class NewItemActivity extends AppCompatActivity{
         Editable commentsText = itemComments.getText();
         String comments = commentsText.toString();
 
-        model.getCurrentLocation().addDonation(new Donation(formattedTime, item,
+        Location current = model.getCurrentLocation();
+        current.addDonation(new Donation(formattedTime, item,
                 descriptionText.toString(), price, category,
-                comments, loc));
+                comments, current.getName()));
 //        Model.setCurrentLocation(loc);
 
         // save model
