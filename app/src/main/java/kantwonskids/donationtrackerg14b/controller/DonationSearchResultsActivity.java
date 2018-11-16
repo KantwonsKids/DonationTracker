@@ -48,8 +48,7 @@ public class DonationSearchResultsActivity extends AppCompatActivity {
         Collection<Donation> toRemove = new ArrayList<>();
         if (selectedCategories != null) {
             for (Donation d : searchResults) {
-                DonationCategory.setCurrentDonationCategory(d.getCategory());
-                if (!selectedCategories.contains(DonationCategory._currentDonation.toString())) {
+                if (!selectedCategories.contains(d.getCategory())) {
 //                    searchResults.remove(d);
                     toRemove.add(d);
                 }

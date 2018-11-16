@@ -12,16 +12,16 @@ public enum DonationCategory {
 
     final String categoryName;
 
-    public static transient DonationCategory _currentDonation;
+//    private static transient DonationCategory currentDonation;
 
-    /**
-     * Sets the current donation category
-     *
-     * @param category current donation category
-     */
-    public static void setCurrentDonationCategory(DonationCategory category) {
-        _currentDonation = category;
-    }
+//    /**
+//     * Sets the current donation category
+//     *
+//     * @param category current donation category
+//     */
+//    public static void setCurrentDonationCategory(DonationCategory category) {
+//        currentDonation = category;
+//    }
 
     /**
      * Creates a new donation category

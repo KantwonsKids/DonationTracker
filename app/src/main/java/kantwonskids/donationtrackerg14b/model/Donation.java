@@ -31,6 +31,7 @@ public class Donation implements Searchable, Serializable, Parcelable {
      * @param value         price of donation
      * @param category      category that donation is in
      * @param comments      additional comments about donation
+     * @param ownerString   name of the owner location
      */
     public Donation(String time, String item, String description, float value,
                     DonationCategory category, String comments, String ownerString) {
