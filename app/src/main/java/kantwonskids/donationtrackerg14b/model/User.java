@@ -107,39 +107,6 @@ public class User implements Parcelable, Searchable, Serializable {
     }
 
     /**
-     * Gets the role of the current user.
-     *
-     * @return the type of account that the current user has
-     */
-    public UserRole getUserRole() {
-        return this.role;
-    }
-
-//    /**
-//     * Sets the location where this user works (Location employees only).
-//     *
-//     * @param location where this user works
-//     * @throws IllegalArgumentException if the user is not a location employee
-//     */
-//    public void setLocation(Location location) {
-//        if (this.role != UserRole.LOCATION_EMPLOYEE) {
-//            throw new IllegalArgumentException("User type "
-//                    + this.role.toString()
-//                    + " cannot be assigned to a location.");
-//        }
-//        this.location = location;
-//    }
-
-    /**
-     * Gets the location where this user works (Location employees only).
-     *
-     * @return the location described above.
-     */
-    public Location getLocation() {
-        return this.location;
-    }
-
-    /**
      * Parcelable creator.
      */
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator<User>() {
@@ -166,32 +133,6 @@ public class User implements Parcelable, Searchable, Serializable {
         // dest.writeString(this.location);
         dest.writeSerializable(this.role);
     }
-
-//    @Override
-//    public String toString() {
-//        if (this.role == UserRole.GUEST) {
-//            return "Guest";
-//        }
-//
-//        String str = "Username: " + this.username;
-//        switch (this.role) {
-//            case LOCATION_EMPLOYEE:
-//                str += "\nLocation Employee\nAssigned Location: " + location;
-//                break;
-//            case MANAGER:
-//                str += "\nManager";
-//                break;
-//            case ADMINISTRATOR:
-//                str += "\nAdministrator";
-//                break;
-//            default:
-//                str += "\nUser";
-//                break;
-//        }
-//
-//        return str;
-//    }
-
 
     @Override
     public boolean equals(Object other) {

@@ -3,6 +3,8 @@ package kantwonskids.donationtrackerg14b.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,66 +49,130 @@ public class Location implements Searchable, Serializable, Parcelable {
         private List<Donation> donations = new ArrayList<>();
 
 
+        /**
+         * Sets the key
+         * @param key the key
+         * @return this
+         */
         public LocationBuilder setKey(int key) {
             this.key = key;
             return this;
         }
 
+        /**
+         * Sets the name
+         * @param name the name
+         * @return this
+         */
         public LocationBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * Sets the latitude
+         * @param latitude the latitude
+         * @return this
+         */
         public LocationBuilder setLatitude(double latitude) {
             this.latitude = latitude;
             return this;
         }
 
+        /**
+         * Sets the longitude
+         * @param longitude the longitude
+         * @return this
+         */
         public LocationBuilder setLongitude(double longitude) {
             this.longitude = longitude;
             return this;
         }
 
+        /**
+         * Sets the address
+         * @param address the address
+         * @return this
+         */
         public LocationBuilder setAddress(String address) {
             this.address = address;
             return this;
         }
 
+        /**
+         * Sets the city
+         * @param city the city
+         * @return this
+         */
         public LocationBuilder setCity(String city) {
             this.city = city;
             return this;
         }
 
+        /**
+         * Sets the state
+         * @param state the state
+         * @return this
+         */
         public LocationBuilder setState(String state) {
             this.state = state;
             return this;
         }
 
+        /**
+         * Sets the zip code
+         * @param zipCode the zip code
+         * @return this
+         */
         public LocationBuilder setZipCode(int zipCode) {
             this.zipCode = zipCode;
             return this;
         }
 
+        /**
+         * Sets the type
+         * @param type the type
+         * @return this
+         */
         public LocationBuilder setType(String type) {
             this.type = type;
             return this;
         }
 
+        /**
+         * Sets the phone number
+         * @param phoneNumber the phoneNumber
+         * @return this
+         */
         public LocationBuilder setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
+        /**
+         * Sets the website
+         * @param website the website
+         * @return this
+         */
         public LocationBuilder setWebsite(String website) {
             this.website = website;
             return this;
         }
 
+        /**
+         * Sets the list of donations
+         * @param donations the list of donations
+         * @return this
+         */
         public LocationBuilder setDonations(List<Donation> donations) {
             this.donations = donations;
             return this;
         }
 
+        /**
+         * Creates the location object from the options.
+         * @return new location object
+         */
         public Location createLocation() {
             return new Location(key, name, latitude, longitude, address, city, state, zipCode,
                     type, phoneNumber, website, donations);
@@ -236,16 +302,6 @@ public class Location implements Searchable, Serializable, Parcelable {
         return key;
     }
 
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the key for a current location
-//     * @param x a unique int for a certain location
-//     */
-//    public void setKey(int x) {
-//        key = x;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
     /**
      * Gets the name of the location
      * @return the name
@@ -254,143 +310,13 @@ public class Location implements Searchable, Serializable, Parcelable {
         return name;
     }
 
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the name of a location.
-//     * @param s a string representing the name
-//     */
-//    public void setName(String s) {
-//        name = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
     /**
-     * Gets the latitude of a location.
-     * @return the latitude
+     * Gets a LatLng object representing this location's position.
+     * @return LatLng object of the latitude and longitude
      */
-    public double getLatitude() {
-        return latitude;
+    public LatLng getLatLng() {
+        return new LatLng(latitude, longitude);
     }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the latitude of a location.
-//     * @param d the double representing the latitude
-//     */
-//    public void setLatitude(double d) {
-//        latitude = d;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the longitude of a location
-     * @return the longitude
-     */
-    public double getLongitude() {
-        return longitude;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the longitude of a location.
-//     * @param d a double representing the longitude
-//     */
-//    public void setLongitude(double d) {
-//        longitude = d;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the address of a location.
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the address of a location
-//     * @param s a string representing the address
-//     */
-//    public void setAddress(String s) {
-//        address = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the city in which the location is
-     * @return the name of the city
-     */
-    public String getCity() {
-        return city;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the city in which a location is
-//     * @param s a string representing the city
-//     */
-//    public void setCity(String s) {
-//        city = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the state that a location is in
-     * @return the state
-     */
-    public String getState() {
-        return state;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the state that the location is in
-//     * @param s a string representing the state
-//     */
-//    public void setState(String s) {
-//        state = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the zipCode that a location is in
-     * @return an int representing the zipCode
-     */
-    public int getZipCode() {
-        return zipCode;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets a location's zipCode
-//     * @param x an int representing the zipCode
-//     */
-//    public void setZipcode(int x) {
-//        zipCode = x;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Gets the type of location
-//     * @return the type
-//     */
-//    public String getType() {
-//        return type;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the type of the location
-//     * @param s a String representing the type of location
-//     */
-//    public void setType(String s) {
-//        type = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Gets the phone number of a location, formatted (XXX) XXX-XXXX
@@ -399,34 +325,6 @@ public class Location implements Searchable, Serializable, Parcelable {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the phone number of a location
-//     * @param s a phone number formatted (XXX) XXX-XXXX
-//     */
-//    public void setPhoneNumber(String s) {
-//        phoneNumber = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
-    /**
-     * Gets the website for a location
-     * @return the website
-     */
-    public String getWebsite() {
-        return website;
-    }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the website for a location
-//     * @param s a string representing the website
-//     */
-//    public void setWebsite(String s) {
-//        website = s;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     /**
      * Returns a string representation of the location Name (City, State)
@@ -446,16 +344,6 @@ public class Location implements Searchable, Serializable, Parcelable {
         return donations;
     }
 
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Sets the collection of all donations made at this location
-//     * @param donations a list of Donations
-//     */
-//    public void setDonations(List<Donation> donations) {
-//        this.donations = donations;
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
-
     /**
      * Adds a Donation to the collection for this location
      * @param donation a Donation
@@ -463,16 +351,6 @@ public class Location implements Searchable, Serializable, Parcelable {
     public void addDonation(Donation donation) {
         donations.add(donation);
     }
-
-// --Commented out by Inspection START (11/15/18, 12:38 PM):
-//    /**
-//     * Adds multiple donations at once
-//     * @param donations a collection of Donations
-//     */
-//    public void addDonation(List<Donation> donations) {
-//        this.donations.addAll(donations);
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:38 PM)
 
     @Override
     public String getLabel() {

@@ -55,7 +55,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         List<Location> locs = model.getLocationList();
 
         // Zoom camera.
-        LatLng cameraPos = new LatLng(locs.get(0).getLatitude(), locs.get(0).getLongitude());
+        Location first = locs.get(0);
+        LatLng cameraPos = first.getLatLng();
         map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
         // 15 is "street view" zoom level.
         // 10 is "city view" zoom level.
@@ -65,7 +66,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         // Put a marker at every location in the location list.
         for (Location loc : locs) {
-            LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
+            LatLng ltlng = loc.getLatLng();
             MarkerOptions marker = new MarkerOptions().position(ltlng)
                     .title(loc.getName()).snippet(loc.getPhoneNumber());
             map.addMarker(marker);

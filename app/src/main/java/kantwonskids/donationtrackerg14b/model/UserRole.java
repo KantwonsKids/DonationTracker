@@ -13,32 +13,34 @@ public enum UserRole {
     MANAGER("Manager", true, false, true, false, false, false),
     ADMINISTRATOR("Administrator", true, false, true, true, true, true);
 
-    /*
-     * Enumerates the permissions for each user type.
-     *
-     * Users can:
-     *     - Log in
-     *     - View inventory and locations
-     *
-     * Location employees can:
-     *     - Do everything a user can
-     *     - Update inventories at one location
-     *
-     * Managers can:
-     *     - Do everything a user can
-     *     - Update information at all locations
-     *
-     * Administrators can:
-     *     - Do everything a manager can
-     *     - Add/remove users and locations
-     *     - Lock/unlock accounts
-     */
-    private final boolean canLogIn;
+// --Commented out by Inspection START (11/15/2018 8:46 PM):
+//    /*
+//     * Enumerates the permissions for each user type.
+//     *
+//     * Users can:
+//     *     - Log in
+//     *     - View inventory and locations
+//     *
+//     * Location employees can:
+//     *     - Do everything a user can
+//     *     - Update inventories at one location
+//     *
+//     * Managers can:
+//     *     - Do everything a user can
+//     *     - Update information at all locations
+//     *
+//     * Administrators can:
+//     *     - Do everything a manager can
+//     *     - Add/remove users and locations
+//     *     - Lock/unlock accounts
+//     */
+//    private final boolean canLogIn;
+// --Commented out by Inspection STOP (11/15/2018 8:46 PM)
     private final boolean canUpdateInfo;
     private final boolean canUpdateInfoAtAllLocations;
-    private final boolean canAddOrRemoveUsers;
-    private final boolean canLockOrUnlockUsers;
-    private final boolean canAddOrRemoveLocations;
+    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canAddOrRemoveUsers;
+    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canLockOrUnlockUsers;
+    // --Commented out by Inspection (11/15/2018 8:46 PM):private final boolean canAddOrRemoveLocations;
 
     // String representation for nice displaying
     private final String name;
