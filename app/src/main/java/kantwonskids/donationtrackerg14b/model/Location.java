@@ -108,7 +108,8 @@ public class Location implements Searchable, Serializable, Parcelable {
         }
 
         public Location createLocation() {
-            return new Location(key, name, latitude, longitude, address, city, state, zipCode, type, phoneNumber, website, donations);
+            return new Location(key, name, latitude, longitude, address, city, state, zipCode,
+                    type, phoneNumber, website, donations);
         }
     }
 
