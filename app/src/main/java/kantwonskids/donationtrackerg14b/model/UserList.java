@@ -15,7 +15,7 @@ public class UserList implements Serializable {
     /**
      * Creates an empty user list.
      */
-    UserList() {
+    public UserList() {
         usernameObjectMap = new HashMap<>();
     }
 
@@ -27,15 +27,13 @@ public class UserList implements Serializable {
         usernameObjectMap.put(user.getUsername(), user);
     }
 
-// --Commented out by Inspection START (11/15/18, 12:37 PM):
-//    /**
-//     * Method to remove a user from the list
-//     * @param user the user to be removed
-//     */
-//    public void removeUser(User user) {
-//        usernameObjectMap.remove(user);
-//    }
-// --Commented out by Inspection STOP (11/15/18, 12:37 PM)
+    /**
+     * Method to remove a user from the list
+     * @param username the user to be removed
+     */
+    public void removeUser(String username) {
+        usernameObjectMap.remove(username);
+    }
 
     /**
      * Method to check if the user is a valid user
