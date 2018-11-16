@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Donation;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -26,8 +25,9 @@ public class ItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
+        final Model model = Model.getInstance();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -35,19 +35,12 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Item details");
         }
-        Model model = Model.getInstance();
-        Donation mDonation = model.getCurrentDonation();
+        //Model model = Model.getInstance();
+        //Donation mDonation = Model.getCurrentDonation();
         TextView donationTitle = findViewById(R.id.item_title);
-        donationTitle.setText(mDonation.getName());
+        donationTitle.setText(model.getCurrentDonation().getName());
         TextView donationDetail = findViewById(R.id.item_detail_text);
-        donationDetail.setText(
-                String.format("Details: " + "\n" +
-                        mDonation.getCategory() + "\n" +
-                        mDonation.getValue() + ", " +
-                        mDonation.getTime() + " " +
-                        mDonation.getDescription() + "\n" +
-                        mDonation.getComments()
-                ));
+        donationDetail.setText(model.getCurrentDonation().detailString());
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

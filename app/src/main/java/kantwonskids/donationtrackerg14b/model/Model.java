@@ -10,9 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
@@ -26,37 +25,37 @@ import me.xdrop.fuzzywuzzy.model.ExtractedResult;
  * A singleton instance of the model that controllers
  * can access
  */
-public class Model implements Serializable {
+public final class Model implements Serializable {
     // instance of the class
     private static Model _instance = new Model();
 
     /**
      * The list of registered users.
      */
-    public UserList _userList;
+    private final UserList _userList = new UserList();
 
     /**
      * A list of donationData objects
      */
-    public List<Location> locationList;
-
-    /**
-     * The user that is currently logged in.
-     * Transient so that it does not persist when saving
-     */
-    private transient User loggedInUser;
+    private final List<Location> locationList = new ArrayList<>();
 
     /**
      * The currently selected location
      * Transient so that it does not persist when saving
      */
-    private transient Location _currentLocation;
+    private transient Location currentLocation;
 
     /**
      * The currently selected donation
      * Transient so that it does not persist when saving
      */
-    private transient Donation _currentDonation;
+    private transient Donation currentDonation;
+
+    /**
+     * Current logged-in user.
+     */
+    private transient User currentUser;
+
     /**
      * Gets the instance of the model class.
      * @return the instance of the Model, which stores all relevant application data
@@ -65,19 +64,21 @@ public class Model implements Serializable {
         return _instance;
     }
 
-    /**
-     * Creates a new Model. Only used inside this class, since it's a singleton.
-     */
-    private Model() {
-        _userList = new UserList();
-    }
 
     /**
      * Sets the currently logged in user.
      * @param u the user currently logged in.
      */
     public void setCurrentUser(User u) {
-        this.loggedInUser = u;
+        currentUser = u;
+    }
+
+    /**
+     * Gets the list of all users.
+     * @return the user list
+     */
+    public UserList getUserList() {
+        return _userList;
     }
 
     /**
@@ -85,40 +86,46 @@ public class Model implements Serializable {
      * @return The user currently logged in.
      */
     public User getCurrentUser() {
-        return loggedInUser;
+        return currentUser;
     }
 
     /**
      * @return the currently selected location.
      */
     public Location getCurrentLocation() {
-        return _currentLocation;
+        return currentLocation;
     }
 
-//    /**
-//     * @return the list of locations
-//     */
-//    public SearchableList<Location> getLocationList() { return locationList; }
+    /**
+     * @return the list of locations
+     */
+    public List<Location> getLocationList() {
+        return locationList;
+    }
 
     /**
      * Sets the currently selected location.
      * @param location the currently selected location.
      */
     public void setCurrentLocation(Location location) {
-        _currentLocation = location;
+        currentLocation = location;
     }
 
     /**
-     *
+     * Gets the current donation item.
      * @return currently selected donation item
      */
-    public Donation getCurrentDonation() {return _currentDonation;}
+    public Donation getCurrentDonation() {
+        return currentDonation;
+    }
 
     /**
      *
      * @param donation sets currently selected donation item
      */
-    public void setCurrentDonation(Donation donation) {_currentDonation = donation;}
+    public void setCurrentDonation(Donation donation) {
+        currentDonation = donation;
+    }
 
     /**
      * Return the location with a given key.
@@ -141,7 +148,8 @@ public class Model implements Serializable {
      */
     public Location getLocationByName(String name) {
         for (Location d : locationList) {
-            if (d.getName().equals(name)) {
+            String locationName = d.getName();
+            if (locationName.equals(name)) {
                 return d;
             }
         }
@@ -149,17 +157,10 @@ public class Model implements Serializable {
     }
 
     /**
-     * Gets a mapping of the location list's name to the object itself.
-     * Used when searching.
-     * @return a map of each location's name to its object reference
+     * Deletes all the locations from the model.
      */
-    public Map<String, Location> getLabelLocationMap() {
-        Map<String, Location> map = new HashMap<>();
-        for (Location l : locationList) {
-            map.put(l.getLabel(), l);
-        }
-
-        return map;
+    public void clearLocations() {
+        locationList.clear();
     }
 
     /**
@@ -173,14 +174,18 @@ public class Model implements Serializable {
         ObjectOutputStream out;
 
         try {
-            path.mkdirs();
-            filename.createNewFile();
+            boolean success = path.mkdirs();
+            success = success && filename.createNewFile();
             fOS = new FileOutputStream(filename);
             out = new ObjectOutputStream(fOS);
             out.writeObject(_instance);
             out.close();
             fOS.close();
-            Log.v("Serializing", "Wrote model to file successfully");
+            if (success) {
+                Log.v("Serializing", "Wrote model to file successfully");
+            } else {
+                Log.v("Serializing", "Failed to write model to file, aborting");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -236,9 +241,9 @@ public class Model implements Serializable {
      * @return list of objects sorted by search similarity
      * @throws IllegalArgumentException if query or list is null
      */
-    public static <T extends LabeledObject> List<T> search(List<T> list, String query) {
+    public static <T extends Searchable> List<T> search(List<T> list, String query) {
         final int CUTOFF = 10;
-        if (query == null || list == null) {
+        if ((query == null) || (list == null)) {
             throw new IllegalArgumentException("The query and the list must be non-null.");
         }
 

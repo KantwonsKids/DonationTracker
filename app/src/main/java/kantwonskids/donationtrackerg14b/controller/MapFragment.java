@@ -1,7 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
 
-import android.graphics.Camera;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,21 +24,28 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
+/**
+ * Fragment for a map view of all locations.
+ * @author Amanda
+ * @version 1.0
+ */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    private MapView mMapView;
-    private GoogleMap map;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) throws NullPointerException {
         // Inflate the root view into the fragment.
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
         // Set up maps.
-        mMapView = rootView.findViewById(R.id.map);
+        MapView mMapView = rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
-        MapsInitializer.initialize(getActivity().getApplicationContext());
+        Activity activity = getActivity();
+
+        MapsInitializer.initialize(activity.getApplicationContext());
         mMapView.getMapAsync(this);
 
         return rootView;
@@ -46,14 +53,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-
+    public void onMapReady(GoogleMap map) {
         Model model = Model.getInstance();
-        List<Location> locs = model.locationList;
+        List<Location> locs = model.getLocationList();
 
         // Zoom camera.
-        LatLng cameraPos = new LatLng(locs.get(0).getLatitude(), locs.get(0).getLongitude());
+        Location first = locs.get(0);
+        LatLng cameraPos = first.getLatLng();
         map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
         // 15 is "street view" zoom level.
         // 10 is "city view" zoom level.
@@ -63,11 +69,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         // Put a marker at every location in the location list.
         for (Location loc : locs) {
-            LatLng ltlng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            MarkerOptions marker = new MarkerOptions().position(ltlng).title(loc.getName()).snippet(loc.getPhoneNumber());
+            LatLng ltlng = loc.getLatLng();
+            MarkerOptions marker = new MarkerOptions().position(ltlng)
+                    .title(loc.getName()).snippet(loc.getPhoneNumber());
             map.addMarker(marker);
         }
     }
-
 
 }

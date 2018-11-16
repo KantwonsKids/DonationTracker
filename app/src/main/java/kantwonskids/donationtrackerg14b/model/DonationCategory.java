@@ -4,23 +4,32 @@ package kantwonskids.donationtrackerg14b.model;
  * Represents a category of donation.
  */
 public enum DonationCategory {
-    CLOTHING ("Clothing", 101),
-    KITCHEN ("Kitchen", 102),
-    ELECTRONICS ("Electronics", 103),
-    HOUSEHOLD ("Household", 104),
-    OTHER ("Other", 105);
+    CLOTHING("Clothing"),
+    KITCHEN("Kitchen"),
+    ELECTRONICS("Electronics"),
+    HOUSEHOLD("Household"),
+    OTHER("Other");
 
-    String categoryName;
-    int menuId;
+    final String categoryName;
+
+//    private static transient DonationCategory currentDonation;
+
+//    /**
+//     * Sets the current donation category
+//     *
+//     * @param category current donation category
+//     */
+//    public static void setCurrentDonationCategory(DonationCategory category) {
+//        currentDonation = category;
+//    }
 
     /**
      * Creates a new donation category
-     * @param name name of the category
-     * @param id unique integer (used to populate the toolbar menu). Arbitrary value as long as it is unique.
+     *  @param name name of the category
+     *
      */
-    DonationCategory(String name, int id) {
+    DonationCategory(String name) {
         this.categoryName = name;
-        this.menuId = id;
     }
 
     @Override
@@ -28,11 +37,4 @@ public enum DonationCategory {
         return this.categoryName;
     }
 
-    /**
-     * Gets the menu ID.
-     * @return the menu ID
-     */
-    public int getMenuId() {
-        return menuId;
-    }
 }
