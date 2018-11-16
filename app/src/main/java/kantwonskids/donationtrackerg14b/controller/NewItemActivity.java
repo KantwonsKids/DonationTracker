@@ -94,8 +94,8 @@ public class NewItemActivity extends AppCompatActivity{
     }
 
     private void createDonation() {
-        //final Model model = Model.getInstance();
-        Location loc = Model.getInstance().getCurrentLocation();
+        final Model model = Model.getInstance();
+        Location loc = model.getCurrentLocation();
 
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu");
@@ -118,7 +118,7 @@ public class NewItemActivity extends AppCompatActivity{
         Editable commentsText = itemComments.getText();
         String comments = commentsText.toString();
 
-        Model.getInstance().getCurrentLocation().addDonation(new Donation(formattedTime, item,
+        model.getCurrentLocation().addDonation(new Donation(formattedTime, item,
                 descriptionText.toString(), price, category,
                 comments, loc));
 //        Model.setCurrentLocation(loc);

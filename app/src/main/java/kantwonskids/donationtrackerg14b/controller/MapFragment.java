@@ -26,15 +26,13 @@ import kantwonskids.donationtrackerg14b.model.Model;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    private MapView mMapView;
-    private GoogleMap map;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the root view into the fragment.
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
 
         // Set up maps.
-        mMapView = rootView.findViewById(R.id.map);
+        MapView mMapView = rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
@@ -46,9 +44,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-
+    public void onMapReady(GoogleMap map) {
         Model model = Model.getInstance();
         List<Location> locs = model.getLocationList();
 

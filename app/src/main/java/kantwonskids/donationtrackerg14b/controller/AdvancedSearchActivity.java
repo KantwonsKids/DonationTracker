@@ -29,6 +29,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_search);
+        final Model model = Model.getInstance();
 
         // Populate the page with checkboxes for each category
         LinearLayout layout = findViewById(R.id.adv_search_linear_layout);
@@ -59,10 +60,10 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             Intent newIntent = getIntent();
             String scope =  newIntent.getStringExtra("SCOPE");
             if ((scope != null) && "ALL".equals(scope)) {
-                toSearch = Model.getInstance().getAllDonations();
+                toSearch = model.getAllDonations();
             } else {
                 //Location location = Model.getCurrentLocation();
-                toSearch = Model.getInstance().getCurrentLocation().getDonations();
+                toSearch = model.getCurrentLocation().getDonations();
             }
 
             List<Donation> searchResults = Model.search(toSearch, query);

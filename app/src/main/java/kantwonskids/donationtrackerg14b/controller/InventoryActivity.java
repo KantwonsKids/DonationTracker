@@ -34,7 +34,7 @@ import kantwonskids.donationtrackerg14b.model.*;
  */
 public class InventoryActivity extends AppCompatActivity {
 
-    private User user = Model.getInstance().getCurrentUser();
+    private final User user = Model.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,8 @@ public class InventoryActivity extends AppCompatActivity {
         nonNull.setDisplayHomeAsUpEnabled(true);
         //Model model = Model.getInstance();
         //Location location = Model.getCurrentLocation();
-        ab.setTitle(Model.getInstance().getCurrentLocation().getName());
+        Model model = Model.getInstance();
+        ab.setTitle(model.getCurrentLocation().getName());
 
         View recyclerView = findViewById(R.id.inventory);
         assert recyclerView != null;
@@ -74,7 +75,7 @@ public class InventoryActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
-            List<Donation> donationList = Model.getInstance().getCurrentLocation().getDonations();
+            List<Donation> donationList = model.getCurrentLocation().getDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
             Intent resultsIntent = new Intent(this,

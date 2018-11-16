@@ -145,14 +145,14 @@ public class RegistrationActivity extends AppCompatActivity {
         String accType = (String) accTypeSpinner.getSelectedItem();
         String locationStr = (String) locationSpinner.getSelectedItem();
         Location loc = null;
-        //Model model = Model.getInstance();
+        Model model = Model.getInstance();
         // find the real location
         if ("Location Employee".equals(accType)) {
-            for (int i = 0; i < Model.getInstance().getLocationList().size(); i++) {
-                Location location = Model.getInstance().getLocationList().get(i);
+            for (int i = 0; i < model.getLocationList().size(); i++) {
+                Location location = model.getLocationList().get(i);
                 String name = location.getName();
                 if (name.equals(locationStr)) {
-                    loc = Model.getInstance().getLocationList().get(i);
+                    loc = model.getLocationList().get(i);
                 }
             }
         }
@@ -192,8 +192,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     newUser = new User(u, p, UserRole.USER);
                     break;
             }
-            Model.getInstance().getUserList().addUser(newUser);
-            Model.getInstance().setCurrentUser(newUser);
+            model.getUserList().addUser(newUser);
+            model.setCurrentUser(newUser);
 
             // save to file
             Model.saveToPhone();

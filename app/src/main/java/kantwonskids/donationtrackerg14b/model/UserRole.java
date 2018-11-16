@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Enum for storing possible roles a user can have and abilities associated with these roles
  */
 
-public enum UserRole implements Serializable {
+public enum UserRole {
     GUEST("Guest", false, false, false, false, false, false),
     USER("User", true, false, false, false, false, false),
     LOCATION_EMPLOYEE("Location Employee", true, true, false, false, false, false),
@@ -35,12 +35,12 @@ public enum UserRole implements Serializable {
      *     - Add/remove users and locations
      *     - Lock/unlock accounts
      */
-    private boolean canLogIn;
-    private boolean canUpdateInfo;
-    private boolean canUpdateInfoAtAllLocations;
-    private boolean canAddOrRemoveUsers;
-    private boolean canLockOrUnlockUsers;
-    private boolean canAddOrRemoveLocations;
+    private final boolean canLogIn;
+    private final boolean canUpdateInfo;
+    private final boolean canUpdateInfoAtAllLocations;
+    private final boolean canAddOrRemoveUsers;
+    private final boolean canLockOrUnlockUsers;
+    private final boolean canAddOrRemoveLocations;
 
     // String representation for nice displaying
     private final String name;

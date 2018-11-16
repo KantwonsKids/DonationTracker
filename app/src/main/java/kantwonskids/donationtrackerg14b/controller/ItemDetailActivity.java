@@ -25,6 +25,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
+        final Model model = Model.getInstance();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,9 +38,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         //Donation mDonation = Model.getCurrentDonation();
         TextView donationTitle = findViewById(R.id.item_title);
-        donationTitle.setText(Model.getInstance().getCurrentDonation().getName());
+        donationTitle.setText(model.getCurrentDonation().getName());
         TextView donationDetail = findViewById(R.id.item_detail_text);
-        donationDetail.setText(Model.getInstance().getCurrentDonation().detailString());
+        donationDetail.setText(model.getCurrentDonation().detailString());
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

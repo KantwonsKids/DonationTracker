@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Model model = Model.getInstance();
 
         // set up the app bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
             //Model model = Model.getInstance();
-            List<Donation> donationList = Model.getInstance().getAllDonations();
+            List<Donation> donationList = model.getAllDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
             Intent resultsIntent = new Intent(this,
