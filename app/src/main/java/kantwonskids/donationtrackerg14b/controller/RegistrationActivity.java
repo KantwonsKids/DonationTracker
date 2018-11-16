@@ -59,6 +59,25 @@ public class RegistrationActivity extends AppCompatActivity {
         accTypeSpinner = findViewById(R.id.registration_accountType_spinner);
         locationSpinner = findViewById(R.id.registration_location_spinner);
 
+        setUpSpinner();
+
+        // Attempt to create an account if the account doesn't already exist
+        Button createAccountButton = findViewById(R.id.registration_createAccount_button);
+        createAccountButton.setOnClickListener((view) -> attemptRegistration());
+
+
+        // Return to welcome screen if cancel button is pressed
+        Button cancelButton = findViewById(R.id.registration_cancel_button);
+        cancelButton.setOnClickListener((view) -> {
+            Intent intent_cancel = new Intent(this, WelcomeActivity.class);
+            startActivity(intent_cancel);
+        });
+    }
+
+    /**
+     * Sets up the spinner for locations.
+     */
+    private void setUpSpinner() {
         // Get location names
         List<Location> locations = Model.getInstance().getLocationList();
         String[] locNames = new String[locations.size()];
@@ -66,7 +85,6 @@ public class RegistrationActivity extends AppCompatActivity {
             Location location = locations.get(i);
             locNames[i] = location.getName();
         }
-
         // populate the invisible spinner for location data
         ArrayAdapter<String> adapter_loc = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, locNames);
@@ -79,6 +97,7 @@ public class RegistrationActivity extends AppCompatActivity {
         for (int i = 0; i < userValues.length; i++) {
             types[i] = userValues[i].toString();
         }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -111,18 +130,6 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // Do nothing
             }
-        });
-
-        // Attempt to create an account if the account doesn't already exist
-        Button createAccountButton = findViewById(R.id.registration_createAccount_button);
-        createAccountButton.setOnClickListener((view) -> attemptRegistration());
-
-
-        // Return to welcome screen if cancel button is pressed
-        Button cancelButton = findViewById(R.id.registration_cancel_button);
-        cancelButton.setOnClickListener((view) -> {
-            Intent intent_cancel = new Intent(this, WelcomeActivity.class);
-            startActivity(intent_cancel);
         });
     }
 
