@@ -2,20 +2,14 @@ package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Location;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -42,20 +36,13 @@ public class LocationDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         Model model = Model.getInstance();
-        Location mLocation = model.getCurrentLocation();
+        //Location mLocation = Model.getCurrentLocation();
 //        TextView locationTitle = findViewById(R.id.locationTitle);
 //        locationTitle.setText(mLocation.getName());
         TextView locationDetail = findViewById(R.id.location_detail_text);
-        locationDetail.setText(
-                String.format("Location: " + "\n" +
-                        mLocation.getAddress() + "\n" +
-                        mLocation.getCity() + ", " +
-                        mLocation.getState() + " " +
-                        mLocation.getZipcode() + "\n\n" + "Contact: " + "\n" +
-                        mLocation.getPhoneNumber() + "\n" +
-                        mLocation.getWebsite()));
+        locationDetail.setText(model.getCurrentLocationDetails());
 
-        Button inventoryButton = (Button) findViewById(R.id.viewInventory);
+        Button inventoryButton = findViewById(R.id.viewInventory);
         inventoryButton.setOnClickListener((view) -> {
             Intent intent_inventory = new Intent(this, InventoryActivity.class);
             startActivity(intent_inventory);

@@ -2,7 +2,6 @@ package kantwonskids.donationtrackerg14b.controller;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,14 +14,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.content.res.Resources;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.*;
+import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.Donation;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Juliana Petrillo
@@ -41,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Model model = Model.getInstance();
 
         // set up the app bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setTitle(R.string.home_page_title);
+        ActionBar nonNull = Objects.requireNonNull(ab);
+        nonNull.setTitle(R.string.home_page_title);
 //        ab.setDisplayHomeAsUpEnabled(true);
 
         // Search
@@ -55,11 +61,14 @@ public class MainActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 //            SearchableList locationList = Model.getInstance().locationList;
-            List<Donation> donationList = Model.getInstance().getAllDonations();
+            //Model model = Model.getInstance();
+            List<Donation> donationList = model.getAllDonations();
             List<Donation> searchResults = Model.search(donationList, query);
 
-            Intent resultsIntent = new Intent(this, DonationSearchResultsActivity.class);
-            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS", (ArrayList<Donation>) searchResults);
+            Intent resultsIntent = new Intent(this,
+                    DonationSearchResultsActivity.class);
+            resultsIntent.putParcelableArrayListExtra("SEARCH_RESULTS",
+                    (ArrayList<Donation>) searchResults);
             startActivity(resultsIntent);
         }
 
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.location_list_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-//        tabLayout.addTab(tabLayout.newTab().setText("sajdfkj"));
+//        tabLayout.addTab(tabLayout.newTab().setText("text"));
 
     }
 
@@ -81,14 +90,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager vp) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         LocationListFragment listFragment = new LocationListFragment();
-        adapter.addFragment(listFragment, getResources().getString(R.string.location_tab_title));
+        Resources resources = getResources();
+        adapter.addFragment(listFragment, resources.getString(R.string.location_tab_title));
 
         MapFragment mapFragment = new MapFragment();
-        adapter.addFragment(mapFragment, getResources().getString(R.string.map_tab_title));
+        adapter.addFragment(mapFragment, resources.getString(R.string.map_tab_title));
         vp.setAdapter(adapter);
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+    private final class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> fragmentList;
         private final List<String> fragmentTitleList;
 
@@ -108,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return fragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        void addFragment(Fragment fragment, String title) {
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
         }
@@ -122,13 +132,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
 
         // Set up the search bar
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        //MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)menuItem.getActionView();
+        SearchManager nonNull = Objects.requireNonNull(searchManager);
+        searchView.setSearchableInfo(nonNull.getSearchableInfo(getComponentName()));
 
         return true;
     }
@@ -156,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
     private void logout() {
         Intent intent = new Intent(this, LoginActivity.class);
         // Log out the current user
-        Model.getInstance().setCurrentUser(null);
+        Model model = Model.getInstance();
+        model.setCurrentUser(null);
         startActivity(intent);
     }
 
@@ -169,18 +184,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Logout?");
         builder.setMessage("Press OK to be logged out of the app. Press CANCEL"
                 + " or tap outside of this dialogue to return to the app.");
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                logout();
-            }
-        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.setPositiveButton("OK", (dialog, which) -> logout());
         builder.show();
     }
 }

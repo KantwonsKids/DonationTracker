@@ -5,16 +5,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.content.res.Resources;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.*;
+import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.Location;
 
+
+/**
+ * @author Daniel Profilli
+ * @version 3.0
+ *
+ * Activity representing the initial page presented to the user
+ * where they can either login or make an account
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override
@@ -30,17 +40,18 @@ public class WelcomeActivity extends AppCompatActivity {
         });
 
         // Send to registration screen when button is pressed
-        Button regiButton = findViewById(R.id.welcome_register_button);
-        regiButton.setOnClickListener((view) -> {
-            Intent intent_regi = new Intent(this, RegistrationActivity.class);
-            startActivity(intent_regi);
+        Button registerButton = findViewById(R.id.welcome_register_button);
+        registerButton.setOnClickListener((view) -> {
+            Intent intent_register = new Intent(this, RegistrationActivity.class);
+            startActivity(intent_register);
         });
 
 
         // Load the serialized model
         Model.loadSavedData();
-        Model instance = Model.getInstance();
-        if (instance.getInstance().locationList == null)
+        Model model = Model.getInstance();
+        List<Location> locationList = model.getLocationList();
+        if (locationList.isEmpty())
         {
             readSampleData();
         }
@@ -54,20 +65,23 @@ public class WelcomeActivity extends AppCompatActivity {
      * within the model instance
      */
     private void readSampleData() {
-        Model model = Model.getInstance();
+        //Model model = Model.getInstance();
 
         try {
             // open a stream on the file
-            InputStream is = getResources().openRawResource(R.raw.sampledata);
+            Resources resources = getResources();
+            InputStream is = resources.openRawResource(R.raw.sampledata);
             // wrap it in a buffered reader so that we can see lines
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            BufferedReader br =
+                    new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
             // initialize the locationList in the model
-            model.locationList = new ArrayList<>();
+            //model.locationList = new ArrayList<>();
 
             String line;
-            br.readLine(); // drop the header line
-            while ((line = br.readLine()) != null) {
+            line = br.readLine(); // drop the header line
+            while (line != null) {
+                line = br.readLine();
                 String[] tokens = line.split(",");
                 // separate everything out
                 int key = Integer.parseInt(tokens[0]);
@@ -77,32 +91,28 @@ public class WelcomeActivity extends AppCompatActivity {
                 String address = tokens[4];
                 String city = tokens[5];
                 String state = tokens[6];
-                int zipcode = Integer.parseInt(tokens[7]);
+                int zipCode = Integer.parseInt(tokens[7]);
                 String type = tokens[8];
                 String phoneNumber = tokens[9];
                 String website = tokens[10];
 
                 // create a donationData from these parameters and add it to model
-                Location d = new Location(
-                        key,
-                        name,
-                        latitude,
-                        longitude,
-                        address,
-                        city,
-                        state,
-                        zipcode,
-                        type,
-                        phoneNumber,
-                        website
-                );
-                model.locationList.add(d);
+
+                //this violates law of demeter but Location Builder was created because
+                //the Location constructor has private access
+                Location d = new Location.LocationBuilder().setKey(key).setName(name)
+                        .setLatitude(latitude).setLongitude(longitude).setAddress(address)
+                        .setCity(city).setState(state).setZipCode(zipCode).setType(type)
+                        .setPhoneNumber(phoneNumber).setWebsite(website).createLocation();
+                Model model = Model.getInstance();
+                List<Location> locationList = model.getLocationList();
+                locationList.add(d);
             }
             // print the success
             Log.d("DATA", "Successfully populated the locationList");
             br.close();
         } catch (Exception e) {
-            System.out.print(e.getMessage());
+            Log.e("DATA", e.getMessage());
         }
     }
 

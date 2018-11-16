@@ -4,19 +4,30 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.List;
+import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.*;
+import kantwonskids.donationtrackerg14b.model.Model;
+import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.UserRole;
+import kantwonskids.donationtrackerg14b.model.User;
+import kantwonskids.donationtrackerg14b.model.UserList;
 
+/**
+ * @author Juliana Petrillo
+ * @version 1.0
+ *
+ * An activity representing the registration page for a user
+ */
 public class RegistrationActivity extends AppCompatActivity {
 
 
@@ -43,30 +54,52 @@ public class RegistrationActivity extends AppCompatActivity {
         usernameField = findViewById(R.id.registration_usernameField);
         passwordField = findViewById(R.id.registration_passwordField);
         confirmField = findViewById(R.id.registration_confirmField);
-        LinearLayout registrationLayout = findViewById(R.id.registration_linearLayout);
+        //LinearLayout registrationLayout = findViewById(R.id.registration_linearLayout);
 
         // Create a spinner and populate with valid values
         accTypeSpinner = findViewById(R.id.registration_accountType_spinner);
         locationSpinner = findViewById(R.id.registration_location_spinner);
 
+        setUpSpinner();
+
+        // Attempt to create an account if the account doesn't already exist
+        Button createAccountButton = findViewById(R.id.registration_createAccount_button);
+        createAccountButton.setOnClickListener((view) -> attemptRegistration());
+
+
+        // Return to welcome screen if cancel button is pressed
+        Button cancelButton = findViewById(R.id.registration_cancel_button);
+        cancelButton.setOnClickListener((view) -> {
+            Intent intent_cancel = new Intent(this, WelcomeActivity.class);
+            startActivity(intent_cancel);
+        });
+    }
+
+    /**
+     * Sets up the spinner for locations.
+     */
+    private void setUpSpinner() {
         // Get location names
         List<Location> locs = Model.getInstance().locationList;
         String[] locNames = new String[locs.size()];
         for (int i = 0; i < locs.size(); i++) {
             locNames[i] = locs.get(i).getName();
         }
-
-        // populate the invisible spinner for locationdata
-        ArrayAdapter<String> adapter_loc = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locNames);
+        // populate the invisible spinner for location data
+        ArrayAdapter<String> adapter_loc = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locNames);
         adapter_loc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(adapter_loc);
 
         // Get values for each of the roles
-        String[] types = new String[UserRole.values().length];
-        for (int i = 0; i < UserRole.values().length; i++) {
-            types[i] = UserRole.values()[i].toString();
+        UserRole[] userValues = UserRole.values();
+        String[] types = new String[userValues.length];
+        for (int i = 0; i < userValues.length; i++) {
+            types[i] = userValues[i].toString();
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accTypeSpinner.setAdapter(adapter);
         // Callback for item clicked, which shows a new text box for location employees to pick
@@ -74,8 +107,10 @@ public class RegistrationActivity extends AppCompatActivity {
         accTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // If the user selects location employee, open a new text field to enter the location
-                if (adapter.getItem(i).equals("Location Employee")) {
+                // If the user selects location employee,
+                // open a new text field to enter the location
+                String currentItem = Objects.requireNonNull(adapter.getItem(i));
+                if ("Location Employee".equals(currentItem)) {
                     locationTextField.setHint("Name of location");
                     locationSpinner.setVisibility(View.VISIBLE);
 
@@ -96,20 +131,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-
-        // Attempt to create an account if the account doesn't already exist
-        Button createAccountButton = findViewById(R.id.registration_createAccount_button);
-        createAccountButton.setOnClickListener((view) -> {
-            attemptRegistration();
-        });
-
-
-        // Return to welcome screen if cancel button is pressed
-        Button cancelButton = findViewById(R.id.registration_cancel_button);
-        cancelButton.setOnClickListener((view) -> {
-            Intent intent_cancel = new Intent(this, WelcomeActivity.class);
-            startActivity(intent_cancel);
-        });
     }
 
      /**
@@ -121,55 +142,34 @@ public class RegistrationActivity extends AppCompatActivity {
         confirmField.setError(null);
 
 
-        String u = usernameField.getText().toString();
-        String p = passwordField.getText().toString();
-        String c = confirmField.getText().toString();
+        Editable uText = usernameField.getText();
+        String u = uText.toString();
+        Editable pText = passwordField.getText();
+        String p = pText.toString();
+        Editable cText = confirmField.getText();
+        String c = cText.toString();
+
         String accType = (String) accTypeSpinner.getSelectedItem();
         String locationStr = (String) locationSpinner.getSelectedItem();
         Location loc = null;
+        Model model = Model.getInstance();
         // find the real location
-        if (accType.equals("Location Employee")) {
-            for (int i = 0; i < Model.getInstance().locationList.size(); i++) {
-                if (Model.getInstance().locationList.get(i).getName().equals(locationStr)) {
-                    loc = Model.getInstance().locationList.get(i);
+        if ("Location Employee".equals(accType)) {
+            List<Location> locationList = model.getLocationList();
+            for (int i = 0; i < locationList.size(); i++) {
+                Location location = locationList.get(i);
+                String name = location.getName();
+                if (name.equals(locationStr)) {
+                    loc = locationList.get(i);
                 }
             }
         }
 
-
-        // get reference to the model
-        Model model = Model.getInstance();
-        // check to see if the username exists in the list
-        if (model._userList.isUsernameTaken(u)) {
-            usernameField.setError("This username is taken!");
-        } else if (!validateUsername(u).equals("VALID")) {
-            usernameField.setError(validateUsername(u));
-        } else if (!p.equals(c)) {
-            passwordField.setError("Passwords do not match!");
-        } else if (!validatePassword(p).equals("VALID")) {
-            passwordField.setError(validatePassword(p));
-        } else if (accType.equals("Location Employee") && !isValidLocation(loc)) {
-            locationTextField.setError("Invalid location!");
-        }
-        else
-        {
-            // Determine the selected account type and create object accordingly
-            User newUser = null;
-            switch (accType) {
-                case "Administrator":
-                    newUser = new User(u, p, UserRole.ADMINISTRATOR);
-                    break;
-                case "Manager":
-                    newUser = new User(u, p, UserRole.MANAGER);
-                    break;
-                case "Location Employee":
-                    newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, loc);
-                    break;
-                case "User":
-                    newUser = new User(u, p, UserRole.USER);
-                    break;
-            }
-            model._userList.addUser(newUser);
+        User newUser = validate(u, p, c, accType, loc);
+        if (newUser != null) {
+            UserList userList = model.getUserList();
+            userList.addUser(newUser);
+            model.setCurrentUser(newUser);
 
             // save to file
             Model.saveToPhone();
@@ -179,8 +179,54 @@ public class RegistrationActivity extends AppCompatActivity {
             welcomeIntent.putExtra("CURRENT_USER", (Parcelable)newUser);
             startActivity(welcomeIntent);
         }
+    }
 
+    private User createNewUser(String accType, String u, String p, Location loc) {
+        User newUser = null;
+        switch (accType) {
+            case "Administrator":
+                newUser = new User(u, p, UserRole.ADMINISTRATOR);
+                break;
+            case "Manager":
+                newUser = new User(u, p, UserRole.MANAGER);
+                break;
+            case "Location Employee":
+                newUser = new User(u, p, UserRole.LOCATION_EMPLOYEE, loc);
+                break;
+            case "User":
+                newUser = new User(u, p, UserRole.USER);
+                break;
+        }
 
+        return newUser;
+    }
+
+    private User validate(String u, String p, String c, String accType,
+                            Location loc) {
+        User newUser = null;
+        String validUsername = validateUsername(u);
+        String validPassword = validatePassword(p);
+        Model model = Model.getInstance();
+        UserList userList = model.getUserList();
+        // check to see if the username exists in the list
+        if (userList.isUsernameTaken(u)) {
+            usernameField.setError("This username is taken!");
+
+        } else if (!"VALID".equals(validUsername)) {
+            usernameField.setError(validateUsername(u));
+        } else if (!p.equals(c)) {
+            passwordField.setError("Passwords do not match!");
+        } else if (!"VALID".equals(validPassword)) {
+            passwordField.setError(validatePassword(p));
+        } else if ("Location Employee".equals(accType) && !isValidLocation(loc)) {
+            locationTextField.setError("Invalid location!");
+        } else {
+            // Determine the selected account type and create object accordingly
+            newUser = createNewUser(accType, u, p, loc);
+
+       }
+
+        return newUser;
     }
 
     /**
@@ -189,7 +235,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param u username
      * @return message
      */
-    private String validateUsername(String u) {
+    private String validateUsername(CharSequence u) {
         String msg = "VALID";
 
         if (u.length() < 4) {
@@ -215,7 +261,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param p password
      * @return message
      */
-    private String validatePassword(String p) {
+    private String validatePassword(CharSequence p) {
         String msg = "VALID";
 
         if (p.length() < 8) {
@@ -232,12 +278,13 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks to see if the location string is non-empty, non-null, and exists in the locations list.
+     * Checks to see if the location string is non-empty, non-null,
+     * and exists in the locations list.
      * @param l the location to check
      * @return true if the location is valid, false otherwise
      */
     private boolean isValidLocation(Location l) {
 
-        return Model.getInstance().locationList.contains(l);
+        return Model.getInstance().getLocationList().contains(l);
     }
 }
