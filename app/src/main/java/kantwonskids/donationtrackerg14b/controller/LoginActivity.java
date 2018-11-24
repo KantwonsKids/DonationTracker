@@ -1,5 +1,7 @@
 package kantwonskids.donationtrackerg14b.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +28,6 @@ import kantwonskids.donationtrackerg14b.model.UserList;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
     //private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private int loginAttempts = 0;
+    private static int LOCKOUT_NUMBER = 2;
     // --Commented out by Inspection (11/15/18, 12:36 PM):private View mMainView;
 
     @Override
@@ -74,6 +77,21 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+        if (loginAttempts >= LOCKOUT_NUMBER) {
+            AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+            alertDialog.setTitle("Lock out");
+            alertDialog.setMessage("After attempting registration with incorrect credentials multiple" +
+                    "times, you will be locked out");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            lockOut();
+                        }
+                    });
+            alertDialog.show();
+        }
+
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -95,9 +113,18 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
+            loginAttempts++;
         }
     }
 
+    /**
+     * method to lock the user out after 3 incorrect password attempts
+     */
+    private void lockOut() {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+
+    }
     /**
      * Logs in to the app, once the username and password have passed verification.
      * Shows the main screen with a "success" page.
