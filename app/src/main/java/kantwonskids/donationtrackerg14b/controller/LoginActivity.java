@@ -3,6 +3,7 @@ package kantwonskids.donationtrackerg14b.controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -81,15 +82,16 @@ public class LoginActivity extends AppCompatActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
             alertDialog.setTitle("Lock out");
             alertDialog.setMessage("After attempting registration with incorrect credentials multiple" +
-                    "times, you will be locked out");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            lockOut();
-                        }
-                    });
+                    "times, you are locked out. You will be able to attempt log in again in 5 " +
+                    "minutes.");
             alertDialog.show();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    alertDialog.dismiss();
+                    lockOut();
+                }
+            }, 10000);
         }
 
         // Reset errors.
