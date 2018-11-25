@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.setTitle("Lock out");
             String message = String.format("After attempting registration with incorrect" +
                     "credentials %d times, you are locked out. You will be able to attempt login" +
-                    " again after %d minutes", LOCKOUT_NUMBER, LOCKOUT_MINUTES);
+                    " again after %d minutes", LOCKOUT_NUMBER + 1, LOCKOUT_MINUTES);
             alertDialog.setMessage(message);
             alertDialog.setCancelable(false);
             alertDialog.show();
@@ -94,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                     alertDialog.dismiss();
                     mEmailView.setText("");
                     mPasswordView.setText("");
+                    mEmailView.setError(null);
+                    mPasswordView.setError(null);
                 }
             }, LOCKOUT_MINUTES * 60 * 1000);
         }
