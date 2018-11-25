@@ -39,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private int loginAttempts = 0;
-    private static int LOCKOUT_NUMBER = 2;
+    private static final int LOCKOUT_NUMBER = 2;
+    private static final int LOCKOUT_MINUTES = 5;
     // --Commented out by Inspection (11/15/18, 12:36 PM):private View mMainView;
 
     @Override
@@ -81,17 +82,20 @@ public class LoginActivity extends AppCompatActivity {
         if (loginAttempts >= LOCKOUT_NUMBER) {
             AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
             alertDialog.setTitle("Lock out");
-            alertDialog.setMessage("After attempting registration with incorrect credentials multiple" +
-                    "times, you are locked out. You will be able to attempt log in again in 5 " +
-                    "minutes.");
+            String message = String.format("After attempting registration with incorrect" +
+                    "credentials %d times, you are locked out. You will be able to attempt login" +
+                    " again after %d minutes", LOCKOUT_NUMBER, LOCKOUT_MINUTES);
+            alertDialog.setMessage(message);
+            alertDialog.setCancelable(false);
             alertDialog.show();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     alertDialog.dismiss();
-                    lockOut();
+                    mEmailView.setText("");
+                    mPasswordView.setText("");
                 }
-            }, 10000);
+            }, LOCKOUT_MINUTES * 60 * 1000);
         }
 
         // Reset errors.
@@ -119,14 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * method to lock the user out after 3 incorrect password attempts
-     */
-    private void lockOut() {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
-
-    }
     /**
      * Logs in to the app, once the username and password have passed verification.
      * Shows the main screen with a "success" page.
