@@ -62,7 +62,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             if ((scope != null) && "ALL".equals(scope)) {
                 toSearch = model.getAllDonations();
             } else {
-                //Location location = Model.getCurrentLocation();
+                //OurLocation location = Model.getCurrentOurLocation();
                 toSearch = model.getCurrentLocation().getDonations();
             }
 

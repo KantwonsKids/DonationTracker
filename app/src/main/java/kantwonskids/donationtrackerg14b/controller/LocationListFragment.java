@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -45,7 +45,7 @@ public class LocationListFragment extends Fragment {
         /**
          * The items to be shown in the list
          */
-        private final List<Location> mLocations;
+        private final List<OurLocation> mLocations;
 
         /**
          * Sets the items to be used by the adapter.
@@ -67,7 +67,7 @@ public class LocationListFragment extends Fragment {
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
             //final Model model = Model.getInstance();
             holder.mLocation = mLocations.get(position);
-            Location location = mLocations.get(position);
+            OurLocation location = mLocations.get(position);
             holder.mContentView.setText(location.toString());
 
             holder.mView.setOnClickListener(v -> {
@@ -94,7 +94,7 @@ public class LocationListFragment extends Fragment {
         class ViewHolder extends RecyclerView.ViewHolder {
             final View mView;
             final TextView mContentView;
-            Location mLocation;
+            OurLocation mLocation;
 
 
             ViewHolder(View view) {

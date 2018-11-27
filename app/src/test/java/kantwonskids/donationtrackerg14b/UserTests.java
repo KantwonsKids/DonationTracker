@@ -2,7 +2,7 @@ package kantwonskids.donationtrackerg14b;
 
 import org.junit.Test;
 
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.User;
 import kantwonskids.donationtrackerg14b.model.UserRole;
 
@@ -21,7 +21,7 @@ public class UserTests {
 
     @Test
     public void userToString_locationEmployee() {
-        Location location = new Location.LocationBuilder().setKey(0).setName("fake location").setLatitude(0.0).setLongitude(0.0).setAddress("fake").setCity("fake").setState("fake").setZipCode(0).setType("fake").setPhoneNumber("fake").setWebsite("fake").setDonations(null).createLocation();
+        OurLocation location = new OurLocation.LocationBuilder().setKey(0).setName("fake location").setLatitude(0.0).setLongitude(0.0).setAddress("fake").setCity("fake").setState("fake").setZipCode(0).setType("fake").setPhoneNumber("fake").setWebsite("fake").setDonations(null).createLocation();
         User locationEmployee = new User("username", "password", UserRole.LOCATION_EMPLOYEE, location);
         String expected = "Username: username" +
                             "\nLocation Employee" +

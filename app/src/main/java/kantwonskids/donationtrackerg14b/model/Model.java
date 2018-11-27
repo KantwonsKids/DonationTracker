@@ -37,13 +37,13 @@ public final class Model implements Serializable {
     /**
      * A list of donationData objects
      */
-    private final List<Location> locationList = new ArrayList<>();
+    private final List<OurLocation> locationList = new ArrayList<>();
 
     /**
      * The currently selected location
      * Transient so that it does not persist when saving
      */
-    private transient Location currentLocation;
+    private transient OurLocation currentLocation;
 
     /**
      * The currently selected donation
@@ -92,14 +92,14 @@ public final class Model implements Serializable {
     /**
      * @return the currently selected location.
      */
-    public Location getCurrentLocation() {
+    public OurLocation getCurrentLocation() {
         return currentLocation;
     }
 
     /**
      * @return the list of locations
      */
-    public List<Location> getLocationList() {
+    public List<OurLocation> getLocationList() {
         return locationList;
     }
 
@@ -107,7 +107,7 @@ public final class Model implements Serializable {
      * Sets the currently selected location.
      * @param location the currently selected location.
      */
-    public void setCurrentLocation(Location location) {
+    public void setCurrentLocation(OurLocation location) {
         currentLocation = location;
     }
 
@@ -132,8 +132,8 @@ public final class Model implements Serializable {
      * @param key the key of the location to look for
      * @return the correct location or null if no such location exists
      */
-    public Location getLocationByKey(int key) {
-        for (Location d : locationList) {
+    public OurLocation getLocationByKey(int key) {
+        for (OurLocation d : locationList) {
             if (d.getKey() == key) {
                 return d;
             }
@@ -146,8 +146,8 @@ public final class Model implements Serializable {
      * @param name the name of the location to look for
      * @return the correct location or null if no such location exists
      */
-    public Location getLocationByName(String name) {
-        for (Location d : locationList) {
+    public OurLocation getLocationByName(String name) {
+        for (OurLocation d : locationList) {
             String locationName = d.getName();
             if (locationName.equals(name)) {
                 return d;
@@ -224,7 +224,7 @@ public final class Model implements Serializable {
      */
     public List<Donation> getAllDonations() {
         List<Donation> list = new ArrayList<>();
-        for (Location l : locationList) {
+        for (OurLocation l : locationList) {
             list.addAll(l.getDonations());
         }
 
