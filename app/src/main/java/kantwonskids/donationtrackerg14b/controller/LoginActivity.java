@@ -19,6 +19,7 @@ import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Model;
 import kantwonskids.donationtrackerg14b.model.User;
 import kantwonskids.donationtrackerg14b.model.UserList;
+import kantwonskids.donationtrackerg14b.model.UserRole;
 
 
 /**
@@ -64,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent_register);
         });
 
+        // Log in as a guest
+        View guestView = findViewById(R.id.login_asGuest_textview);
+        guestView.setOnClickListener((view) -> GuestLogin());
+
         //View mLoginFormView = findViewById(R.id.login_form);
         //View mProgressView = findViewById(R.id.login_progress);
     }
@@ -96,6 +101,15 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
         }
+    }
+
+    /**
+     * Logs in to the app as a guest, by passing in a dummy user
+     * This is the only way to have the Guest UserType
+     */
+    private void GuestLogin()
+    {
+        login(new User(null, null, UserRole.GUEST, null));
     }
 
     /**

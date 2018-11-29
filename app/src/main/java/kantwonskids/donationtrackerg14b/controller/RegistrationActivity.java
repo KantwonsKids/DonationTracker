@@ -93,9 +93,20 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Get values for each of the roles
         UserRole[] userValues = UserRole.values();
-        String[] types = new String[userValues.length];
+        // hacky (bad) code to get around skipping guests
+        String[] types = new String[userValues.length - 1];
+        boolean skippedGuest = false;
         for (int i = 0; i < userValues.length; i++) {
-            types[i] = userValues[i].toString();
+            // don't allow them to declare themselves a guest, because that's weird
+            if (userValues[i].equals(UserRole.GUEST)) {
+                skippedGuest = true;
+            }
+            else if (skippedGuest) {
+                types[i - 1] = userValues[i].toString();
+            }
+            else {
+                types[i] = userValues[i].toString();
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
