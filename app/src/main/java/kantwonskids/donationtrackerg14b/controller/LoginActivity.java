@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
             alertDialog.setTitle("Lock out");
             String message = String.format("After attempting registration with incorrect" +
-                    "credentials %d times, you are locked out. You will be able to attempt login" +
+                    " credentials %d times, you are locked out. You will be able to attempt login" +
                     " again after %d minutes", LOCKOUT_NUMBER + 1, LOCKOUT_MINUTES);
             alertDialog.setMessage(message);
             alertDialog.setCancelable(false);
@@ -115,9 +115,9 @@ public class LoginActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
-
-        if (userList.isValidUser(potentialUser)) {
-            login(potentialUser);
+        if ((potentialUser != null) &&
+                    (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
+                login(potentialUser);
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
