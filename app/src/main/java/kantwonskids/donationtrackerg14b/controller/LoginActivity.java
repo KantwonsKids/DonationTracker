@@ -1,6 +1,9 @@
 package kantwonskids.donationtrackerg14b.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -26,7 +29,6 @@ import kantwonskids.donationtrackerg14b.model.UserList;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
     //private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
@@ -36,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private int loginAttempts = 0;
+    private static final int LOCKOUT_NUMBER = 2;
+    private static final int LOCKOUT_MINUTES = 5;
     // --Commented out by Inspection (11/15/18, 12:36 PM):private View mMainView;
 
     @Override
@@ -74,6 +79,27 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+        if (loginAttempts >= LOCKOUT_NUMBER) {
+            AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+            alertDialog.setTitle("Lock out");
+            String message = String.format("After attempting registration with incorrect" +
+                    " credentials %d times, you are locked out. You will be able to attempt login" +
+                    " again after %d minutes", LOCKOUT_NUMBER + 1, LOCKOUT_MINUTES);
+            alertDialog.setMessage(message);
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    alertDialog.dismiss();
+                    mEmailView.setText("");
+                    mPasswordView.setText("");
+                    mEmailView.setError(null);
+                    mPasswordView.setError(null);
+                }
+            }, LOCKOUT_MINUTES * 60 * 1000);
+        }
+
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -85,18 +111,19 @@ public class LoginActivity extends AppCompatActivity {
 
         View focusView = mPasswordView;
 
-        // Get instance of model to compare the username / password with the list of valid users
         //Model model = Model.getInstance();
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
 
         if (potentialUser != null && potentialUser.isLocked()) {
             mEmailView.setError("This account is locked.");
-        } else if (userList.isValidUser(potentialUser)) {
+        } else if ((potentialUser != null) &&
+                (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
             login(potentialUser);
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
+            loginAttempts++;
         }
     }
 
