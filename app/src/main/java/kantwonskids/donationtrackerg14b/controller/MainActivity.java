@@ -160,9 +160,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
                 // Open list of accounts for admin to control
-                intent = new Intent(this, AccountListActivity.class);
-                intent.putExtra("SCOPE", "ALL");
-                startActivity(intent);
+                if (Model.getInstance().getCurrentUser().canLockAccounts()) {
+                    intent = new Intent(this, AccountListActivity.class);
+                    intent.putExtra("SCOPE", "ALL");
+                    startActivity(intent);
+                }
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

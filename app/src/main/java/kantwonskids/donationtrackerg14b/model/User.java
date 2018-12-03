@@ -90,6 +90,10 @@ public class User implements Parcelable, Searchable, Serializable {
         this.locked = Boolean.parseBoolean(in.readString());
     }
 
+    public boolean canLockAccounts() {
+        return this.role == UserRole.ADMINISTRATOR;
+    }
+
     /**
      * Returns a boolean value determining whether this user can update info at a certain location.
      * @param loc the location to update info at
