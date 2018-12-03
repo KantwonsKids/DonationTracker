@@ -90,7 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
 
-        if (userList.isValidUser(potentialUser)) {
+        if (potentialUser != null && potentialUser.isLocked()) {
+            mEmailView.setError("This account is locked.");
+        } else if (userList.isValidUser(potentialUser)) {
             login(potentialUser);
         } else {
             focusView.requestFocus();
