@@ -3,11 +3,13 @@ package kantwonskids.donationtrackerg14b.controller;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 
 import java.util.List;
@@ -71,16 +74,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Context temp = activity.getApplicationContext();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(temp);
 
-//        if (ActivityCompat.checkSelfPermission(activity,
-//                Manifest.permission.ACCESS_FINE_LOCATION) != PERMISSION_GRANTED
-//                && ActivityCompat.checkSelfPermission(activity,
-//                Manifest.permission.ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(activity, new String[] {
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//            }, LOCATION_REQUEST_CODE);
-//        }
+        if (ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            }, LOCATION_REQUEST_CODE);
+        }
         mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(activity, location -> {
+                .addOnSuccessListener((AppCompatActivity) activity, location -> {
                     if (location != null) {
                         LatLng ltlng = new LatLng(location.getLatitude(),
                                 location.getLongitude());
@@ -90,7 +93,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         mMap.addMarker(marker);
                     }
                 });
-
         return rootView;
 
     }
@@ -118,18 +120,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Zoom camera.
         OurLocation first = locs.get(0);
         LatLng cameraPos = first.getLatLng();
-        map.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
         // 15 is "street view" zoom level.
         // 10 is "city view" zoom level.
         // 10 is best to display all pins at once.
-        map.moveCamera(CameraUpdateFactory.zoomTo(10));
-        map.getUiSettings().setZoomControlsEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         // Put a marker at every location in the location list.
         for (OurLocation loc : locs) {
             LatLng ltlng = loc.getLatLng();
             MarkerOptions marker = new MarkerOptions().position(ltlng)
                     .title(loc.getName()).snippet(loc.getPhoneNumber());
-            map.addMarker(marker);
+            mMap.addMarker(marker);
         }
 
 
