@@ -200,7 +200,7 @@ public class ModelTests {
         Location location2 = new Location.LocationBuilder().setKey(1).setName("Soho South Cafe").setLatitude(32.00).setLongitude(-80.00).setAddress("12 W Liberty St").setCity("Savannah").setState("GA").setZipCode(31401).setType("Restaurant").setPhoneNumber("(912) 555-2400").setWebsite("www.soho.com").createLocation();
         Location location3 = new Location.LocationBuilder().setKey(2).setName("Savannah Christian Preparatory School").setLatitude(32.00).setLongitude(-82.00).setAddress("1599 Chatham Parkway").setCity("Garden City").setState("GA").setZipCode(31408).setType("School").setPhoneNumber("(912) 555-2121").setWebsite("www.savscps.com").createLocation();
         Location location4 = new Location.LocationBuilder().setKey(3).setName("Blessed Sacrament Church").setLatitude(30.00).setLongitude(-82.00).setAddress("1003 E Victory Dr").setCity("Savannah").setState("GA").setZipCode(31405).setType("Church").setPhoneNumber("(912) 555-6608").setWebsite("www.blessedsacramentsavannah.com").createLocation();
-        model.clearLocations();
+        model = Model.getInstance();
         model.getLocationList().add(location1);
         model.getLocationList().add(location2);
         model.getLocationList().add(location3);
@@ -213,13 +213,14 @@ public class ModelTests {
     @Test
     public void testGetLocationByName() {
         assertEquals(model.getLocationByName(
-                "My House"), location1);
+                "My House").getKey(), 0);
         assertEquals(model.getLocationByName(
-                "Soho South Cafe"), location2);
+                "Soho South Cafe").getKey(), 1);
         assertEquals(model.getLocationByName(
-                "Savannah Christian Preparatory School"), location3);
+                "Savannah Christian Preparatory School").getKey(), 2);
         assertEquals(model.getLocationByName(
-                "Blessed Sacrament Church"), location4);
+                "Blessed Sacrament Church").getKey(), 3);
+        assertNull(model.getLocationByName("Does not exist."));
     }
 
     /**

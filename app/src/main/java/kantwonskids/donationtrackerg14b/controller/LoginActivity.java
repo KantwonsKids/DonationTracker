@@ -2,17 +2,17 @@ package kantwonskids.donationtrackerg14b.controller;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Editable;
 
+import android.text.InputType;
 import android.view.View;
 
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.*;
 
 
 import kantwonskids.donationtrackerg14b.R;
@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private UserList userList = Model.getInstance().getUserList();
     // --Commented out by Inspection (11/15/18, 12:36 PM):private View mMainView;
 
     @Override
@@ -69,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
         View guestView = findViewById(R.id.login_asGuest_textview);
         guestView.setOnClickListener((view) -> GuestLogin());
 
+        View forgotPassView = findViewById(R.id.forgot_pass_textView);
+        forgotPassView.setOnClickListener((view) -> requestEmail());
+
         //View mLoginFormView = findViewById(R.id.login_form);
         //View mProgressView = findViewById(R.id.login_progress);
     }
@@ -92,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Get instance of model to compare the username / password with the list of valid users
         //Model model = Model.getInstance();
-        UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
 
         if (userList.isValidUser(potentialUser)) {
@@ -123,6 +126,50 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("CURRENT_USER", (Parcelable)potentialUser);
         Model.getInstance().setCurrentUser(potentialUser);
         startActivity(intent);
+    }
+
+    private void requestEmail() {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(LoginActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Send Password Recovery");
+        builder.setMessage("Enter email.");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        String email = input.getText().toString();
+        builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.cancel());
+        builder.setPositiveButton("SEND", (dialog, which) -> sendEmail(email));
+        builder.show();
+    }
+
+    private void sendEmail(String email) {
+        Editable usernameText = mEmailView.getText();
+        String username = usernameText.toString();
+        User user = userList.getUser(username);
+        String password;
+        if (user != null) {
+            password = user.getPassword();
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{email});
+            i.putExtra(Intent.EXTRA_SUBJECT, "Donation Tracker Password");
+            i.putExtra(Intent.EXTRA_TEXT   , "The password for account " + username +
+                    "is " + password + ".");
+            try {
+                startActivity(Intent.createChooser(i, "Send mail..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(LoginActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(LoginActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Password Recovery Failed");
+            builder.setMessage("We could not find that username.");
+            builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.cancel());
+            builder.show();
+        }
     }
 
 }
