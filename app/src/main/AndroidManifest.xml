@@ -68,6 +68,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".controller.NewItemActivity" />
+        <activity android:name=".controller.AccountListActivity" />
         <activity android:name=".controller.ItemDetailActivity" />
         <activity
             android:name=".controller.DonationSearchResultsActivity"

@@ -32,6 +32,7 @@
     <string name="search_results">Search results</string>
     <string name="advanced_search">Advanced search</string>
     <string name="search">Search</string>
+    <string name="admin_button">View Accounts</string>
 
     <!--New item strings-->
     <string name="category">Category</string>

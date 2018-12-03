@@ -1,7 +1,6 @@
 package kantwonskids.donationtrackerg14b.model;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A class for the list of valid users
@@ -73,6 +72,15 @@ public class UserList implements Serializable {
      */
     public User getUser(String username) {
         return usernameObjectMap.get(username);
+    }
+
+    /**
+     * Return a collection of all the users.
+     * @return every user
+     */
+    public List<User> values() {
+        Collection<User> col = usernameObjectMap.values();
+        return new ArrayList<>(col);
     }
 
 }

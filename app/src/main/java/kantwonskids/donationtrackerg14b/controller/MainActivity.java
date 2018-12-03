@@ -1,5 +1,6 @@
 package kantwonskids.donationtrackerg14b.controller;
 
+import android.accounts.Account;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -149,14 +150,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.advanced_search:
                 // Show the advanced search activity
-                Intent intent = new Intent(this, AdvancedSearchActivity.class);
+                intent = new Intent(this, AdvancedSearchActivity.class);
                 intent.putExtra("SCOPE", "ALL");
                 startActivity(intent);
                 return true;
-
+            case R.id.action_settings:
+                // Open list of accounts for admin to control
+                intent = new Intent(this, AccountListActivity.class);
+                intent.putExtra("SCOPE", "ALL");
+                startActivity(intent);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
