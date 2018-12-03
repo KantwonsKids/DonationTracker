@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".controller.LocationListFragment">
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.RecyclerView xmlns:android=
+        "http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/location_list"
         android:name="kantwonskids.donationtrackerg14b.controller.LocationListFragment"

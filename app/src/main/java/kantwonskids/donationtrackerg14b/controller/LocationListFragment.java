@@ -25,20 +25,19 @@ import kantwonskids.donationtrackerg14b.model.Model;
  * Used as the fragment for one of the tabs on the main screen.
  */
 public class LocationListFragment extends Fragment {
-    RecyclerView recyclerView;
 
     /**
      * Sets up the recycler view.
      * @param recyclerView the recycler view to set up
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
-                Model.getInstance().locationList));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     /**
-     * View adapter for the recycler view. Populates the recycler view with the elements of the global location list.
+     * View adapter for the recycler view. Populates the recycler view with the elements
+     * of the global location list.
      */
     private static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
@@ -50,36 +49,35 @@ public class LocationListFragment extends Fragment {
 
         /**
          * Sets the items to be used by the adapter.
-         * @param locations
          */
-        SimpleItemRecyclerViewAdapter(List<Location> locations) {
-            mLocations = locations;
+        SimpleItemRecyclerViewAdapter() {
+            mLocations = Model.getInstance().getLocationList();
         }
 
+        @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater
                     .inflate(R.layout.location_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            final Model model = Model.getInstance();
+        public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+            //final Model model = Model.getInstance();
             holder.mLocation = mLocations.get(position);
-            holder.mContentView.setText(mLocations.get(position).toString());
+            Location location = mLocations.get(position);
+            holder.mContentView.setText(location.toString());
 
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context,
-                            LocationDetailActivity.class);
-                    //intent.putExtra(LocationDetailFragment.ARG_NAME,
-                    //      holder.mLocation.getName());
-                    model.setCurrentLocation(holder.mLocation);
-                    context.startActivity(intent);
-                }
+            holder.mView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent intent = new Intent(context,
+                        LocationDetailActivity.class);
+                //intent.putExtra(LocationDetailFragment.ARG_NAME,
+                //      holder.mLocation.getName());
+                Model.getInstance().setCurrentLocation(holder.mLocation);
+                context.startActivity(intent);
             });
 
         }
@@ -94,15 +92,15 @@ public class LocationListFragment extends Fragment {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mContentView;
-            public Location mLocation;
+            final View mView;
+            final TextView mContentView;
+            Location mLocation;
 
 
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mContentView = view.findViewById(R.id.content);
             }
 
         }
@@ -110,12 +108,13 @@ public class LocationListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the root view into the fragment
         View rootView = inflater.inflate(R.layout.location_list, container, false);
 
         // Get the recycler view
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.location_list);
+        RecyclerView recyclerView = rootView.findViewById(R.id.location_list);
 
         // set up the recycler view
         setupRecyclerView(recyclerView);
