@@ -61,7 +61,7 @@ public class UserList implements Serializable {
      */
     public boolean isValidUser(String username, String password) {
         User user = usernameObjectMap.get(username);
-        String userPassword = user.getPassword();
+        int userPassword = user.getPassword();
         return this.usernameObjectMap.containsKey(username)
                 && userPassword.equals(password);
     }
