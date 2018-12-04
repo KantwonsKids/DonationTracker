@@ -242,7 +242,7 @@ public final class Model implements Serializable {
      * @throws IllegalArgumentException if query or list is null
      */
     public static <T extends Searchable> List<T> search(List<T> list, String query) {
-        final int CUTOFF = 10;
+        final int CUTOFF = 50;
         if ((query == null) || (list == null)) {
             throw new IllegalArgumentException("The query and the list must be non-null.");
         }
