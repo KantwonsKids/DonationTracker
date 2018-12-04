@@ -63,7 +63,7 @@ public class UserList implements Serializable {
         User user = usernameObjectMap.get(username);
         int userPassword = user.getPassword();
         return this.usernameObjectMap.containsKey(username)
-                && userPassword.equals(password);
+                && userPassword == user.getPassword();
     }
 
     /**
