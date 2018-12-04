@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.setTitle("Lock out");
             String message = String.format("After attempting registration with incorrect" +
                     " credentials %d times, you are locked out. You will be able to attempt login" +
-                    " again after an adminisotrator unlocks your account.");
+                    " again after an adminisotrator unlocks your account.", loginAttempts);
             alertDialog.setMessage(message);
             alertDialog.setCancelable(true);
             alertDialog.show();
