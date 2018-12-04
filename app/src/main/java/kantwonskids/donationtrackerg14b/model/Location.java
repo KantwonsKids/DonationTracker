@@ -196,7 +196,7 @@ public final class Location implements Searchable, Serializable, Parcelable {
      * @param website       website of location
      * @param donations     list of donations donated to the location
      */
-    private Location(int key, String name, double latitude, double longitude, String address,
+    public Location(int key, String name, double latitude, double longitude, String address,
                     String city, String state, int zipCode, String type, String phoneNumber,
                     String website, List<Donation> donations) {
         this.key = key;
