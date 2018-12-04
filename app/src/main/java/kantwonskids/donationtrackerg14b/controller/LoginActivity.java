@@ -115,8 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
         if ((potentialUser != null) &&
-                (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
-            login(potentialUser);
+                    (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
+                login(potentialUser);
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));

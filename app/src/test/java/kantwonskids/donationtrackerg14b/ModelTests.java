@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.Model;
 import kantwonskids.donationtrackerg14b.model.Searchable;
 
@@ -172,14 +172,14 @@ public class ModelTests {
     private void populatedModel() {
         model = Model.getInstance();
 
-        List<Location> locationList = model.getLocationList();
+        List<OurLocation> locationList = model.getLocationList();
         for (int i = 0; i < 100; i++)
         {
             if (i == 50) {
-                locationList.add(new Location.LocationBuilder().setKey(i).setName("BOB").setLatitude(5).setLongitude(5).setAddress("house").setCity("atl").setState("ga").setZipCode(12345).setType("big").setPhoneNumber("8675309").setWebsite("bob.com").setDonations(new ArrayList<Donation>()).createLocation());
+                locationList.add(new OurLocation.LocationBuilder().setKey(i).setName("BOB").setLatitude(5).setLongitude(5).setAddress("house").setCity("atl").setState("ga").setZipCode(12345).setType("big").setPhoneNumber("8675309").setWebsite("bob.com").setDonations(new ArrayList<Donation>()).createLocation());
                 continue;
             }
-            locationList.add(new Location.LocationBuilder().setKey(i).setName("NOT BOB").setLatitude(5).setLongitude(5).setAddress("house").setCity("atl").setState("ga").setZipCode(12345).setType("big").setPhoneNumber("8675309").setWebsite("bob.com").setDonations(new ArrayList<>()).createLocation());
+            locationList.add(new OurLocation.LocationBuilder().setKey(i).setName("NOT BOB").setLatitude(5).setLongitude(5).setAddress("house").setCity("atl").setState("ga").setZipCode(12345).setType("big").setPhoneNumber("8675309").setWebsite("bob.com").setDonations(new ArrayList<>()).createLocation());
         }
 //        model.locationList = locationList;
     }
@@ -189,17 +189,17 @@ public class ModelTests {
      * @author Juliana Petrillo
      */
 
-    private Location location1 = new Location.LocationBuilder().setKey(0).setName("My House").setLatitude(32.00).setLongitude(-81.00).setAddress("25 Main St").setCity("Savannah").setState("GA").setZipCode(31419).setType("Home").setPhoneNumber("(912) 555-6413").setWebsite("www.myHouse.com").createLocation();
-    private Location location2 = new Location.LocationBuilder().setKey(1).setName("Soho South Cafe").setLatitude(32.00).setLongitude(-80.00).setAddress("12 W Liberty St").setCity("Savannah").setState("GA").setZipCode(31401).setType("Restaurant").setPhoneNumber("(912) 555-2400").setWebsite("www.soho.com").createLocation();
-    private Location location3 = new Location.LocationBuilder().setKey(2).setName("Savannah Christian Preparatory School").setLatitude(32.00).setLongitude(-82.00).setAddress("1599 Chatham Parkway").setCity("Garden City").setState("GA").setZipCode(31408).setType("School").setPhoneNumber("(912) 555-2121").setWebsite("www.savscps.com").createLocation();
-    private Location location4 = new Location.LocationBuilder().setKey(3).setName("Blessed Sacrament Church").setLatitude(30.00).setLongitude(-82.00).setAddress("1003 E Victory Dr").setCity("Savannah").setState("GA").setZipCode(31405).setType("Church").setPhoneNumber("(912) 555-6608").setWebsite("www.blessedsacramentsavannah.com").createLocation();
+    private OurLocation location1 = new OurLocation.LocationBuilder().setKey(0).setName("My House").setLatitude(32.00).setLongitude(-81.00).setAddress("25 Main St").setCity("Savannah").setState("GA").setZipCode(31419).setType("Home").setPhoneNumber("(912) 555-6413").setWebsite("www.myHouse.com").createLocation();
+    private OurLocation location2 = new OurLocation.LocationBuilder().setKey(1).setName("Soho South Cafe").setLatitude(32.00).setLongitude(-80.00).setAddress("12 W Liberty St").setCity("Savannah").setState("GA").setZipCode(31401).setType("Restaurant").setPhoneNumber("(912) 555-2400").setWebsite("www.soho.com").createLocation();
+    private OurLocation location3 = new OurLocation.LocationBuilder().setKey(2).setName("Savannah Christian Preparatory School").setLatitude(32.00).setLongitude(-82.00).setAddress("1599 Chatham Parkway").setCity("Garden City").setState("GA").setZipCode(31408).setType("School").setPhoneNumber("(912) 555-2121").setWebsite("www.savscps.com").createLocation();
+    private OurLocation location4 = new OurLocation.LocationBuilder().setKey(3).setName("Blessed Sacrament Church").setLatitude(30.00).setLongitude(-82.00).setAddress("1003 E Victory Dr").setCity("Savannah").setState("GA").setZipCode(31405).setType("Church").setPhoneNumber("(912) 555-6608").setWebsite("www.blessedsacramentsavannah.com").createLocation();
 
     @Before
     public void setUp() {
-        Location location1 = new Location.LocationBuilder().setKey(0).setName("My House").setLatitude(32.00).setLongitude(-81.00).setAddress("25 Main St").setCity("Savannah").setState("GA").setZipCode(31419).setType("Home").setPhoneNumber("(912) 555-6413").setWebsite("www.myHouse.com").createLocation();
-        Location location2 = new Location.LocationBuilder().setKey(1).setName("Soho South Cafe").setLatitude(32.00).setLongitude(-80.00).setAddress("12 W Liberty St").setCity("Savannah").setState("GA").setZipCode(31401).setType("Restaurant").setPhoneNumber("(912) 555-2400").setWebsite("www.soho.com").createLocation();
-        Location location3 = new Location.LocationBuilder().setKey(2).setName("Savannah Christian Preparatory School").setLatitude(32.00).setLongitude(-82.00).setAddress("1599 Chatham Parkway").setCity("Garden City").setState("GA").setZipCode(31408).setType("School").setPhoneNumber("(912) 555-2121").setWebsite("www.savscps.com").createLocation();
-        Location location4 = new Location.LocationBuilder().setKey(3).setName("Blessed Sacrament Church").setLatitude(30.00).setLongitude(-82.00).setAddress("1003 E Victory Dr").setCity("Savannah").setState("GA").setZipCode(31405).setType("Church").setPhoneNumber("(912) 555-6608").setWebsite("www.blessedsacramentsavannah.com").createLocation();
+        OurLocation location1 = new OurLocation.LocationBuilder().setKey(0).setName("My House").setLatitude(32.00).setLongitude(-81.00).setAddress("25 Main St").setCity("Savannah").setState("GA").setZipCode(31419).setType("Home").setPhoneNumber("(912) 555-6413").setWebsite("www.myHouse.com").createLocation();
+        OurLocation location2 = new OurLocation.LocationBuilder().setKey(1).setName("Soho South Cafe").setLatitude(32.00).setLongitude(-80.00).setAddress("12 W Liberty St").setCity("Savannah").setState("GA").setZipCode(31401).setType("Restaurant").setPhoneNumber("(912) 555-2400").setWebsite("www.soho.com").createLocation();
+        OurLocation location3 = new OurLocation.LocationBuilder().setKey(2).setName("Savannah Christian Preparatory School").setLatitude(32.00).setLongitude(-82.00).setAddress("1599 Chatham Parkway").setCity("Garden City").setState("GA").setZipCode(31408).setType("School").setPhoneNumber("(912) 555-2121").setWebsite("www.savscps.com").createLocation();
+        OurLocation location4 = new OurLocation.LocationBuilder().setKey(3).setName("Blessed Sacrament Church").setLatitude(30.00).setLongitude(-82.00).setAddress("1003 E Victory Dr").setCity("Savannah").setState("GA").setZipCode(31405).setType("Church").setPhoneNumber("(912) 555-6608").setWebsite("www.blessedsacramentsavannah.com").createLocation();
         model.clearLocations();
         model.getLocationList().add(location1);
         model.getLocationList().add(location2);

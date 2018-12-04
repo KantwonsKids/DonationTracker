@@ -15,7 +15,7 @@ import java.util.List;
  *
  * A wrapper that stores all data of a specific donation
  */
-public final class Location implements Searchable, Serializable, Parcelable {
+public final class OurLocation implements Searchable, Serializable, Parcelable {
 
     private int key;
     private final String name;
@@ -173,8 +173,8 @@ public final class Location implements Searchable, Serializable, Parcelable {
          * Creates the location object from the options.
          * @return new location object
          */
-        public Location createLocation() {
-            return new Location(key, name, latitude, longitude, address, city, state, zipCode,
+        public OurLocation createLocation() {
+            return new OurLocation(key, name, latitude, longitude, address, city, state, zipCode,
                     type, phoneNumber, website, donations);
         }
     }
@@ -196,7 +196,7 @@ public final class Location implements Searchable, Serializable, Parcelable {
      * @param website       website of location
      * @param donations     list of donations donated to the location
      */
-    private Location(int key, String name, double latitude, double longitude, String address,
+    private OurLocation(int key, String name, double latitude, double longitude, String address,
                     String city, String state, int zipCode, String type, String phoneNumber,
                     String website, List<Donation> donations) {
         this.key = key;
@@ -217,7 +217,7 @@ public final class Location implements Searchable, Serializable, Parcelable {
      * Constructs a Location object using a parcel.
      * @param in a parcel
      */
-    private Location(Parcel in) {
+    private OurLocation(Parcel in) {
         this.name = in.readString();
         this.city = in.readString();
         this.state = in.readString();
@@ -303,15 +303,15 @@ public final class Location implements Searchable, Serializable, Parcelable {
     /**
      * Parcelable creator.
      */
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<Location>() {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<OurLocation>() {
         @Override
-        public Location createFromParcel(Parcel in) {
-            return new Location(in);
+        public OurLocation createFromParcel(Parcel in) {
+            return new OurLocation(in);
         }
 
         @Override
-        public Location[] newArray(int size) {
-            return new Location[size];
+        public OurLocation[] newArray(int size) {
+            return new OurLocation[size];
         }
     };
 

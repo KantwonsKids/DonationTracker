@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Model;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.UserRole;
 import kantwonskids.donationtrackerg14b.model.User;
 
@@ -79,10 +79,10 @@ public class RegistrationActivity extends AppCompatActivity {
      */
     private void setUpSpinner() {
         // Get location names
-        List<Location> locations = Model.getInstance().getLocationList();
+        List<OurLocation> locations = Model.getInstance().getLocationList();
         String[] locNames = new String[locations.size()];
         for (int i = 0; i < locations.size(); i++) {
-            Location location = locations.get(i);
+            OurLocation location = locations.get(i);
             locNames[i] = location.getName();
         }
         // populate the invisible spinner for location data
@@ -151,12 +151,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
         String accType = (String) accTypeSpinner.getSelectedItem();
         String locationStr = (String) locationSpinner.getSelectedItem();
-        Location loc = null;
+        OurLocation loc = null;
         Model model = Model.getInstance();
         // find the real location
         if ("Location Employee".equals(accType)) {
             for (int i = 0; i < model.getLocationList().size(); i++) {
-                Location location = model.getLocationList().get(i);
+                OurLocation location = model.getLocationList().get(i);
                 String name = location.getName();
                 if (name.equals(locationStr)) {
                     loc = model.getLocationList().get(i);
@@ -179,7 +179,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private User createNewUser(String accType, String u, String p, Location loc) {
+    private User createNewUser(String accType, String u, String p, OurLocation loc) {
         User newUser = null;
         switch (accType) {
             case "Administrator":
@@ -200,7 +200,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private User validate(String u, String p, String c, String accType,
-                            Location loc) {
+                            OurLocation loc) {
         User newUser = null;
         String validUsername = validateUsername(u);
         String validPassword = validatePassword(p);
@@ -279,7 +279,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param l the location to check
      * @return true if the location is valid, false otherwise
      */
-    private boolean isValidLocation(Location l) {
+    private boolean isValidLocation(OurLocation l) {
 
         return Model.getInstance().getLocationList().contains(l);
     }
