@@ -15,6 +15,8 @@
         providing email completions."
     </string>
     <string name="no_account"><u>Don\'t have an account?</u></string>
+    <string name="guest_login"><u>View Application as a Guest</u></string>
+
     <string name="title_activity_main" tools:keep="@string/title_activity_main">
         MainActivity</string>
     <string name="login">Login</string>
