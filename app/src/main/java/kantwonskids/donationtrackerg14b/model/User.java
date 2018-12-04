@@ -19,7 +19,7 @@ public class User implements Parcelable, Searchable, Serializable {
     private final UserRole role;
     private boolean locked = false;
     @Nullable
-    private final Location location;
+    private final OurLocation location;
 
     /**
      * Creates a new user with a given username, password, role, and assigned location.
@@ -32,7 +32,7 @@ public class User implements Parcelable, Searchable, Serializable {
      * @throws IllegalArgumentException If the role is not location employee and "location"
      * is anything other than null
      */
-    public User(String username, String password, UserRole role, @Nullable Location location) {
+    public User(String username, String password, UserRole role, @Nullable OurLocation location) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -100,7 +100,7 @@ public class User implements Parcelable, Searchable, Serializable {
      * @return true if the user can, false if it cannot
      * @throws IllegalArgumentException if the location is null
      */
-    public boolean canUpdateDonationsAt(Location loc) {
+    public boolean canUpdateDonationsAt(OurLocation loc) {
         if (loc == null) {
             throw new IllegalArgumentException("Location cannot be null.");
         }

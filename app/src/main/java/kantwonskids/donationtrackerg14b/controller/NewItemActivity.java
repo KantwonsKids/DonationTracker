@@ -19,7 +19,7 @@ import java.util.Objects;
 
 import kantwonskids.donationtrackerg14b.model.DonationCategory;
 import kantwonskids.donationtrackerg14b.model.Donation;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.Model;
 import kantwonskids.donationtrackerg14b.R;
 
@@ -117,7 +117,7 @@ public class NewItemActivity extends AppCompatActivity{
         Editable commentsText = itemComments.getText();
         String comments = commentsText.toString();
 
-        Location current = model.getCurrentLocation();
+        OurLocation current = model.getCurrentLocation();
         current.addDonation(new Donation(formattedTime, item,
                 descriptionText.toString(), price, category,
                 comments, current.getName()));

@@ -109,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
-
         if (potentialUser != null && potentialUser.isLocked()) {
             mEmailView.setError("This account is locked.");
         } else if ((potentialUser != null) &&
