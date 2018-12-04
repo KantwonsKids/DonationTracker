@@ -59,11 +59,11 @@ public class UserList implements Serializable {
      * @param password password for user to check
      * @return if user is valid
      */
-    public boolean isValidUser(String username, String password) {
+    public boolean isValidUser(String username, int password) {
         User user = usernameObjectMap.get(username);
         int userPassword = user.getPassword();
         return this.usernameObjectMap.containsKey(username)
-                && userPassword == user.getPassword();
+                && userPassword == password;
     }
 
     /**
