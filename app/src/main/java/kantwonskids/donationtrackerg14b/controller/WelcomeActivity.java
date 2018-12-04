@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 import kantwonskids.donationtrackerg14b.R;
 import kantwonskids.donationtrackerg14b.model.Model;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 
 
 /**
@@ -95,7 +95,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 String website = tokens[10];
 
                 // create a donationData from these parameters and add it to model
-                Location d = new Location.LocationBuilder().setKey(key).setName(name)
+                OurLocation d = new OurLocation.LocationBuilder().setKey(key).setName(name)
                         .setLatitude(latitude).setLongitude(longitude).setAddress(address)
                         .setCity(city).setState(state).setZipCode(zipCode).setType(type)
                         .setPhoneNumber(phoneNumber).setWebsite(website).createLocation();

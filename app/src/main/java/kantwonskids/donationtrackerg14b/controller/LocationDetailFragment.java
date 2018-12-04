@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import kantwonskids.donationtrackerg14b.R;
-import kantwonskids.donationtrackerg14b.model.Location;
+import kantwonskids.donationtrackerg14b.model.OurLocation;
 import kantwonskids.donationtrackerg14b.model.Model;
 
 /**
@@ -32,7 +32,7 @@ public class LocationDetailFragment extends Fragment {
     /**
      * The content this fragment is presenting.
      */
-    private Location mLocation;
+    private OurLocation mLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
