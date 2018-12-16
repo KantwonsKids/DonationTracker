@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class User implements Parcelable, Searchable, Serializable {
 
     private final String username;
-    private final String password;
+    private final int password;
     private final UserRole role;
     @Nullable
     private final OurLocation location;
@@ -33,7 +33,8 @@ public class User implements Parcelable, Searchable, Serializable {
      */
     public User(String username, String password, UserRole role, @Nullable OurLocation location) {
         this.username = username;
-        this.password = password;
+        String combo = username + password;
+        this.password = combo.hashCode();
         this.role = role;
         if ((location != null) && (role != UserRole.LOCATION_EMPLOYEE)) {
             throw new IllegalArgumentException("Only location employees can have assigned" +
@@ -66,7 +67,7 @@ public class User implements Parcelable, Searchable, Serializable {
      */
     private User(Parcel in) {
         this.username = in.readString();
-        this.password = in.readString();
+        this.password = in.readInt();
         // this.location = in.readString(); idk what this parcel thing is but it is bad
         this.location = null;
         this.role = (UserRole)in.readSerializable();
@@ -110,7 +111,7 @@ public class User implements Parcelable, Searchable, Serializable {
      * Gets the password
      * @return the password
      */
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
@@ -137,7 +138,7 @@ public class User implements Parcelable, Searchable, Serializable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.username);
-        dest.writeString(this.password);
+        dest.writeInt(this.password);
         // dest.writeString(this.location);
         dest.writeSerializable(this.role);
     }
