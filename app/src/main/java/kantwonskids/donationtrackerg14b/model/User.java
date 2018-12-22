@@ -17,6 +17,7 @@ public class User implements Parcelable, Searchable, Serializable {
     private final String username;
     private final String password;
     private final UserRole role;
+    private boolean locked = false;
     @Nullable
     private final OurLocation location;
 
@@ -61,6 +62,22 @@ public class User implements Parcelable, Searchable, Serializable {
     }
 
     /**
+     * Gets whether or not the account is locked
+     * @return true or false
+     */
+    public boolean isLocked() {
+        return locked;
+    }
+
+    /**
+     * Sets the account to be locked or unlocked
+     * @param b true for locked, false for unlocked
+     */
+    public void setLocked(boolean b) {
+        this.locked = b;
+    }
+
+    /**
      * Create a new user from a parcel.
      * @param in The parcel to create a new user from.
      */
@@ -70,6 +87,11 @@ public class User implements Parcelable, Searchable, Serializable {
         // this.location = in.readString(); idk what this parcel thing is but it is bad
         this.location = null;
         this.role = (UserRole)in.readSerializable();
+        this.locked = Boolean.parseBoolean(in.readString());
+    }
+
+    public boolean canLockAccounts() {
+        return this.role == UserRole.ADMINISTRATOR;
     }
 
     /**
@@ -140,6 +162,7 @@ public class User implements Parcelable, Searchable, Serializable {
         dest.writeString(this.password);
         // dest.writeString(this.location);
         dest.writeSerializable(this.role);
+        dest.writeString(String.valueOf(locked));
     }
 
     @Override
@@ -160,5 +183,16 @@ public class User implements Parcelable, Searchable, Serializable {
     @Override
     public String getLabel() {
         return this.getUsername();
+    }
+
+    @Override
+    public String toString() {
+        String end;
+        if (this.locked) {
+            end = "(Locked)";
+        } else {
+            end = "";
+        }
+        return this.username + ", " + this.role + " " + end;
     }
 }

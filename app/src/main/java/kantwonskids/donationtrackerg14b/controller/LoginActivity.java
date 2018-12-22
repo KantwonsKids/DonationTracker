@@ -85,24 +85,19 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
         if (loginAttempts >= LOCKOUT_NUMBER) {
+            UserList ul = Model.getInstance().getUserList();
+            User user = ul.getUser(mEmailView.getText().toString());
+            if (user != null) {
+                user.setLocked(true);
+            }
             AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
             alertDialog.setTitle("Lock out");
             String message = String.format("After attempting registration with incorrect" +
                     " credentials %d times, you are locked out. You will be able to attempt login" +
-                    " again after %d minutes", LOCKOUT_NUMBER + 1, LOCKOUT_MINUTES);
+                    " again after an adminisotrator unlocks your account.", loginAttempts);
             alertDialog.setMessage(message);
-            alertDialog.setCancelable(false);
+            alertDialog.setCancelable(true);
             alertDialog.show();
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    alertDialog.dismiss();
-                    mEmailView.setText("");
-                    mPasswordView.setText("");
-                    mEmailView.setError(null);
-                    mPasswordView.setError(null);
-                }
-            }, LOCKOUT_MINUTES * 60 * 1000);
         }
 
         // Reset errors.
@@ -119,9 +114,11 @@ public class LoginActivity extends AppCompatActivity {
         //Model model = Model.getInstance();
         UserList userList = Model.getInstance().getUserList();
         User potentialUser = userList.getUser(email);
-        if ((potentialUser != null) &&
-                    (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
-                login(potentialUser);
+        if (potentialUser != null && potentialUser.isLocked()) {
+            mEmailView.setError("This account is locked.");
+        } else if ((potentialUser != null) &&
+                (potentialUser.getPassword().equals(mPasswordView.getText().toString()))){
+            login(potentialUser);
         } else {
             focusView.requestFocus();
             mPasswordView.setError(getString(R.string.error_incorrect_password));
